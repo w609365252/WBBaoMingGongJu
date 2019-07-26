@@ -1,0 +1,131 @@
+input {
+    box-sizing: border-box;
+}
+
+.enroll-info .label {
+    font-size: 30rpx;
+    color: #888;
+    padding: 25rpx 30rpx 12rpx;
+}
+
+.label .red {
+    color: red;
+    font-size: 30rpx;
+    padding-left: 10rpx;
+    border: 0;
+}
+
+.label.tips {
+    font-size: 26rpx;
+}
+
+.enroll-info .label label {
+    font-size: 24rpx;
+}
+
+.form-control {
+    background: #fff;
+    height: 88rpx;
+    line-height: 88rpx;
+    font-size: 30rpx;
+    padding: 0 30rpx;
+}
+
+.enroll-info-item {
+    background: #fff;
+    height: 88rpx;
+    line-height: 88rpx;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    overflow: hidden;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.enroll-info-item .text {
+    float: left;
+    color: black;
+    font-size: 30rpx;
+}
+
+.enroll-info-item .right {
+    float: right;
+    color: black;
+    font-size: 30rpx;
+}
+
+.right-arrow {
+    width: 16rpx;
+    height: 25rpx;
+    margin-left: 16rpx;
+    margin-top: 4rpx;
+}
+
+.vote-options-content-item {
+    background: #fff;
+}
+
+.vote-options-content-item.selected {
+    display: block;
+}
+
+.vote-options-content-item.unselected {
+    display: none;
+}
+
+.vote-options-content-image {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.vote-options-content-image .pic {
+    width: 70rpx;
+    height: 70rpx;
+    margin: 20rpx;
+}
+
+.vote-options-content-image input {
+    position: absolute;
+    left: 70rpx;
+    right: 30rpx;
+    top: 20rpx;
+    color: black;
+    font-size: 30rpx;
+}
+
+.vote-options-content-image .minus {
+    display: block;
+    padding: 30rpx;
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.vote-options-content-image .remove {
+    position: absolute;
+    right: 15rpx;
+    top: 15rpx;
+    z-index: 3;
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.vote-options-add {
+    position: relative;
+    background: #fff;
+    height: 88rpx;
+    line-height: 88rpx;
+    padding-left: 30rpx;
+}
+
+.vote-options-add .icon {
+    float: left;
+    width: 30rpx;
+    height: 30rpx;
+    margin: 32rpx 15rpx 0 0;
+}
+
+.vote-options-add .text {
+    display: inline-block;
+    color: #01a9f4;
+    font-size: 30rpx;
+}

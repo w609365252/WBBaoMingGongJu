@@ -1,0 +1,81 @@
+<form bindsubmit="postFormId" class="wrapper" reportSubmit="true" wx:if="{{unionid}}">
+    <view class="header" wx:if="{{auth_type==4&&code_status==0&&status==1}}">
+        <view class="result-box">
+            <image src="/images/ic_identification_ongoing.png"></image>
+            <view>输入审核验证码</view>
+        </view>
+        <view class="text">审核人员会2个工作日内在你的公众号后台发送4位数字验证码，请注意查收消息，收到后将验证码填写在下方</view>
+        <view class="form-control">
+            <input bindinput="inputCode" placeholder="请填写审核验证码" type="text"></input>
+            <view bindtap="submitCode" class="btn">确定</view>
+        </view>
+    </view>
+    <view class="header" wx:elif="{{status==0}}">
+        <view class="result-box">
+            <image src="/images/ic_identification_no.png"></image>
+            <view>待认证</view>
+        </view>
+        <view class="text"></view>
+    </view>
+    <view class="header" wx:elif="{{status==1}}">
+        <view class="result-box">
+            <image src="/images/ic_identification_ongoing.png"></image>
+            <view>审核中</view>
+        </view>
+        <view class="text">2个工作日内完成审核，还请耐心等待</view>
+    </view>
+    <view class="header" wx:elif="{{status==2}}">
+        <view class="result-box">
+            <image src="/images/ic_identification_done.png"></image>
+            <view>已认证</view>
+        </view>
+        <view class="text" wx:if="{{auth_type==1}}">个人认证，认证有效期到：{{expire}}</view>
+        <view class="text" wx:elif="{{auth_type==2}}">企业认证，认证有效期到：{{expire}}</view>
+        <view class="text" wx:elif="{{auth_type==3}}">组织认证，认证有效期到：{{expire}}</view>
+        <view class="text" wx:elif="{{auth_type==4}}">公众号认证，认证有效期到：{{expire}}</view>
+    </view>
+    <view class="header" wx:elif="{{status==3}}">
+        <view class="result-box">
+            <image src="/images/ic_identification_no.png"></image>
+            <view>认证失败</view>
+        </view>
+        <view class="text">失败原因：{{reason}}</view>
+    </view>
+    <view class="auth-box">
+        <view class="auth-title">
+            <image src="/images/ic_title_left.png"></image>
+            <view>认证后权益</view>
+            <image src="/images/ic_title_right.png"></image>
+        </view>
+        <view class="auth-description">
+      “报名工具”是一款好用、强大的在线活动发起软件。如果你是活动发起方，可以通过认证获得额外功能和权益。
+    </view>
+        <view class="list-item" formType="submit" wx:for="{{list}}" wx:key="{{index}}">
+            <image class="icon" src="{{item.icon}}"></image>
+            <view class="item-body">
+                <view class="title">{{item.title}}<view bindtap="toDemo" class="list-item-link" wx:if="{{index==2}}">查看实例></view>
+                </view>
+                <view class="desc">{{item.desc}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="auth-box pb140">
+        <view class="auth-title">
+            <image src="/images/ic_title_left.png"></image>
+            <view>认证声明</view>
+            <image src="/images/ic_title_right.png"></image>
+        </view>
+        <button class="statement" formType="submit" wx:if="{{platform=='ios'&&index!=0||platform!='ios'&&index!=1}}" wx:for="{{statement}}" wx:key="{{index}}">
+            <view></view>
+      {{item}}
+    </button>
+    </view>
+    <view class="footer">
+        <button bindtap="{{!buttonClicked?'authTips':''}}" class="button" wx:if="{{(status==0||status==1)&&platform=='ios'}}">立即认证</button>
+        <button bindtap="{{!buttonClicked?'toAuthDetail':''}}" class="button" wx:if="{{auth_type==4&&code_status==0&&status==1}}">查看认证信息</button>
+        <button bindtap="{{!buttonClicked?'toAuthType':''}}" class="button" wx:elif="{{status==0}}">立即认证（199元/年）</button>
+        <button bindtap="{{!buttonClicked?'toAuthDetail':''}}" class="button" wx:elif="{{status==1}}">立即认证（199元/年）</button>
+        <button bindtap="{{!buttonClicked?'toAuthDetail':''}}" class="button" wx:elif="{{status==2}}">查看认证信息</button>
+        <button bindtap="{{!buttonClicked?'toAuthType':''}}" class="button" wx:elif="{{status==3}}">重新认证</button>
+    </view>
+</form>

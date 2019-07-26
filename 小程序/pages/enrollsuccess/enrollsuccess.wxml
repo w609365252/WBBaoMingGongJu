@@ -1,0 +1,51 @@
+<form bindsubmit="formSubmit" reportSubmit="true">
+    <view wx:if="{{status==0}}">
+        <view class="wrapper">
+            <icon size="70" type="success"></icon>
+            <view class="rs-title">已提交</view>
+            <view class="rs-subtitle">请等待提交结果...</view>
+        </view>
+        <button class="button btn-hidden mb20" data-id="1" formType="submit">查看报名凭证</button>
+    </view>
+    <block wx:elif="{{status==1}}">
+        <import src="/tmp/tmp.wxml"></import>
+        <view>
+            <view class="wrapper">
+                <view wx:if="{{waitVerified==-1}}">
+                    <image class="result-wait" src="/images/ic_result_waiting.png"></image>
+                    <view class="rs-title">排队中</view>
+                    <view class="rs-subtitle">当有名额空出时，系统自动帮你报名成功，活动结束，仍然没有名额，则报名失败。付费报名，自动原路退回报名费用。</view>
+                </view>
+                <view wx:else>
+                    <icon size="70" type="success"></icon>
+                    <view class="rs-title">提交成功</view>
+                    <view class="rs-subtitle">你填写的信息已成功提交</view>
+                </view>
+                <template is="qrcodeDemo" data="{{imgTypeIndex:imgTypeIndex,imgInfo:imgInfo}}"></template>
+            </view>
+            <view class="btn-more-box">
+                <button bindtap="{{!buttonClicked?'toBack':''}}" class="button btn-white" data-id="2" formType="submit">返回上一页</button>
+                <button class="button btn-white" data-id="1" formType="submit" wx:if="{{waitVerified!=-1}}">查看凭证</button>
+                <navigator appId="wx56c8f077de74b07c" openType="navigate" path="/open/order-comment/order-comment?appid={{appid}}&order_id={{orderId}}" target="miniProgram" wx:if="{{orderId}}">去评价</navigator>
+            </view>
+        </view>
+    </block>
+    <view wx:elif="{{status==2}}">
+        <view class="wrapper">
+            <icon size="70" type="warn"></icon>
+            <view class="rs-title">报名失败</view>
+            <text class="rs-subtitle" selectable="true">报名名额已满，报名费已原路退回</text>
+        </view>
+        <button class="button btn-white" data-id="2" formType="submit">返回上一页</button>
+    </view>
+    <block wx:if="{{recommend.length>0}}">
+        <import src="/tmp/tmp.wxml"></import>
+        <view style="margin-top: 20rpx;">
+            <template is="recommend" data="{{recommend:recommend}}"></template>
+        </view>
+    </block>
+    <view class="ad-box">
+        <ad unitId="{{adsList[0].unit_id}}" wx:if="{{adsList[0].type==3}}"></ad>
+        <image bindtap="toAdDetail" class="slide-image" data-index="0" mode="widthFix" src="{{adsList[0].banner}}" wx:else></image>
+    </view>
+</form>

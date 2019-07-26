@@ -1,0 +1,59 @@
+<form bindsubmit="{{!buttonClicked?'editHome':''}}" reportSubmit="true">
+    <view class="space"></view>
+    <view class="enroll-info">
+        <view class="enroll-info-item first">
+            <view class="text">主办方名称</view>
+            <view bindtap="noAllowEdit" class="right alias w380" style="text-align: right;" wx:if="{{auth_type==1}}">
+        {{defaultName}}
+      </view>
+            <view class="right alias w380" wx:else>
+                <input bindblur="inputName" bindinput="inputName" maxlength="50" placeholder="请输入主办方名称" type="text" value="{{defaultName}}"></input>
+                <icon bindtap="clearName" size="15" type="clear" wx:if="{{name}}"></icon>
+            </view>
+        </view>
+        <view class="enroll-info-item rule">
+            <textarea bindblur="inputSummary" bindinput="inputSummary" maxlength="-1" name="rule" placeholder="请输入主办方简介（最多50个字）" placeholderClass="placeholder" value="{{defaultSummary}}"></textarea>
+            <icon catchtap="clearSummary" class="clear" size="15" type="clear" wx:if="{{summary}}"></icon>
+        </view>
+    </view>
+    <view class="space"></view>
+    <view class="enroll-info">
+        <view class="enroll-info-item first">
+            <view class="text">微信号</view>
+            <view class="right alias w380">
+                <input bindblur="inputWxNo" bindinput="inputWxNo" maxlength="30" placeholder="请输入微信号" type="text" value="{{defaultWxNo}}"></input>
+                <icon bindtap="clearWxNo" size="15" type="clear" wx:if="{{wxNo}}"></icon>
+            </view>
+        </view>
+        <view class="enroll-info-item">
+            <view class="text">联系方式</view>
+            <button bindgetphonenumber="getPhoneNumber" class="btn-blue" openType="getPhoneNumber" wx:if="{{!phoneDefault&&noAuthPhone==null}}">自动填写</button>
+            <view class="right alias w380" wx:else>
+                <input bindblur="inputPhone" bindinput="inputPhone" maxlength="20" name="phone" placeholder="请输入联系方式" placeholderClass="placeholder" type="text" value="{{phoneDefault}}"></input>
+                <icon catchtap="clearPhone" size="15" type="clear" wx:if="{{phone}}"></icon>
+            </view>
+        </view>
+    </view>
+    <view class="space"></view>
+    <view class="enroll-info">
+        <view class="enroll-info-item first logo-body">
+            <view class="text" style="width: 380rpx;">主办方头像<label wx:if="{{auth_type==1}}">（不可更改）</label>
+            </view>
+            <view class="right">
+                <image class="logo" src="{{logo}}" wx:if="{{logo}}"></image>
+                <image bindtap="{{!buttonClicked?'chooseImage':''}}" class="logo" data-type="logo" src="/images/add_img.png" wx:else></image>
+                <icon bindtap="clearLogo" size="15" type="clear" wx:if="{{logo&&auth_type!=1}}"></icon>
+            </view>
+        </view>
+    </view>
+    <view class="enroll-info">
+        <view class="enroll-info-item">
+            <view class="text" style="width: 380rpx;">更换背景图</view>
+            <button bindtap="{{!buttonClicked?'chooseImage':''}}" class="btn-blue" data-type="banner">更换图片</button>
+        </view>
+        <image class="banner" mode="aspectFill" src="{{banner}}"></image>
+    </view>
+    <view style="padding: 20rpx 0;">
+        <button class="button" formType="submit">保存</button>
+    </view>
+</form>

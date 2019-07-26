@@ -1,0 +1,11 @@
+<view class="dialog-qrcode-body">
+    <view class="qrcode-box">
+        <image binderror="loadError" bindload="loadSuccess" bindtap="showPic" class="qrcode-img" mode="aspectFit" src="{{qrcode}}"></image>
+    </view>
+    <view class="qrcode-footer">
+        <view class="qrcode-tips">请先将二维码图片，下载保存本地，然后用微信打开-长按识别</view>
+        <button bindtap="{{!buttonClicked?'downloadQrcode':''}}" class="button">下载图片</button>
+    </view>
+</view>
+<import src="/tmp/tmp.wxml"></import>
+<template is="huomaDialog" data="{{huomaDialog:huomaDialog}}"></template>

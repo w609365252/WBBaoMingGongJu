@@ -1,0 +1,6 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <button bindtap="{{!buttonClicked?'toSettingItem':''}}" class="setting-item" data-index="{{index}}" formType="submit" wx:for="{{setting}}" wx:key="{{index}}">
+        <view class="setting-title">{{item.title}}</view>
+        <image class="ic-right" src="/images/right_arrow.png"></image>
+    </button>
+</form>

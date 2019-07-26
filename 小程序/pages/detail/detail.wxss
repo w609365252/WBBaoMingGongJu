@@ -1,0 +1,1502 @@
+.mtm30 {
+    margin-top: -30rpx;
+}
+
+.nav-custom {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+}
+
+.nav-custom image {
+    display: block;
+    width: 54rpx;
+    height: 54rpx;
+    margin-left: 20rpx;
+}
+
+.nav-custom .back {
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.nav-title {
+    width: 600rpx;
+    font-size: 34rpx;
+    text-align: center;
+    color: #000;
+}
+
+.detail-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    width: auto;
+    height: auto;
+}
+
+.dialog-userinfo {
+    z-index: 11;
+}
+
+.dialog-userinfo .dialog-body {
+    width: 580rpx;
+    overflow: hidden;
+}
+
+.dialog-userinfo-title {
+    font-size: 37rpx;
+    color: #333;
+    text-align: center;
+    padding: 70rpx 0 40rpx;
+}
+
+.dialog-userinfo-desc {
+    font-size: 30rpx;
+    color: #333;
+    line-height: 1.5;
+    padding: 0 40rpx 30rpx;
+    text-align: left;
+}
+
+.btn-auth {
+    margin-bottom: 30rpx;
+}
+
+.btn-to-index {
+    width: 500rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: #333;
+    max-width: 100%;
+    border: 1rpx solid #ddd;
+    margin-bottom: 40rpx;
+}
+
+.address {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.address label {
+    color: #60769b;
+}
+
+.wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 100rpx;
+}
+
+.no-start {
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 24rpx;
+    color: #fff;
+    background: #d9b75d;
+    padding: 0 30rpx;
+    white-space: nowrap;
+}
+
+.no-start image {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 10rpx;
+    vertical-align: top;
+    margin-top: 15rpx;
+}
+
+.banner {
+    display: block;
+    width: 100%;
+    max-height: 750rpx;
+}
+
+.enroll-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 0 30rpx 30rpx;
+    border-bottom: 2rpx solid #e5e5e5;
+}
+
+.enroll-info-title {
+    display: flex;
+    align-items: center;
+    margin-top: 30rpx;
+    margin-bottom: 10rpx;
+    color: black;
+    font-size: 40rpx;
+    line-height: 1.5;
+    width: 100%;
+}
+
+.enroll-info-more {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 0rpx 30rpx 0rpx 30rpx;
+}
+
+.enroll-info-content {
+    color: #999;
+    font-size: 28rpx;
+    line-height: 1.5;
+    margin-top: 20rpx;
+}
+
+.enroll-info-remark {
+    color: #999;
+    font-size: 28rpx;
+    text-align: center;
+    margin-top: 20rpx;
+}
+
+.share-icon,.collect-icon {
+    position: absolute;
+    right: 0rpx;
+    top: 0rpx;
+    margin: 30rpx;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.collect-icon {
+    right: 110rpx;
+}
+
+.share-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 12;
+}
+
+.share-dialog .mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+    background-image: -webkit-linear-gradient(90deg,rgba(0,0,0,.1),transparent);
+}
+
+.share-dialog .body {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.share-dialog .inner {
+    margin: 0 30rpx 30rpx;
+    background: #fff;
+    font-size: 32rpx;
+    line-height: 3.4;
+    text-align: center;
+    border-radius: 20rpx;
+    box-shadow: 1rpx 1rpx 8rpx rgba(0,0,0,.1),-1rpx -1rpx 8rpx rgba(0,0,0,.1);
+}
+
+.share-dialog button {
+    border: 0!important;
+    background: none;
+    font-size: 32rpx;
+    line-height: 3;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.share-dialog button::after {
+    border: 0;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.share-show {
+    display: block;
+    -webkit-animation: moveFromBottom 0.4s ease;
+}
+
+.share-hide {
+    -webkit-animation: moveFromTop 0.4s ease;
+}
+
+.hide {
+    display: none;
+}
+
+@-webkit-keyframes moveFromBottom {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes moveFromTop {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+}
+
+.tags {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10rpx;
+}
+
+.tags label {
+    float: left;
+    margin-right: 12rpx;
+    color: #aaaaaa;
+    font-size: 28rpx;
+    padding: 6rpx 10rpx 6rpx 0;
+    border-radius: 8rpx;
+}
+
+.tags-blue label {
+    color: #02a8f7;
+}
+
+.tags-end label {
+    color: #fc776d;
+}
+
+.tags .lable-illegal {
+    background: #f00;
+    color: #fff;
+    padding: 4rpx 6rpx;
+}
+
+.views {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0,-50%);
+    display: flex;
+    align-items: center;
+    font-size: 24rpx;
+    color: #999;
+}
+
+.views image {
+    width: 32rpx;
+    height: 32rpx;
+    margin-right: 8rpx;
+}
+
+.options-tips {
+    text-align: center;
+    margin: 50rpx 0 0rpx;
+    color: #999;
+    font-size: 26rpx;
+}
+
+.enroll-more-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.enroll-more-item image {
+    width: 24rpx;
+    height: 24rpx;
+}
+
+.enroll-more-item view {
+    margin-left: 20rpx;
+    font-size: 28rpx;
+    line-height: 1.7;
+    color: #666;
+    align-self: center;
+}
+
+.owner-box {
+    background: #fff;
+    min-height: 88rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40rpx 0 30rpx;
+}
+
+.owner-box .owner-head {
+    border-radius: 50%;
+    width: 36rpx;
+    height: 36rpx;
+}
+
+.owner-box .enroll-more-item view {
+    max-width: 550rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.owner-other-info {
+    overflow: hidden;
+    font-size: 26rpx;
+    color: #00a8f3;
+    padding-left: 30rpx;
+}
+
+.owner-other-info image {
+    float: left;
+    width: 52rpx;
+    height: 52rpx;
+    padding: 10rpx 0 10rpx 30rpx;
+    margin-top: 4rpx;
+}
+
+.owner-name-box {
+    display: flex;
+    align-items: center;
+}
+
+.owner-name-box .owner-name {
+    margin-left: 0;
+    max-width: 220rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.owner-name-box .tag-red {
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 26rpx;
+    color: #f76260;
+    background: #fee8e7;
+    padding: 0 6rpx;
+}
+
+.btn-contact {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #00a8f3;
+}
+
+.owner-auth-box {
+    position: relative;
+    background: #fff;
+    padding-bottom: 70rpx;
+}
+
+.owner-auth-body {
+    display: flex;
+    align-items: center;
+    padding: 20rpx 30rpx;
+}
+
+.owner-avatar {
+    border-radius: 50%;
+    width: 96rpx;
+    height: 96rpx;
+    margin-right: 30rpx;
+}
+
+.owner-body {
+    width: 500rpx;
+}
+
+.owner-header {
+    display: flex;
+    align-items: center;
+}
+
+.owner-name {
+    font-size: 32rpx;
+    color: #333;
+    max-width: 350rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.w220 {
+    max-width: 220rpx!important;
+}
+
+.owner-auth-type {
+    display: flex;
+}
+
+.owner-icon {
+    width: 32rpx;
+    height: 32rpx;
+    margin: 0 10rpx;
+}
+
+.owner-tag {
+    height: 32rpx;
+    line-height: 32rpx;
+    padding: 0 10rpx;
+    font-size: 22rpx;
+    color: #333;
+    background: #d1f1ff;
+    white-space: nowrap;
+}
+
+.owner-desc {
+    display: -webkit-box;
+    font-size: 24rpx;
+    color: #999;
+    line-height: 1.5;
+    padding-top: 14rpx;
+    max-width: 500rpx;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.owner-auth-box .owner-right {
+    position: absolute;
+    right: 30rpx;
+    top: 40%;
+    transform: translate(0,-50%);
+    width: 16rpx;
+    height: 25rpx;
+}
+
+.enroll-rule {
+    position: relative;
+    margin: 20rpx 0;
+    padding: 30rpx 30rpx 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #fff;
+}
+
+.enroll-rule-title {
+    font-size: 30rpx;
+    color: #333;
+    padding-bottom: 20rpx;
+}
+
+.enroll-rule-desc {
+    font-size: 30rpx;
+    line-height: 1.8;
+    color: #333;
+    display: box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1000;
+    -webkit-box-orient: vertical;
+}
+
+.btn-opt {
+    position: absolute;
+    right: 30rpx;
+    top: 20rpx;
+    font-size: 30rpx;
+    color: #00a8f3;
+    width: 160rpx;
+    text-align: right;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+
+.btn-opt image {
+    margin-left: 10rpx;
+    margin-top: 24rpx;
+    vertical-align: top;
+    width: 20rpx;
+    height: 11rpx;
+}
+
+.share-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40rpx 0 30rpx;
+}
+
+.share-panel button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 24rpx;
+    text-align: center;
+}
+
+.share-panel image {
+    display: block;
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 8rpx;
+}
+
+.vertical-line {
+    border-left: 1rpx solid #d6d6d6;
+    width: 0;
+    height: 40rpx;
+    margin: 0 36rpx;
+}
+
+.enroll-content {
+    background: #fff;
+}
+
+.enroll-user-list {
+    padding-bottom: 20rpx;
+}
+
+.enroll-list-item {
+    position: relative;
+    overflow: hidden;
+    padding: 20rpx 30rpx;
+    height: 110rpx;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #eee;
+}
+
+.user-head {
+    float: left;
+    width: 72rpx;
+    height: 72rpx;
+    border-radius: 50%;
+    background: #eee;
+}
+
+.enroll-right {
+    position: relative;
+    display: block;
+    margin-left: 102rpx;
+    overflow: hidden;
+    min-height: 72rpx;
+}
+
+.no-right-arrow .time,.no-right-arrow .enroll-no {
+    right: 0;
+}
+
+.username {
+    font-size: 30rpx;
+    color: #333;
+    line-height: 1.2;
+    width: 300rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.username image {
+    width: 32rpx;
+    height: 32rpx;
+    margin-left: 10rpx;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.phone {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 10rpx;
+    width: 280rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.time {
+    position: absolute;
+    top: 0;
+    right: 40rpx;
+    color: #aaa;
+    font-size: 26rpx;
+}
+
+.enroll-no {
+    position: absolute;
+    top: 42rpx;
+    right: 40rpx;
+    color: #aaa;
+    font-size: 24rpx;
+}
+
+.arrow-right {
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    transform: translate(0,-50%);
+    width: 16rpx;
+    height: 25rpx;
+}
+
+.table {
+    font-size: 26rpx;
+    width: 100%;
+}
+
+.tr {
+    display: flex;
+    width: 200%;
+    justify-content: left;
+    align-items: center;
+    border-right: 1rpx solid #e5e5e5;
+    border-bottom: 1rpx solid #e5e5e5;
+    border-top: 1rpx solid #e5e5e5;
+    margin-top: -1rpx;
+}
+
+.td,.th {
+    float: left;
+    padding: 6rpx 16rpx;
+    border-left: 1rpx solid #e5e5e5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 70rpx;
+    line-height: 70rpx;
+}
+
+.bg-w {
+    background: snow;
+}
+
+.th,.bg-gray {
+    background: #f5f5f5;
+}
+
+.td-index {
+    width: 100rpx;
+    justify-content: center;
+}
+
+.td-name {
+    width: 250rpx;
+    overflow: hidden;
+}
+
+.dialog-share {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: rgba(0,0,0,.7);
+}
+
+.d-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: #fff;
+    border-radius: 10rpx;
+    width: 80%;
+    transform: translate(-50%,-50%);
+    font-size: 32rpx;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.d-content image {
+    width: 100%;
+    height: 800rpx;
+}
+
+.d-content .button {
+    width: 330rpx;
+    margin-top: 30rpx;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100rpx;
+    border-top: 1rpx solid #e5e5e5;
+    background: #f7f7fa;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.enroll-panel {
+    flex: 1;
+    background: #00a8f3;
+}
+
+.owner-btn {
+    flex: 1;
+    display: flex;
+}
+
+.btn-bottom {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    font-size: 24rpx;
+    color: #666;
+}
+
+.btn-bottom image,navigator image {
+    display: block;
+    width: 48rpx;
+    height: 48rpx;
+    margin: 12rpx auto 6rpx;
+}
+
+.btn-bottom .notice,navigator .notice,.notice-dot {
+    position: absolute;
+    left: 55%;
+    top: 10rpx;
+    min-width: 30rpx;
+    min-height: 30rpx;
+    border-radius: 20rpx;
+    background: #ff5353;
+    color: #fff;
+    font-size: 24rpx;
+    text-align: center;
+    line-height: 30rpx;
+}
+
+.notice-dot {
+    min-width: 16rpx;
+    min-height: 16rpx;
+    overflow: hidden;
+}
+
+.btn-text {
+    padding-top: 4rpx;
+}
+
+.btn-enroll {
+    height: 100%;
+    line-height: 2.9;
+    margin-top: 0;
+    width: 100%;
+    border-radius: 0;
+}
+
+.btn-disabled {
+    background: #99ddfb;
+}
+
+.empty-tips {
+    font-size: 30rpx;
+    text-align: center;
+    padding: 40rpx 0 20rpx;
+    color: #999;
+}
+
+scroll-view {
+    padding-bottom: 20rpx;
+}
+
+.help {
+    text-align: center;
+    font-size: 26rpx;
+    color: #576b95;
+    padding: 24rpx 0;
+}
+
+.btn-page {
+    font-size: 30rpx;
+    padding: 0 25rpx;
+    border-radius: 10rpx;
+    background: #fff;
+    color: #666;
+    text-align: center;
+    height: 80rpx;
+    line-height: 80rpx;
+    margin-right: 15rpx;
+    border: 1rpx solid #ddd;
+}
+
+.btn-prev {
+    float: left;
+    margin-left: 10rpx;
+}
+
+.btn-next {
+    float: right;
+    margin-right: 10rpx;
+}
+
+.btn-page-panel {
+    overflow: hidden;
+    padding-bottom: 20rpx;
+}
+
+.d-content .share-tips {
+    display: block;
+    margin: 0 auto;
+    width: 56rpx;
+    height: 56rpx;
+}
+
+.btn-light {
+    display: inline-block;
+    color: #333;
+    padding: 0 16rpx;
+    font-size: 26rpx;
+    height: 42rpx;
+    line-height: 42rpx;
+    border-radius: 6rpx;
+    border: 1rpx solid #999;
+    margin-left: 20rpx;
+}
+
+.wx-dialog .mask,.path-dialog .mask {
+    background: rgba(0,0,0,.4);
+}
+
+.wx-dialog-body {
+    box-sizing: border-box;
+    width: 580rpx;
+    padding: 40rpx;
+}
+
+.wx-dialog-body .dialog-header {
+    text-align: center;
+    font-size: 32rpx;
+    color: #333;
+    padding-bottom: 50rpx;
+}
+
+.wx-dialog-body .dialog-close,.red-dialog-body .dialog-close {
+    position: absolute;
+    right: 40rpx;
+    top: 40rpx;
+    width: 30rpx;
+    height: 30rpx;
+    padding: 10rpx;
+}
+
+.wx-dialog-content {
+    overflow: hidden;
+    background: #f8f8f8;
+    min-height: 140rpx;
+    box-sizing: border-box;
+    padding: 20rpx;
+}
+
+.wx-dialog-body .head {
+    float: left;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.wx-dialog-body .c-right {
+    margin-left: 120rpx;
+}
+
+.wx-dialog-body .nickname {
+    font-size: 32rpx;
+    color: #333;
+    line-height: 1.8;
+}
+
+.wx-dialog-body .wx-no {
+    font-size: 28rpx;
+    color: #999;
+    display: inline-block;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.wx-dialog-body .dialog-footer {
+    padding-top: 40rpx;
+}
+
+.wx-dialog-body .button {
+    width: 100%;
+}
+
+.red-dialog,.red-dialog .mask {
+    z-index: 1000;
+}
+
+.red-dialog .mask {
+    background: rgba(0,0,0,.4);
+}
+
+.red-dialog-body {
+    background: none;
+}
+
+.red-bg {
+    width: 580rpx;
+    height: 740rpx;
+}
+
+.red-dialog-body .dialog-close {
+    right: -30rpx;
+    top: 35rpx;
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.red-dialog-body .red-content {
+    position: absolute;
+    left: 5%;
+    top: 360rpx;
+    width: 540rpx;
+    text-align: center;
+    color: #fff;
+    line-height: 1.8;
+    font-size: 30rpx;
+}
+
+.red-dialog-body .d-close {
+    position: absolute;
+    right: -20rpx;
+    top: 35rpx;
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.btn-cp {
+    width: 500rpx;
+    height: 140rpx;
+    margin-top: 80rpx;
+}
+
+.dialog-front {
+    z-index: 1001;
+}
+
+.censor-box {
+    text-align: center;
+}
+
+.censor-icon {
+    display: block;
+    margin: 66rpx auto;
+}
+
+.censor-title {
+    font-size: 36rpx;
+    padding-bottom: 40rpx;
+}
+
+.censor-desc {
+    line-height: 1.6;
+    font-size: 28rpx;
+    color: #999;
+    padding: 0 80rpx;
+}
+
+.censor-desc label {
+    color: #576b95;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.censor-btn-success {
+    background: #00a8f3;
+    color: #fff;
+    border-radius: 10rpx;
+    height: 84rpx;
+    line-height: 84rpx;
+    font-size: 34rpx;
+    margin: 50rpx 30rpx;
+}
+
+.censor-btn-back {
+    position: absolute;
+    bottom: 30rpx;
+    left: 50%;
+    transform: translate(-50%,0);
+    font-size: 30rpx;
+    margin: 0 auto;
+    padding: 15rpx 30rpx;
+    border-radius: 44rpx;
+}
+
+.censor-btn-customer {
+    color: #0283eb;
+    border: 0;
+    font-size: 26rpx;
+}
+
+.censor-btn-back .contact {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 300rpx;
+    height: 80rpx;
+    opacity: 0;
+}
+
+.manage-dialog .mask {
+    background: rgba(0,0,0,0);
+}
+
+.manage-body {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f5f5f5;
+    padding: 30rpx 0 20rpx;
+    border-top: 1rpx solid #e5e5e5;
+}
+
+.btn-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-box button {
+    flex: 1;
+    text-align: center;
+    font-size: 24rpx;
+    color: #333;
+    padding: 30rpx 0;
+}
+
+.btn-box button image {
+    width: 100rpx;
+    height: 100rpx;
+    margin-bottom: 20rpx;
+}
+
+.button-white {
+    background: #fff;
+    color: #333;
+    font-size: 32rpx;
+    border: 1rpx solid #ccc;
+    margin-top: 30rpx;
+    margin-bottom: 0;
+}
+
+.group-box {
+    position: relative;
+    display: flex;
+    background: #fff;
+    padding: 20rpx 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.group-box .group-icon {
+    width: 88rpx;
+    height: 88rpx;
+    margin-right: 20rpx;
+}
+
+.group-box .group-count {
+    position: absolute;
+    left: 98rpx;
+    top: 6rpx;
+    color: #fff;
+    font-size: 28rpx;
+    font-weight: 900;
+    background: #f00;
+    width: 34rpx;
+    height: 34rpx;
+    line-height: 30rpx;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.group-body {
+    width: 480rpx;
+}
+
+.group-box .group-title {
+    font-size: 32rpx;
+    color: #333;
+    line-height: 1.4;
+}
+
+.group-box label {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.group-join {
+    margin-top: 10rpx;
+    font-size: 28rpx;
+    color: #333;
+    height: 68rpx;
+    line-height: 66rpx;
+    width: 120rpx;
+    text-align: center;
+    border: 1rpx solid #aaa;
+    border-radius: 6rpx;
+}
+
+.space {
+    height: 30rpx;
+    overflow: hidden;
+}
+
+.pic {
+    background: #efeff4;
+    display: block;
+    width: 100%;
+    margin-bottom: 30rpx;
+}
+
+.tag-info {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 34rpx;
+    height: 34rpx;
+    border-radius: 4rpx;
+    text-align: center;
+    line-height: 32rpx;
+    margin-left: 10rpx;
+    font-size: 22rpx;
+    color: #00a8f3;
+    border: 1rpx solid #00a8f3;
+}
+
+.path-dialog .wx-dialog-content {
+    background: none;
+    padding: 0;
+}
+
+.path-title {
+    font-size: 24rpx;
+    color: #333;
+    margin-top: 40rpx;
+}
+
+.path-body {
+    display: flex;
+    align-items: center;
+    margin-top: 20rpx;
+}
+
+.path-text {
+    flex: 1;
+    font-size: 28rpx;
+    color: #333;
+    line-height: 1.5;
+    padding: 20rpx;
+    white-space: normal;
+    word-break: break-all;
+    border: 1rpx solid #ccc;
+    border-radius: 10rpx;
+}
+
+.btn-copy {
+    color: #00a8f3;
+    font-size: 26rpx;
+    width: 90rpx;
+    height: 86rpx;
+    line-height: 86rpx;
+    text-align: right;
+}
+
+.path-desc {
+    font-size: 24rpx;
+    color: #999;
+    padding-top: 20rpx;
+    line-height: 1.5;
+}
+
+.report-panel {
+    position: relative;
+    text-align: center;
+    height: 60rpx;
+    overflow: hidden;
+}
+
+.report-panel label {
+    display: block;
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 10rpx;
+}
+
+.report-panel button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}
+
+.blue {
+    color: #00a8f3;
+}
+
+.gray {
+    color: #999;
+}
+
+.red {
+    color: #fc776d;
+    border: 0;
+}
+
+.gray text,.time text {
+    color: #fc776d;
+}
+
+.delete-dialog .dialog-header {
+    font-size: 36rpx;
+    color: #333;
+}
+
+.delete-dialog .delete-title {
+    font-size: 26rpx;
+    color: #333;
+    background: none;
+    padding: 0 0 20rpx;
+}
+
+.delete-desc {
+    border: 1rpx solid #ddd;
+    padding: 10rpx 20rpx;
+    height: 170rpx;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 28rpx;
+    line-height: 1.5;
+}
+
+.btn-white {
+    line-height: 2.2;
+    margin-bottom: 0;
+}
+
+.ad-box ad {
+    border-radius: 10rpx;
+    margin-top: 0!important;
+    margin-bottom: 20rpx;
+}
+
+.notice-dialog {
+    height: 500rpx;
+}
+
+.notice-dialog .dialog-header {
+    padding-bottom: 30rpx;
+}
+
+.notice-text {
+    box-sizing: border-box;
+    border: 1rpx solid #ddd;
+    width: 500rpx;
+    height: 180rpx;
+    padding: 10rpx;
+    font-size: 30rpx;
+    line-height: 1.5;
+}
+
+.notice-desc {
+    color: #f00;
+    font-size: 26rpx;
+    line-height: 1.6;
+    padding: 10rpx 0 0;
+}
+
+.notice-dialog .dialog-content {
+    position: relative;
+    display: block;
+}
+
+.placeholder {
+    color: #aaa;
+}
+
+.notice-dialog .dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1rpx solid #ddd;
+    margin: 20rpx -40rpx -40rpx -40rpx;
+    padding: 0;
+}
+
+.notice-dialog button {
+    flex: 1;
+    text-align: center;
+    color: #999;
+    font-size: 30rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+}
+
+.notice-dialog .btn-ok {
+    position: relative;
+    overflow: hidden;
+    color: #00a8f3;
+}
+
+.notice-dialog .btn-ok::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 180rpx;
+    border-left: 1rpx solid #ddd;
+}
+
+.confirm-input {
+    position: relative;
+    overflow: hidden;
+    margin-top: 20rpx;
+}
+
+.confirm-input view {
+    float: right;
+    width: 34%;
+    height: 80rpx;
+    text-align: center;
+    font-size: 48rpx;
+    letter-spacing: 8rpx;
+    line-height: 80rpx;
+    border: 1px solid #eee;
+    background: #ccc;
+}
+
+.input-code {
+    float: left;
+    width: 60%;
+    height: 80rpx;
+    line-height: 80rpx;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background: #fff;
+    padding-left: 20rpx;
+    font-size: 42rpx;
+}
+
+.tab-sort {
+    display: flex;
+}
+
+.tab-sort view {
+    flex: 1;
+    text-align: right;
+}
+
+.tab-sort picker {
+    display: flex;
+    align-items: center;
+}
+
+.tab-sort image {
+    display: block;
+    width: 36rpx;
+    height: 36rpx;
+    margin: 20rpx 105rpx 20rpx 15rpx;
+}
+
+.red-dialog,.red-dialog .mask {
+    z-index: 1000;
+}
+
+.red-dialog .mask {
+    background: rgba(0,0,0,.4);
+}
+
+.red-dialog-body {
+    background: none;
+    top: 45%;
+}
+
+.red-bg {
+    display: block;
+    width: 560rpx;
+    height: 730rpx;
+    margin-bottom: 80rpx;
+}
+
+.red-dialog-body .red-content {
+    position: absolute;
+    left: 5%;
+    top: 360rpx;
+    z-index: 530;
+    width: 540rpx;
+    text-align: center;
+    color: #fff;
+    line-height: 1.8;
+    font-size: 30rpx;
+}
+
+.red-dialog-body .d-red-close {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.btn-cp {
+    width: 500rpx;
+    height: 140rpx;
+    margin-top: 80rpx;
+}
+
+.dialog-front {
+    z-index: 1001;
+}
+
+.canvas-qr-code {
+    width: 600rpx;
+    height: 600rpx;
+    margin-bottom: 60rpx;
+}
+
+.enroll-list-gray {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 72rpx;
+    background: #f6f5f5;
+}
+
+.enroll-list-gray image {
+    width: 25rpx;
+    height: 25rpx;
+    margin-right: 15rpx;
+}
+
+.enroll-list-gray label {
+    font-size: 26rpx;
+    color: #666;
+}
+
+.list-red {
+    background: #ffe7e7;
+}
+
+.list-red label {
+    color: #f76260;
+}

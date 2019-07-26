@@ -1,0 +1,51 @@
+form {
+    display: block;
+    overflow: hidden;
+}
+
+.enroll-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88rpx;
+    margin-bottom: 0;
+    border-bottom: 1rpx solid #eee;
+    padding: 0 30rpx;
+    font-size: 30rpx;
+    color: #333;
+}
+
+.enroll-item .right-arrow {
+    width: 16rpx;
+    height: 25rpx;
+    margin-left: 20rpx;
+}
+
+.enroll-item .right {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    height: 140rpx;
+    margin-top: 20rpx;
+}
+
+.header .avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    border: 1rpx solid #ccc;
+}
+
+.text-green {
+    color: #09bb07;
+}
+
+.text-red {
+    color: #f76260;
+}
+
+.text-blue {
+    color: #00a8f3;
+}

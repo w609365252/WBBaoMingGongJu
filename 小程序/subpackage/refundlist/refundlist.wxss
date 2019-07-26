@@ -1,0 +1,97 @@
+.empty-tips {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    transform: translate(-50%,-50%);
+    color: #999;
+    font-size: 30rpx;
+}
+
+.enroll-user-list {
+    padding-bottom: 20rpx;
+}
+
+.enroll-list-item {
+    position: relative;
+    overflow: hidden;
+    padding: 20rpx 30rpx;
+    height: 110rpx;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #eee;
+    background: #fff;
+}
+
+.user-head {
+    float: left;
+    width: 72rpx;
+    height: 72rpx;
+    border-radius: 50%;
+    background: #eee;
+}
+
+.enroll-right {
+    position: relative;
+    display: block;
+    margin-left: 102rpx;
+    overflow: hidden;
+    min-height: 72rpx;
+}
+
+.no-right-arrow .time,.no-right-arrow .enroll-no {
+    right: 0;
+}
+
+.username {
+    font-size: 30rpx;
+    color: #333;
+    line-height: 1.2;
+    width: 300rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.username image {
+    width: 32rpx;
+    height: 32rpx;
+    margin-left: 10rpx;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.phone {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 10rpx;
+    width: 280rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.time {
+    position: absolute;
+    top: 0;
+    right: 40rpx;
+    color: #aaa;
+    font-size: 26rpx;
+}
+
+.enroll-no {
+    position: absolute;
+    top: 42rpx;
+    right: 40rpx;
+    color: #aaa;
+    font-size: 24rpx;
+}
+
+.arrow-right {
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    transform: translate(0,-50%);
+    width: 16rpx;
+    height: 25rpx;
+}

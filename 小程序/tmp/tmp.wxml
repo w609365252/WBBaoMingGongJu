@@ -1,0 +1,169 @@
+<template name="auth">
+    <cover-view class="dialog setting-dialog">
+        <cover-view class="mask"></cover-view>
+        <cover-view class="setting-body">
+            <cover-view class="setting-header">授权提示</cover-view>
+            <cover-view class="setting-desc">{{content}}</cover-view>
+            <cover-view class="setting-footer">
+                <button bindtap="closeOpenSetting">不想授权</button>
+                <button bindtap="closeOpenSetting" class="btn-ok1" openType="openSetting">去授权</button>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</template>
+<template name="followDialog">
+    <view class="follow-dialog dialog" wx:if="{{showFollowDialog}}">
+        <view bindtap="closeFollowDialog" class="mask"></view>
+        <view class="dialog-body wx-dialog-body">
+            <image bindtap="closeFollowDialog" class="d-close" src="/images/close.png"></image>
+            <view class="dialog-header" style="padding-bottom: 30rpx;">开启方法</view>
+            <view class="dialog-content" style="position: static; text-align: center;">
+                <view class="follow-tips">客服窗口回复 1, 关注「报名消息」公众号，即可接收提醒</view>
+            </view>
+            <button bindcontact="contactCallback" class="button btn-follow" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">去回复 “1”</button>
+        </view>
+    </view>
+</template>
+<template name="qrcodeDemo">
+    <view bindtap="showPic" class="enroll-demo-bd" wx:if="{{imgTypeIndex>-1}}">
+        <image mode="aspectFill" src="{{imgInfo.header?imgInfo.header:'/images/add_img.png'}}"></image>
+        <view class="enroll-demo-right">
+            <view>{{imgInfo.title?imgInfo.title:'你输入的名称'}}</view>
+            <label>{{imgInfo.desc?imgInfo.desc:'你输入的描述'}}</label>
+        </view>
+        <view class="btn-demo" wx:if="{{imgTypeIndex==0}}">进群</view>
+        <view class="btn-demo" wx:if="{{imgTypeIndex==1}}">添加</view>
+        <view class="btn-demo" wx:if="{{imgTypeIndex==2}}">关注</view>
+    </view>
+</template>
+<template name="uiFieldType">
+    <view class="ui-field-type-box" wx:if="{{fieldTypeDialog}}">
+        <view bindtap="closeUiFieldType" class="mask"></view>
+        <view class="ui-field-content">
+            <view bindtap="closeUiFieldType" class="ui-field-header">
+                <image src="/images/down_arrow.png"></image>
+            </view>
+            <view class="ui-field-body">
+                <view class="ui-field-title">选择字段类型</view>
+                <view class="ui-field-list">
+                    <view bindtap="{{!buttonClicked&&item.img?'toCustom':''}}" class="ui-field-type-item" data-index="{{index}}" data-type="{{item.type}}" wx:for="{{fieldType}}" wx:key="{{index}}">
+                        <image src="{{item.img}}" wx:if="{{item.img}}"></image>
+                        <label class="{{item.img?'':'last'}}">{{item.text}}</label>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="recommend">
+    <view class="recommend-item" wx:for="{{recommend}}" wx:key="{{index}}">
+        <ad unitId="{{recommend[index].unit_id}}" wx:if="{{recommend[index].type==3}}"></ad>
+        <image bindtap="toRecommendDetail" class="slide-image" data-index="{{index}}" mode="widthFix" src="{{recommend[index].banner}}" wx:else></image>
+    </view>
+</template>
+<template name="ads">
+    <view class="ad-box {{radius?'ad-box-radius':''}}" wx:for="{{adsList}}" wx:key="{{index}}">
+        <ad unitId="{{item.unit_id}}" wx:if="{{item.type==3}}"></ad>
+        <image bindtap="showAdPic" class="slide-image" data-index="0" mode="widthFix" src="{{item.thumb}}" wx:elif="{{item.type==4}}"></image>
+        <button openType="contact" wx:elif="{{item.type==5}}">
+            <image class="slide-image" data-index="0" mode="widthFix" src="{{item.banner}}"></image>
+        </button>
+        <image bindtap="toAdDetail" class="slide-image" data-index="0" mode="widthFix" src="{{item.banner}}" wx:else></image>
+    </view>
+</template>
+<template name="wxLogin">
+    <view class="login">
+        <image class="login-logo" src="/images/logo.png"></image>
+        <view class="login-title">报名工具</view>
+        <view class="login-title">欢迎你</view>
+        <text class="login-desc">请微信授权登录后放心使用报名工具
+你的信息和数据将受到保护</text>
+        <button bindgetuserinfo="login" class="button btn-auth" openType="getUserInfo">
+            <image src="/images/wx_logo.png"></image>
+            <view>微信授权登录</view>
+        </button>
+        <view class="login-contact">
+            <view>版本：v1.7.4</view>
+            <label>联系客服</label>
+            <button class="contact" formType="submit" openType="contact" sessionFrom="{\"nickName\":\"\", \"avatarUrl\": \"\"}">进入客服会话</button>
+        </view>
+    </view>
+</template>
+<template name="dialogConfirm">
+    <view class="dialog-confirm" wx:if="{{confirmDialog}}">
+        <view bindtap="closeConfirmDialog" class="mask"></view>
+        <view class="dialog-box">
+            <view class="dialog-title">{{confirm.title}}</view>
+            <view class="dialog-desc">
+                <text>{{confirm.body}}</text>
+            </view>
+            <view class="dialog-footer">
+                <view bindtap="closeConfirmDialog" class="button">取消</view>
+                <button bindcontact="contactCallback" class="button btn-ok" openType="contact" sessionFrom="{{confirm.contactUserInfo}}" wx:if="{{confirm.contact}}">联系客服</button>
+                <view bindtap="confirmOk" class="button btn-ok" wx:else>确定</view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="huomaDialog">
+    <view class="dialog-huoma" wx:if="{{huomaDialog}}">
+        <view bindtap="closeHuomaDialog" class="mask"></view>
+        <view class="dialog-box">
+            <view class="dialog-title">什么是微友活码？</view>
+            <view class="dialog-desc">
+        微友活码，是指对外提供一个固定的二维码，用户扫码进来后看到的是创建者上传的二维码，这些二维码是可以在后台更换的，并且可以上传多张。当第一个二维码达到上限后，会自动切换到下一张二维码。
+      </view>
+            <navigator appId="wxfd5b9439675c4321" class="button" openType="navigate" path="" target="miniProgram">前往生成活码</navigator>
+            <view bindtap="closeHuomaDialog" class="button btn-white">算了下次再试</view>
+        </view>
+    </view>
+</template>
+<template name="enrollList">
+    <view class="enroll-panel">
+        <view bindlongtap="{{!buttonClicked?'longtap':''}}" bindtap="{{!buttonClicked?'toDetail':''}}" class="enroll-item {{type==6?'border-top':''}}" data-id="{{item.eid}}" data-index="{{index}}" data-temp="{{item.temp}}" data-type="{{type}}" wx:for="{{enrollList}}" wx:key="{{item.eid}}">
+            <view wx:if="{{isDev}}">
+                <label class="censor-tags censor-tags-danger" wx:if="{{item.censor_status==2}}">违规</label>
+                <label class="censor-tags censor-tags-success" wx:elif="{{item.censor_status==8||item.censor_status==9}}">正常</label>
+                <label class="censor-tags censor-tags-warning" wx:elif="{{item.censor_status==3}}">争议</label>
+                <label class="censor-tags censor-tags-danger right-bottom" wx:if="{{item.freeze==1}}">已冻结</label>
+                <label class="icon-label icon-ju" wx:if="{{item.temp==1}}">聚</label>
+                <label class="icon-label icon-ke" wx:if="{{item.temp==2}}">课</label>
+                <label class="icon-label icon-xin" wx:if="{{item.temp==3}}">信</label>
+                <label class="icon-label icon-tuan" wx:if="{{item.temp==6}}">团</label>
+                <label class="icon-label icon-tuan" wx:if="{{item.temp==5}}">多</label>
+            </view>
+            <image class="enroll-img" mode="aspectFill" src="{{item.banner?item.banner:'/images/ic_list_dfpicture.png'}}"></image>
+            <view class="enroll-body">
+                <view class="enroll-title">{{item.title}}</view>
+                <view class="enroll-count">
+                    <image class="enroll-person" src="/images/ic_persons.png"></image>
+                    <view>{{item.user_visible==0&&type==1?'**':item.count||0}}{{item.limit?'/'+item.limit:item.temp>=5?'':'/无限制'}} <label wx:if="{{item.fee&&item.charge==0}}">￥{{item.fee/100}}</label>
+                    </view>
+                </view>
+                <image catchtap="{{!buttonClicked?'setStatus':''}}" class="btn-more" data-count="{{item.count}}" data-drawstatus="{{item.draw_status}}" data-eid="{{item.eid}}" data-fee="{{item.fee}}" data-hasbalance="{{item.has_balance}}" data-index="{{index}}" data-status="{{item.censor_status}}" data-type="{{type}}" src="/images/ic_more_opt1.png" wx:if="{{isDev}}"></image>
+                <image catchtap="{{!buttonClicked?'longtap':''}}" class="btn-more" data-cid="{{item.cid}}" data-count="{{item.count}}" data-drawstatus="{{item.draw_status}}" data-fee="{{item.fee}}" data-hasbalance="{{item.has_balance}}" data-index="{{index}}" data-status="{{item.status}}" data-type="{{type}}" src="/images/ic_more_opt1.png" wx:elif="{{type==0||type==6}}"></image>
+                <image catchtap="{{!buttonClicked?'longtap':''}}" class="btn-more" data-count="{{item.count}}" data-drawstatus="{{item.draw_status}}" data-fee="{{item.fee}}" data-hasbalance="{{item.has_balance}}" data-index="{{index}}" data-type="{{type}}" src="/images/ic_more_opt1.png" wx:elif="{{type==2}}"></image>
+            </view>
+            <label class="enroll-status" wx:if="{{item.status==0}}">未开始</label>
+            <label class="enroll-status blur" wx:elif="{{item.status==1}}">进行中</label>
+            <label class="enroll-status red" wx:else>已结束</label>
+        </view>
+    </view>
+</template>
+<template name="noticeBoard">
+    <view class="dialog" wx:if="{{noticeBoard.showUpgradeDialog}}">
+        <view class="dialog-bg"></view>
+        <view bindtap="closeUpgradeDialog" class="dialog-content">
+            <image class="dialog-close" src="/images/dialog_close.png"></image>
+            <view catchtap="doNothing" catchtouchmove="doNothing" class="dialog-view">
+                <image class="dialog-image" src="/images/dialog_image.png"></image>
+                <view class="dialog-info">
+                    <view class="dialog-title">{{noticeBoard.title}}</view>
+                    <scroll-view class="dialog-scroll-view" scrollY="true">
+                        <text>{{noticeBoard.desc}}</text>
+                    </scroll-view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

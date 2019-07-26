@@ -1,0 +1,52 @@
+<view class="wrapper">
+    <view class="list-item">
+        <view class="label">手机品牌</view>
+        <view class="desc">{{brand}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">手机型号</view>
+        <view class="desc">{{model}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">微信语言</view>
+        <view class="desc">{{language}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">微信版本号</view>
+        <view class="desc">{{version}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">操作系统版本</view>
+        <view class="desc">{{system}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">客户端平台</view>
+        <view class="desc">{{platform}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">客户端基础库版本</view>
+        <view class="desc">{{SDKVersion}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">权限信息</view>
+        <view class="desc">{{authorize}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">网络类型</view>
+        <view class="desc">{{network}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">是否登录成功</view>
+        <view class="desc">{{isLogin}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">unionid</view>
+        <view class="desc">{{unionid}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">时区</view>
+        <view class="desc">{{timeZone}}</view>
+    </view>
+    <button bindtap="copy" class="button">复制</button>
+    <button bindtap="toIndex" class="button white">返回首页</button>
+</view>

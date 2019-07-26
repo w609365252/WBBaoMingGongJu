@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpTools.Api", "SignUpTools.Api\SignUpTools.Api.csproj", "{1523109E-D3CB-439F-8C7B-1AC6D950B1C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpTools.DAL", "SignUpTools.Dal\SignUpTools.DAL.csproj", "{2D85F627-842F-41EA-9D7A-98905EF87E24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpTools.Business", "SignUpTools.Business\SignUpTools.Business.csproj", "{C9F0E094-B496-4AA9-BF87-D1835DE6DC69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpTools.Model", "SignUpTools.Model\SignUpTools.Model.csproj", "{F2C8E008-8CAB-4D22-9676-E8B1526BDE6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeoTools", "..\..\..\..\..\资源\LeoTools\LeoTools\LeoTools.csproj", "{ECE68896-8095-443E-B854-08549FC77CAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crp.Tools", "..\..\..\..\..\资源\Crp.Tools1.4\Crp.Tools.csproj", "{7A3A02BC-BA3E-4B45-8A28-98C81F39BB41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpToolsMVC.Web", "SignUpToolsMVC.Web\SignUpToolsMVC.Web.csproj", "{35EEB17B-4047-4A32-B568-A951F20D34D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1523109E-D3CB-439F-8C7B-1AC6D950B1C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1523109E-D3CB-439F-8C7B-1AC6D950B1C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1523109E-D3CB-439F-8C7B-1AC6D950B1C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1523109E-D3CB-439F-8C7B-1AC6D950B1C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D85F627-842F-41EA-9D7A-98905EF87E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D85F627-842F-41EA-9D7A-98905EF87E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D85F627-842F-41EA-9D7A-98905EF87E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D85F627-842F-41EA-9D7A-98905EF87E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9F0E094-B496-4AA9-BF87-D1835DE6DC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F0E094-B496-4AA9-BF87-D1835DE6DC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F0E094-B496-4AA9-BF87-D1835DE6DC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F0E094-B496-4AA9-BF87-D1835DE6DC69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C8E008-8CAB-4D22-9676-E8B1526BDE6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C8E008-8CAB-4D22-9676-E8B1526BDE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C8E008-8CAB-4D22-9676-E8B1526BDE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C8E008-8CAB-4D22-9676-E8B1526BDE6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECE68896-8095-443E-B854-08549FC77CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECE68896-8095-443E-B854-08549FC77CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECE68896-8095-443E-B854-08549FC77CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECE68896-8095-443E-B854-08549FC77CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A3A02BC-BA3E-4B45-8A28-98C81F39BB41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A3A02BC-BA3E-4B45-8A28-98C81F39BB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A3A02BC-BA3E-4B45-8A28-98C81F39BB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A3A02BC-BA3E-4B45-8A28-98C81F39BB41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35EEB17B-4047-4A32-B568-A951F20D34D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35EEB17B-4047-4A32-B568-A951F20D34D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35EEB17B-4047-4A32-B568-A951F20D34D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35EEB17B-4047-4A32-B568-A951F20D34D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A9A6E5A-F063-41A7-878E-587BC6120103}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,73 @@
+<import src="/tmp/tmp.wxml"></import>
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view wx:if="{{status==0}}">
+        <view class="wrapper">
+            <icon size="70" type="success"></icon>
+            <view class="rs-title">已提交</view>
+            <view class="rs-subtitle">请等待提交结果...</view>
+        </view>
+        <button class="button btn-hidden" data-id="1" formType="submit">查看报名凭证</button>
+    </view>
+    <view wx:elif="{{status==1}}">
+        <view wx:if="{{verified<=0}}">
+            <view class="wrapper">
+                <view wx:if="{{waitVerified==-1}}">
+                    <image class="result-wait" src="/images/ic_result_waiting.png"></image>
+                    <view class="rs-title">排队中</view>
+                    <view class="rs-subtitle">当有名额空出时，系统自动帮你报名成功，活动结束，仍然没有名额，则报名失败。付费报名，自动原路退回报名费用。</view>
+                </view>
+                <view wx:else>
+                    <image class="rs-icon" src="/images/ic_review.png"></image>
+                    <view class="rs-title">等待发起人审核</view>
+                    <text class="rs-subtitle" selectable="true">审核完成后会微信通知您报名情况
+请留意服务通知</text>
+                </view>
+            </view>
+            <view class="btn-more-box">
+                <button bindtap="{{!buttonClicked?'toBack':''}}" class="button btn-white" formType="submit">返回上一页</button>
+                <navigator appId="wx56c8f077de74b07c" openType="navigate" path="/open/order-comment/order-comment?appid={{appid}}&order_id={{orderId}}" target="miniProgram" wx:if="{{orderId}}">去评价</navigator>
+            </view>
+        </view>
+        <block wx:if="{{verified==1}}">
+            <import src="/tmp/tmp.wxml"></import>
+            <view>
+                <view class="wrapper">
+                    <icon size="70" type="success"></icon>
+                    <view class="rs-title">提交成功</view>
+                    <text class="rs-subtitle" selectable="true" wx:if="{{comment}}">附言：{{comment}}</text>
+                    <text class="rs-subtitle" selectable="true" wx:else>你填写的信息已成功提交</text>
+                    <template is="qrcodeDemo" data="{{imgTypeIndex:imgTypeIndex,imgInfo:imgInfo}}"></template>
+                </view>
+                <view class="btn-more-box">
+                    <button bindtap="{{!buttonClicked?'toVoucher':''}}" class="button btn-white" formType="submit" wx:if="{{waitVerified!=-1}}">查看报名凭证</button>
+                    <button bindtap="{{!buttonClicked?'toDetail':''}}" class="button btn-white" formType="submit">回到报名详情</button>
+                    <navigator appId="wx56c8f077de74b07c" openType="navigate" path="/open/order-comment/order-comment?appid={{appid}}&order_id={{orderId}}" target="miniProgram" wx:if="{{orderId}}">去评价</navigator>
+                </view>
+            </view>
+        </block>
+        <view wx:if="{{verified==2}}">
+            <view class="wrapper">
+                <icon size="70" type="warn"></icon>
+                <view class="rs-title">报名失败</view>
+                <view class="rs-subtitle pb0">活动发起人<label>未通过</label>你的报名审核，拒绝原因：</view>
+                <text class="rs-subtitle" selectable="true">{{comment}}</text>
+            </view>
+            <button bindtap="{{!buttonClicked?'toDetail':''}}" class="button btn-white" formType="submit">回到报名详情</button>
+        </view>
+    </view>
+    <view class="wrapper" wx:elif="{{status==2}}">
+        <icon size="70" type="warn"></icon>
+        <view class="rs-title">报名失败</view>
+        <text class="rs-subtitle" selectable="true">报名名额已满，报名费已原路退回</text>
+        <button bindtap="{{!buttonClicked?'toBack':''}}" class="button btn-white" data-id="2" formType="submit">返回上一页</button>
+    </view>
+    <block wx:if="{{recommend.length>0}}">
+        <import src="/tmp/tmp.wxml"></import>
+        <view style="margin-top: 20rpx;">
+            <template is="recommend" data="{{recommend:recommend}}"></template>
+        </view>
+    </block>
+    <view class="ad-box">
+        <template is="ads" data="{{adsList:adsList}}"></template>
+    </view>
+</form>

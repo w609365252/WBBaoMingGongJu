@@ -1,0 +1,56 @@
+<view class="enroll-box" wx:if="{{auth_type==1}}">
+    <label class="label">个人基本信息</label>
+    <view class="enroll-item">
+        <view>真实姓名</view>
+        <label>{{info.op_name[0]}}**</label>
+    </view>
+    <view class="enroll-item">
+        <view>认证有效期</view>
+        <label>{{info.auth_time}} - {{info.expire}}</label>
+    </view>
+</view>
+<view class="enroll-box" wx:if="{{auth_type==2}}">
+    <label class="label">企业基本信息</label>
+    <view class="enroll-item">
+        <view>企业全称</view>
+        <label>{{info.full_name}}</label>
+    </view>
+    <view class="enroll-item">
+        <view>法定代表人姓名</view>
+        <label>{{info.legal_person[0]}}**</label>
+    </view>
+    <view class="enroll-item">
+        <view>认证有效期</view>
+        <label>{{info.auth_time}} - {{info.expire}}</label>
+    </view>
+</view>
+<view class="enroll-box" wx:if="{{auth_type==3}}">
+    <label class="label">组织基本信息</label>
+    <view class="enroll-item">
+        <view>组织机构全称</view>
+        <label>{{info.full_name}}</label>
+    </view>
+    <view class="enroll-item">
+        <view>负责人姓名</view>
+        <label>{{info.legal_person[0]}}**</label>
+    </view>
+    <view class="enroll-item">
+        <view>认证有效期</view>
+        <label>{{info.auth_time}} - {{info.expire}}</label>
+    </view>
+</view>
+<view class="enroll-box" wx:if="{{auth_type==4}}">
+    <label class="label">公众号基本信息</label>
+    <view class="enroll-item">
+        <view>公众号名称</view>
+        <label>{{info.full_name}}</label>
+    </view>
+    <view class="enroll-item">
+        <view>认证有效期</view>
+        <label>{{info.auth_time}} - {{info.expire}}</label>
+    </view>
+</view>
+<view bindtap="makeCall" class="enroll-item" wx:if="{{showDev}}">
+    <view>手机号</view>
+    <label>{{info.op_phone}}</label>
+</view>

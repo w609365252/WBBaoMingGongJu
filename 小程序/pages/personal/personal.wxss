@@ -1,0 +1,183 @@
+.user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 30rpx;
+    background-color: #fff;
+    color: #000;
+    font-size: 32rpx;
+}
+
+.avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border: 1rpx solid #e5e5e5;
+    border-radius: 50rpx;
+    margin-right: 20rpx;
+}
+
+.nickname {
+    white-space: normal;
+    word-break: break-all;
+    max-width: 330rpx;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.5;
+    overflow: hidden;
+}
+
+.row {
+    height: 90rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+    background-color: #fff;
+    color: #000;
+    font-size: 32rpx;
+}
+
+.notice,.contact-us {
+    margin: 20rpx 0;
+}
+
+.mt20 {
+    margin-top: 20rpx;
+}
+
+.mb20 {
+    margin-bottom: 20rpx;
+}
+
+.dot-red {
+    position: absolute;
+    right: 20rpx;
+    top: 0;
+    display: flex;
+    align-items: center;
+    width: 20rpx;
+    height: 50rpx;
+    margin-left: 10rpx;
+}
+
+.dot-red label {
+    display: block;
+    background: #ff5353;
+    width: 15rpx;
+    height: 15rpx;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.row-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.row-icon {
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.row-label {
+    margin: 0 15rpx;
+    font-size: 32rpx;
+    color: #000;
+}
+
+.notice-count {
+    width: 32rpx;
+    height: 32rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16rpx;
+    background-color: #f12c20;
+    color: #fff;
+    font-size: 22rpx;
+}
+
+.right-arrow {
+    flex-shrink: 0;
+    width: 20rpx;
+    height: 20rpx;
+}
+
+.contact {
+    width: 60rpx;
+    height: 60rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #12b7f5;
+    border-radius: 30rpx;
+    z-index: 0;
+}
+
+.header-box {
+    display: flex;
+    align-items: center;
+    border-top: 1rpx solid #eee;
+    padding: 40rpx 0;
+    overflow: hidden;
+    background: #fff;
+}
+
+.header-box .row {
+    flex: 1;
+    display: block;
+    text-align: center;
+    border: 0;
+    height: 110rpx;
+    padding: 0;
+}
+
+.header-box .row image {
+    width: 54rpx;
+    height: 54rpx;
+    display: block;
+    margin: 0 auto 20rpx;
+}
+
+.header-box .row view {
+    font-size: 28rpx;
+    color: #333;
+    line-height: 1.5;
+}
+
+.auth-box {
+    position: absolute;
+    right: 30rpx;
+    top: 30rpx;
+    padding: 30rpx 0;
+}
+
+.personal-info,.auth-body {
+    display: flex;
+    align-items: center;
+    font-size: 30rpx;
+}
+
+.auth-body .icon {
+    width: 32rpx;
+    height: 32rpx;
+    margin-right: 10rpx;
+}
+
+.personal-info .right,.auth-body .right {
+    width: 16rpx;
+    height: 25rpx;
+    margin-left: 20rpx;
+}
+
+.auth-body {
+    position: absolute;
+    top: 50%;
+    right: 70rpx;
+    transform: translate(0,-50%);
+}

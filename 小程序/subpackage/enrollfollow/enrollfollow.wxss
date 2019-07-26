@@ -1,0 +1,222 @@
+.tips {
+    font-size: 24rpx;
+    color: #999;
+    line-height: 1.6;
+    padding: 24rpx 30rpx;
+}
+
+input {
+    flex-grow: 1;
+    height: 88rpx;
+}
+
+.enroll-info {
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.enroll-info-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1rpx solid #e5e5e5;
+    color: #000;
+    font-size: 32rpx;
+}
+
+.enroll-info-item.first {
+    border: 0;
+}
+
+.enroll-info-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.enroll-info-row.right {
+    float: right;
+}
+
+.picker-row {
+    width: 100%;
+    font-size: 30rpx;
+    color: #333;
+}
+
+.picker-row .text {
+    float: left;
+    width: 320rpx;
+}
+
+.goods-title {
+    display: block;
+    font-size: 30rpx;
+    line-height: 88rpx;
+    border-bottom: 1rpx solid #e5e5e5!important;
+}
+
+.goods-title label {
+    color: #999;
+    font-size: 28rpx;
+}
+
+.good-box {
+    display: block;
+    height: auto;
+    border-top: 0;
+}
+
+.good-item {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    min-height: 88rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+    padding: 0 30rpx;
+}
+
+.good-item.first {
+    padding-top: 20rpx;
+}
+
+.good-item .arrow {
+    width: 16rpx;
+    height: 25rpx;
+    margin-left: 15rpx;
+}
+
+.good-item.first image {
+    opacity: 1;
+}
+
+.good-label {
+    width: 128rpx;
+    font-size: 30rpx;
+    white-space: nowrap;
+    color: #333;
+}
+
+.good-pics {
+    position: relative;
+    width: 80rpx;
+    height: 80rpx;
+    margin-bottom: 10rpx;
+    margin-top: 16rpx;
+}
+
+.good-pics image {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.good-pics .clear {
+    position: absolute;
+    top: -10rpx;
+    right: -10rpx;
+    display: inline-block;
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.good-item .text-gray {
+    color: #999;
+    font-size: 26rpx;
+    padding-left: 10rpx;
+}
+
+.good-item input {
+    width: 380rpx;
+}
+
+.good-item.first input {
+    width: 280rpx;
+    flex-grow: 0;
+}
+
+.good-item.first .clear {
+    position: absolute;
+    right: -42rpx;
+    top: -26rpx;
+    z-index: 10;
+}
+
+.qr-code-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10rpx 0 10rpx 30rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.qr-code-box .form-label {
+    width: 550rpx;
+    margin-top: 8rpx;
+    margin-bottom: 14rpx;
+    overflow: hidden;
+}
+
+.qr-code-box .qr-code-title {
+    font-size: 30rpx;
+    color: #333;
+}
+
+.qr-code-box .qr-code-desc {
+    font-size: 24rpx;
+    line-height: 1.5;
+    color: #999;
+}
+
+.qr-code-box .qr-code-desc label {
+    color: #00a8f3;
+    padding: 0 6rpx;
+}
+
+.qr-code-box .qr-code-desc image {
+    display: inline-block;
+    width: 26rpx;
+    height: 26rpx;
+    vertical-align: top;
+    margin-top: 4rpx;
+}
+
+.qr-code {
+    width: 120rpx;
+    height: 120rpx;
+    margin-right: 30rpx;
+    border: 1rpx solid #ddd;
+}
+
+.placeholder {
+    font-size: 30rpx;
+    color: #ccc;
+}
+
+.enroll-info .remove {
+    position: absolute;
+    right: 0;
+    top: -4rpx;
+    width: 30rpx;
+    height: 30rpx;
+    padding: 20rpx;
+}
+
+.qr-code-box .remove-qr {
+    top: -15rpx;
+    padding-bottom: 30rpx;
+}
+
+.ad-more-box {
+    margin: 20rpx auto;
+    width: 690rpx;
+}
+
+.ad-more-box image {
+    display: block;
+    width: 100%;
+    height: 156rpx;
+    border-bottom: 1rpx solid #efeff4;
+}

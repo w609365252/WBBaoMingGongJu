@@ -1,0 +1,102 @@
+.detail-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    width: auto;
+    height: auto;
+}
+
+.dialog-userinfo {
+    z-index: 11;
+}
+
+.dialog-userinfo .dialog-body {
+    width: 580rpx;
+    overflow: hidden;
+}
+
+.dialog-userinfo-title {
+    font-size: 37rpx;
+    color: #333;
+    text-align: center;
+    padding: 70rpx 0 40rpx;
+}
+
+.dialog-userinfo-desc {
+    font-size: 30rpx;
+    color: #333;
+    line-height: 1.5;
+    padding: 0 40rpx 30rpx;
+    text-align: left;
+}
+
+.btn-auth {
+    margin-bottom: 30rpx;
+}
+
+.btn-to-index {
+    width: 500rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: #333;
+    max-width: 100%;
+    border: 1rpx solid #ddd;
+    margin-bottom: 40rpx;
+}
+
+.enroll-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88rpx;
+    margin-top: 20rpx;
+    padding: 0 30rpx;
+    background: #fff;
+}
+
+.enroll-info-item label {
+    font-size: 30rpx;
+    color: #333;
+    white-space: nowrap;
+}
+
+.enroll-info-item input {
+    flex: 1;
+    max-width: 280rpx;
+    text-align: right;
+    font-size: 30rpx;
+    color: #00a8f3;
+}
+
+.tips {
+    padding: 0 30rpx 10rpx;
+    line-height: 2.5;
+    font-size: 24rpx;
+    color: #999;
+}
+
+.set-success {
+    text-align: center;
+    padding-bottom: 30rpx;
+}
+
+.set-success icon {
+    padding: 100rpx 0 30rpx;
+}
+
+.set-title {
+    font-size: 36rpx;
+    color: #333;
+}
+
+.set-desc {
+    padding: 10rpx 50rpx 30rpx;
+    font-size: 26rpx;
+    color: #999;
+    line-height: 1.6;
+}

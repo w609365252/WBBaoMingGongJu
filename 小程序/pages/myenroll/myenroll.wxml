@@ -1,0 +1,34 @@
+<block wx:if="{{hasUserInfo==false}}">
+    <import src="/tmp/tmp.wxml"></import>
+    <view>
+        <template is="wxLogin" data></template>
+    </view>
+</block>
+<block wx:if="{{hasUserInfo}}">
+    <import src="/tmp/tmp.wxml"></import>
+    <form bindsubmit="postFormId" reportSubmit="true">
+        <view class="detail-tabs">
+            <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==0?'current':''}}" data-id="0">我管理的</view>
+            <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==1?'current':''}}" data-id="1">我参与的</view>
+            <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==2?'current':''}}" data-id="2">我收藏的</view>
+        </view>
+        <view class="no-data" wx:if="{{enrollList.length==0&&type==0}}">
+            <image class="empty" src="/images/ic_empty.png"></image>
+            <view class="empty-title">暂未发起任何报名活动</view>
+            <view class="empty-desc">赶紧来创建一个报名活动吧!</view>
+        </view>
+        <view class="no-data" wx:if="{{enrollList.length==0&&type==1}}">
+            <image class="empty" src="/images/ic_empty.png"></image>
+            <view class="empty-title">暂未参加任何报名活动</view>
+            <view class="empty-desc">您可以去发起自己的报名活动</view>
+        </view>
+        <view class="no-data" wx:if="{{enrollList.length==0&&type==2}}">
+            <image class="empty" src="/images/ic_empty.png"></image>
+            <view class="empty-title">暂未收藏任何报名活动</view>
+            <view class="empty-desc">您可以去收藏自己喜欢的报名活动</view>
+        </view>
+        <view class="enroll-list pt20">
+            <template is="enrollList" data="{{enrollList:enrollList,type:type}}"></template>
+        </view>
+    </form>
+</block>

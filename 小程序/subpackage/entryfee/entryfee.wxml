@@ -1,0 +1,54 @@
+<view class="fee-box">
+    <view class="fee-total">
+        <view class="fee-title">可提现金额</view>
+        <view class="large-text">
+            <label>￥</label>{{totalFee/100}}</view>
+        <view class="small-text">总收款 ￥{{income/100}}</view>
+        <view bindtap="toFollow" class="revenue-tips" wx:if="{{follow==0}}">开启收款提醒 ></view>
+    </view>
+    <button class="button btn-disabled" wx:if="{{revenue==0&&btnStatus!=0&&btnStatus<7}}">申请提款</button>
+    <button bindtap="{{!buttonClicked?'toInputFee':''}}" class="button" wx:elif="{{revenue>draw_amount&&btnStatus!=0&&btnStatus<7}}">申请提款</button>
+    <button class="button btn-disabled" wx:elif="{{btnStatus==0}}">暂不能提款<label>（请等待报名结束）</label>
+    </button>
+    <button bindtap="{{!buttonClicked?'toInputFee':''}}" class="button" wx:elif="{{btnStatus==1}}">申请提款<label>（可提款金额{{restFee/100}}）</label>
+    </button>
+    <button bindtap="{{!buttonClicked?'toInputFee':''}}" class="button" wx:elif="{{btnStatus==2}}">再次提款<label>（可提款金额{{restFee/100}}）</label>
+    </button>
+    <button class="button btn-disabled" wx:elif="{{btnStatus==3}}">提款处理中<label>（预计5分钟内到账）</label>
+    </button>
+    <button class="button btn-disabled" wx:elif="{{btnStatus==4}}">已全部提取</button>
+    <button class="button btn-disabled" wx:elif="{{btnStatus==5}}">提取失败，请联系客服</button>
+    <button class="button btn-disabled" wx:elif="{{btnStatus==6}}">暂无收款</button>
+    <button class="button btn-disabled" wx:elif="{{btnStatus==7}}">暂不能提款<label>（报名结束未到24小时）</label>
+    </button>
+    <button class="button btn-disabled" wx:elif="{{btnStatus==8}}">今日提款额度已达上限</button>
+    <button bindtap="toRefundList" class="button btn-white">退款记录 ({{refund_total}})</button>
+    <view class="fee-tips">
+        <view class="fee-tips-item">【温馨提示】</view>
+        <view class="fee-tips-item">1. 已认证用户报名结束后可立即提款；未认证用户，报名结束24小时后可提款。</view>
+        <view class="fee-tips-empty"></view>
+        <view class="fee-tips-item">2. 未认证用户单日提款额度为 5000 元，认证用户是 20000 元。 <label bindtap="toAuth" class="to-auth" wx:if="{{auth==0}}">点击认证</label>
+        </view>
+        <view class="fee-tips-empty"></view>
+        <view class="fee-tips-item">3. 付费报名会收取<label class="text-red"> 1% </label>服务费，用于微信支付服务，提现时自动扣除</view>
+        <view class="fee-tips-empty"></view>
+        <view class="fee-tips-item">4. 遇到任何提款问题，请<button bindcontact="contactCallback" openType="contact" sessionFrom="{{contactUserInfo}}">联系客服</button>
+        </view>
+        <view class="fee-tips-empty"></view>
+    </view>
+</view>
+<view class="follow-dialog dialog" wx:if="{{showDrawBox}}">
+    <view bindtap="closeDrawBox" class="mask"></view>
+    <view class="dialog-body wx-dialog-body pb30">
+        <image bindtap="closeDrawBox" class="d-close" src="/images/close.png"></image>
+        <view class="dialog-header pb20">
+            <image src="/images/ic_upload_weixin.png"></image>
+        </view>
+        <view class="dialog-content" style="position: static; text-align: center;">
+            <view class="follow-tips">根据国家反洗钱规定，提款需要确认本人身份。请上传有效身份证件信息，以确保交易顺利进行。</view>
+        </view>
+        <button bindtap="toAuthPage" class="button btn-to-auth" formType="submit">上传身份证件信息</button>
+    </view>
+</view>
+<import src="/tmp/tmp.wxml"></import>
+<template is="followDialog" data="{{showFollowDialog:showFollowDialog}}"></template>

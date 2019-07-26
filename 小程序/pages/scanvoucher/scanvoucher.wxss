@@ -1,0 +1,132 @@
+form {
+    display: block;
+    padding: 30rpx;
+}
+
+.voucher-body {
+    background: #fff;
+    border-radius: 10rpx;
+}
+
+.header {
+    padding: 30rpx 30rpx 0;
+}
+
+.title {
+    font-size: 36rpx;
+    color: #333;
+    line-height: 1.5;
+    padding-bottom: 30rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.start-time {
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+    color: #999;
+    height: 50rpx;
+}
+
+.start-time image {
+    display: block;
+    width: 24rpx;
+    height: 24rpx;
+    margin-right: 20rpx;
+}
+
+.subtitle {
+    color: #333;
+    padding: 40rpx 0;
+    text-align: center;
+    font-size: 36rpx;
+}
+
+.icon {
+    width: 200rpx;
+    height: 200rpx;
+    margin-bottom: 10rpx;
+}
+
+.green {
+    color: #09bb07;
+}
+
+.warning {
+    color: #ff6d6d;
+}
+
+.warning label {
+    display: block;
+    padding: 10rpx 0;
+    font-size: 28rpx;
+    color: #999;
+}
+
+.img-line {
+    width: 100%;
+    height: 20rpx;
+}
+
+.user-info {
+    padding: 20rpx 30rpx 30rpx;
+    font-size: 26rpx;
+    color: #333;
+    line-height: 1.8;
+}
+
+.button {
+    margin: 30rpx 0;
+}
+
+.voucher-user-box {
+    background: #fff;
+    border-radius: 10rpx;
+    padding: 0 30rpx 30rpx;
+}
+
+.voucher-title {
+    height: 88rpx;
+    line-height: 88rpx;
+    color: #333;
+    font-size: 30rpx;
+    border-bottom: 1rpx solid #ddd;
+}
+
+.voucher-user-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100rpx;
+    line-height: 100rpx;
+    border-bottom: 1rpx solid #ddd;
+}
+
+.voucher-user-head {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+}
+
+.voucher-user-name {
+    font-size: 30rpx;
+    color: #333;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 30rpx;
+}
+
+.voucher-user-date {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.btn-disabled {
+    background: #78cbf3;
+}

@@ -1,0 +1,16 @@
+<view class="wrapper">
+    <view bindtap="{{!buttonClick?'toEnroll':''}}" class="user-info" data-index="{{index}}" wx:for="{{userList}}" wx:key="{{index}}">
+        <view class="label">{{item.name}}<label class="tag-info" wx:if="{{item.on_behalf}}">代</label>
+        </view>
+        <view class="right">
+            <view>编辑/取消报名</view>
+            <image class="arrow" src="/images/right_arrow.png"></image>
+        </view>
+    </view>
+    <view bindtap="{{!buttonClicked?'toEnroll':''}}" class="add-enroll" data-type="create">
+        <image src="/images/ic_addperson.png"></image>
+        <view class="add-text">
+      新增报名<label>(点击"新增报名"，可以代人报名)</label>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,63 @@
+<form bindsubmit="{{!buttonClicked?'submitInfo':''}}" reportSubmit="true">
+    <view class="space"></view>
+    <view class="enroll-info">
+        <view class="enroll-info-item first">
+            <view class="text">{{labelName}}</view>
+            <view class="right alias w380">
+                <input bindblur="inputFullName" bindinput="inputFullName" maxlength="50" placeholder="请输入{{labelName}}" placeholderStyle="color: #aaa;" type="text" value="{{defaultFullName}}"></input>
+                <icon bindtap="clearFullName" size="15" type="clear" wx:if="{{fullName}}"></icon>
+            </view>
+        </view>
+        <view class="enroll-info-item">
+            <view class="text">{{labelNo}}</view>
+            <view class="right alias w380">
+                <input bindblur="inputLicenseNo" bindinput="inputLicenseNo" maxlength="50" placeholder="请输入{{labelNo}}" placeholderStyle="color: #aaa;" type="text" value="{{defaultLicenseNo}}"></input>
+                <icon bindtap="clearLicenseNo" size="15" type="clear" wx:if="{{licenseNo}}"></icon>
+            </view>
+        </view>
+        <view class="enroll-info-item">
+            <view class="text">{{labelPerson}}</view>
+            <view class="right alias w380">
+                <input bindblur="inputLegalPerson" bindinput="inputLegalPerson" maxlength="50" placeholder="请输入{{labelPerson}}" placeholderStyle="color: #aaa;" type="text" value="{{defaultLegalPerson}}"></input>
+                <icon bindtap="clearLegalPerson" size="15" type="clear" wx:if="{{legalPerson}}"></icon>
+            </view>
+        </view>
+    </view>
+    <view class="space"></view>
+    <view class="enroll-info">
+        <view class="logo-body">
+            <view class="text">{{labelPic}}</view>
+            <view class="right">
+                <image bindtap="showPic" class="logo" mode="aspectFill" src="{{licensePic}}" wx:if="{{licensePic}}"></image>
+                <image bindtap="{{!buttonClicked?'openImageDialog':''}}" class="logo" src="/images/ic_upload.png" wx:else></image>
+                <view bindtap="{{!buttonClicked?'openImageDialog':''}}" class="btn-blue" wx:if="{{licensePic}}">重新上传</view>
+            </view>
+        </view>
+    </view>
+    <button class="button mt30" formType="submit">下一步</button>
+</form>
+<view class="contact-box">
+    <view>如有问题，请</view>
+    <button class="contact" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">联系客服</button>
+</view>
+<form bindsubmit="{{!buttonClicked?'postFormId':''}}" reportSubmit="true">
+    <view class="dialog image-dialog" wx:if="{{imageDialogShow}}">
+        <view bindtap="closeImageDialog" class="mask"></view>
+        <view class="dialog-box">
+            <view class="image-dialog-header">工商营业执照——示意图</view>
+            <view class="image-dialog-body">
+                <image class="img-demo" src="https://cdn-xcxcustom.weiyoubot.cn/20180920/7fb092dbd673251c583ec68f5b58a7c6.jpg"></image>
+                <view class="image-tips">工商营业执照要求：</view>
+                <view class="require-item">
+                    <image src="/images/ic_num_01.png"></image>
+                    <view>请上传工商营业执照，<label>图片要求四角对齐</label>，如有<label>模糊、太暗、遮挡</label>，则不予认证；</view>
+                </view>
+                <view class="require-item">
+                    <image src="/images/ic_num_02.png"></image>
+                    <view>只支持中国大陆工商局或市场监督管理局颁发的工商营业执照，且<label>必须在有效期内</label>。</view>
+                </view>
+            </view>
+            <button bindtap="{{!buttonClicked?'chooseImage':''}}" class="button" formType="submit">上传图片</button>
+        </view>
+    </view>
+</form>

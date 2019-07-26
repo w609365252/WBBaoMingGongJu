@@ -1,0 +1,13 @@
+<view class="wrapper">
+    <view class="img-box">
+        <view class="img-item" wx:for="{{pics}}" wx:key="{{index}}">
+            <image mode="aspectFill" src="{{item}}"></image>
+            <image bindtap="deleteImg" class="remove" data-index="{{index}}" src="../../images/delete.png"></image>
+        </view>
+        <view bindtap="{{!buttonClicked?'chooseImage':''}}" class="img-item">
+            <image src="/images/ic_item_uploadpicture_default.png"></image>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <button bindtap="{{!buttonClicked?'goBack':''}}" class="button">确定</button>
+</view>

@@ -1,0 +1,15 @@
+<view class="enroll-user-list">
+    <view class="empty-tips" wx:if="{{userList.length==0}}">暂无退款记录~</view>
+    <view class="enroll-list-item" wx:if="{{userList.length}}" wx:for="{{userList}}" wx:key="{{item.info_id}}">
+        <image class="user-head" src="{{item.head_img}}"></image>
+        <view class="enroll-right no-right-arrow">
+            <view class="username">{{item.name}}</view>
+            <view class="phone" wx:if="{{item.date}}">{{item.date_str}}</view>
+            <view class="time" wx:if="{{item.system==1}}">系统退款</view>
+            <view class="time" wx:elif="{{item.refund_status<2}}">退款进行中</view>
+            <view class="time" wx:elif="{{item.refund_status==2}}">退款成功</view>
+            <view class="time" style="color: #f76260;" wx:elif="{{item.refund_status==3}}">退款失败</view>
+            <view class="enroll-no">{{item.fee/100}}元</view>
+        </view>
+    </view>
+</view>

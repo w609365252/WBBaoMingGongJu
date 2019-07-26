@@ -1,0 +1,8 @@
+<view class="voucher-list">
+    <view class="no-data" wx:if="{{voucher.length==0}}">暂无数据</view>
+    <view bindtap="{{!buttonClicked?'toVoucherDetail':''}}" class="voucher-item" data-infoid="{{item.info_id}}" wx:for="{{voucher}}" wx:key="{{index}}">
+        <view class="voucher-title">{{item.title}}<label class="tag-info" wx:if="{{item.on_behalf}}">代</label>
+        </view>
+        <image class="arrow" src="/images/right_arrow.png"></image>
+    </view>
+</view>

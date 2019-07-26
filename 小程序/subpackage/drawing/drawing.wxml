@@ -1,0 +1,10 @@
+<view class="container">
+    <view class="label">请在下方空白处书写</view>
+    <view class="canvas-area">
+        <canvas bindtouchmove="touchMove" bindtouchstart="touchStart" canvasId="drawing" class="myCanvas" disableScroll="false"></canvas>
+    </view>
+    <view class="canvas-tools">
+        <view bindtap="saveCanvas" class="btn save">保存</view>
+        <view bindtap="clearCanvas" class="btn clear">清除</view>
+    </view>
+</view>

@@ -1,0 +1,606 @@
+<view wx:if="{{hasUserInfo==false}}">
+    <image class="detail-bg" src="/images/bg_souquan.jpg"></image>
+    <view class="dialog dialog-userinfo">
+        <view class="mask"></view>
+        <view class="dialog-body">
+            <view class="dialog-userinfo-title">欢迎</view>
+            <view class="dialog-userinfo-desc">请允许授权后放心使用小程序，你的信息和数据将受到保护</view>
+            <button bindgetuserinfo="login" class="button btn-auth" openType="getUserInfo">
+                <image src="/images/wx_logo.png"></image>
+                <view>微信授权登录</view>
+            </button>
+        </view>
+    </view>
+</view>
+<block wx:if="{{hasUserInfo}}">
+    <import src="/tmp/tmp.wxml"></import>
+    <form bindsubmit="postFormId" reportSubmit="true">
+        <view class="error" wx:if="{{showLoadError}}">
+            <image class="error-icon" src="/images/error.png"></image>
+            <view class="error-text">加载失败，请检查网络</view>
+            <button bindtap="refresh" class="error-refresh" formType="submit">重新加载</button>
+        </view>
+        <view class="error" wx:if="{{dataNotFound}}">
+            <image class="error-icon" src="/images/error.png"></image>
+            <view class="error-text">报名不存在，可能已经被删除</view>
+            <button bindtap="toIndex" class="error-refresh" formType="submit">返回首页</button>
+        </view>
+        <view class="censor-box" wx:if="{{enroll!=null&&enroll.censor_status==2&&showDev==0}}">
+            <icon class="censor-icon" size="85" type="warn"></icon>
+            <view class="censor-title">内容违规已被暂停</view>
+            <view class="censor-desc">该内容被多人投诉，为维护绿色上网环境，已停止访问。</view>
+            <button bindtap="copyEid" class="censor-btn-success" wx:if="{{enroll.is_owner}}">{{eid}}</button>
+            <button bindtap="toIndex" class="censor-btn-success">返回首页</button>
+            <view class="censor-btn-back">
+                <button class="censor-btn-customer">联系客服</button>
+                <button bindcontact="contactCallback" class="contact" openType="contact" sessionFrom="{{contactUserInfo}}">联系客服</button>
+            </view>
+        </view>
+        <view class="censor-box" wx:elif="{{enroll!=null&&enroll.censor_status==3&&showDev==0}}">
+            <icon class="censor-icon" color="#ffbe00" size="85" type="warn"></icon>
+            <view class="censor-title">活动存在有争议的内容</view>
+            <view class="censor-desc">请耐心等待有争议内容协商解决，有问题，<view>请 <label bindtap="contactMenu" data-type="1">联系活动发起人</label>。</view>
+            </view>
+            <button bindtap="toIndex" class="censor-btn-success">返回首页</button>
+            <view class="censor-btn-back">
+                <button class="censor-btn-customer">联系客服</button>
+                <button bindcontact="contactCallback" class="contact" openType="contact" sessionFrom="{{contactUserInfo}}">联系客服</button>
+            </view>
+        </view>
+        <view class="wrapper {{enroll.is_owner?'owner':''}}" wx:elif="{{enroll!=null}}">
+            <view class="no-start" wx:if="{{enroll.status==0&&enroll.is_owner==0}}">
+                <image src="/images/ic_infor_88.png"></image>报名暂未开始，可以点击“收藏”，等开始后再报名参加。</view>
+            <image bindtap="showBanner" class="banner" data-pic="{{enroll.banner}}" mode="widthFix" src="{{enroll.banner}}" wx:if="{{enroll.banner}}"></image>
+            <view class="enroll-info">
+                <view bindlongpress="copy" class="enroll-info-title">{{enroll.title}}</view>
+                <view class="tags" wx:if="{{enroll.status==0}}">
+                    <label>[未开始]</label>
+                    <view class="views" wx:if="{{enroll.is_owner}}">
+                        <image src="/images/ic_detail_view_number.png"></image>
+          {{enroll.views}}
+        </view>
+                </view>
+                <view class="tags tags-blue" wx:if="{{enroll.status==1}}">
+                    <label>[进行中]</label>
+                    <label wx:if="{{enroll.info_id}}">[已报名]</label>
+                    <label class="lable-illegal" wx:if="{{enroll.censor_status==2}}">[违规]</label>
+                    <view class="views" wx:if="{{enroll.is_owner}}">
+                        <image src="/images/ic_detail_view_number.png"></image>
+          {{enroll.views}}
+        </view>
+                </view>
+                <view class="tags tags-end" wx:if="{{enroll.status==2}}">
+                    <label>[已结束]</label>
+                    <label wx:if="{{enroll.info_id}}">[已报名]</label>
+                    <label class="lable-illegal" wx:if="{{enroll.censor_status==2}}">[违规]</label>
+                    <view class="views" wx:if="{{enroll.is_owner}}">
+                        <image src="/images/ic_detail_view_number.png"></image>
+          {{enroll.views}}
+        </view>
+                </view>
+                <view class="enroll-more-item pr">
+                    <image class="owner-head" src="../../images/end_time.png"></image>
+                    <view>报名时间：{{enroll.startTime}} - {{enroll.endTime}}</view>
+                </view>
+                <view class="enroll-more-item pr" wx:if="{{enroll.fee}}">
+                    <image src="../../images/ic_money.png"></image>
+                    <view>报名费用：{{enroll.fee/100+'元'}}</view>
+                </view>
+                <view class="enroll-more-item" wx:if="{{enroll.items.length==0&&(enroll.user_visible||enroll.is_owner)}}">
+                    <image src="../../images/number.png"></image>
+                    <view>报名人数：{{enroll.count}}/{{enroll.limit?enroll.limit:'无限制'}} {{enroll.count==enroll.limit&&enroll.limit!=0?'(名额已满)':''}}</view>
+                </view>
+                <view class="enroll-more-item pr" wx:if="{{enroll.act_start}}">
+                    <image class="owner-head" src="../../images/end_time.png"></image>
+                    <view>活动时间：{{enroll.actStartTime}} - {{enroll.actEndTime}}</view>
+                </view>
+                <view bindtap="openLocation" class="enroll-more-item" wx:if="{{enroll.address}}">
+                    <image src="../../images/address_selected.png"></image>
+                    <view class="address">活动地址：<label>{{enroll.address}}</label>
+                    </view>
+                </view>
+            </view>
+            <view bindlongtap="copyOwnerUnionid" wx:if="{{enroll.auth==0||enroll.auth!=0&&!enroll.role}}">
+                <view class="owner-box">
+                    <view bindtap="{{!buttonClicked?'showPhone':''}}" class="enroll-more-item">
+                        <image class="owner-head" src="{{enroll.owner_pic}}"></image>
+                        <view class="owner-name-box">
+                            <label>发起人：</label>
+                            <view class="owner-name {{enroll.is_owner?'w220':''}}">{{enroll.sign_name||'匿名'}}</view>
+                        </view>
+                    </view>
+                    <view catchtap="contactMenu" class="owner-other-info">
+          联系Ta
+        </view>
+                </view>
+                <view bindtap="{{!buttonClicked?'toAuth':''}}" class="auth-tips-box" wx:if="{{enroll.is_owner&&enroll.auth==0}}">
+                    <view class="auth-tips-bd">
+                        <view class="auth-tips-left">
+                            <image src="/images/ic_detail_vip.png"></image>
+                            <label>认证后，享有更多权益</label>
+                        </view>
+                        <view>去认证 ></view>
+                    </view>
+                </view>
+            </view>
+            <view bindlongtap="copyOwnerUnionid" bindtap="{{!buttonClicked?'toHomePage':''}}" class="owner-auth-box" wx:else>
+                <view class="owner-auth-body">
+                    <image class="owner-avatar" src="{{enroll.owner_pic}}"></image>
+                    <view class="owner-body">
+                        <view class="owner-header">
+                            <view class="owner-name">{{enroll.sign_name}}</view>
+                            <view class="owner-auth-type" wx:if="{{enroll.auth==1}}">
+                                <image class="owner-icon" src="/images/ic_identification_person_small.png"></image>
+                                <view class="owner-tag">个人认证</view>
+                            </view>
+                            <view class="owner-auth-type" wx:if="{{enroll.auth==2}}">
+                                <image class="owner-icon" src="/images/ic_identification_company_small.png"></image>
+                                <view class="owner-tag">企业认证</view>
+                            </view>
+                            <view class="owner-auth-type" wx:if="{{enroll.auth==3}}">
+                                <image class="owner-icon" src="/images/ic_identification_organization_small.png"></image>
+                                <view class="owner-tag">组织认证</view>
+                            </view>
+                            <view class="owner-auth-type" wx:if="{{enroll.auth==4}}">
+                                <image class="owner-icon" src="/images/ic_identification_gzh_small.png"></image>
+                                <view class="owner-tag">公众号认证</view>
+                            </view>
+                        </view>
+                        <view class="owner-desc" wx:if="{{enroll.auth>1}}">{{enroll.summary?enroll.summary:'Ta组织活动太忙，还没有腾空写简介'}}</view>
+                    </view>
+                    <image class="owner-right" src="/images/right_arrow.png"></image>
+                </view>
+                <view catchtap="contactMenu" class="btn-contact">联系Ta</view>
+            </view>
+            <view bindtap="toFollow" class="follow-box" wx:if="{{enroll.is_fans==0&&enroll.is_owner}}">
+                <image class="follow-icon" src="/images/ic_detail_notice_guide.png"></image>
+                <view class="follow-bd">
+                    <view class="follow-title">{{enroll.is_owner?'开启报名提醒':'开启通知提醒'}}</view>
+                    <view class="follow-desc">{{enroll.is_owner?'关注公众号，及时接收用户报名提醒':'关注公众号，及时接收报名活动提醒'}}</view>
+                </view>
+                <view class="follow-btn">去开启</view>
+            </view>
+            <view class="enroll-rule rule-all">
+                <view wx:if="{{enroll.content||enroll.pics.length>0}}">
+                    <text class="enroll-rule-desc" selectable="true" wx:if="{{ruleShow}}">{{enroll.content}}</text>
+                    <view class="space" wx:if="{{enroll.content&&enroll.pics.length}}"></view>
+                    <view class="pics" wx:if="{{ruleShow}}">
+                        <image bindtap="showPic" class="pic" data-index="{{index}}" mode="widthFix" src="{{item}}" wx:for="{{enroll.pics}}" wx:key="{{index}}"></image>
+                    </view>
+                </view>
+                <view class="share-panel {{!(enroll.content||enroll.pics.length)?'mtm30':''}}">
+                    <button formType="submit" openType="share">
+                        <image src="/images/ic_detail_sharefriends.png"></image>
+                        <view>分享给好友</view>
+                    </button>
+                    <view class="vertical-line"></view>
+                    <button bindtap="{{!buttonClicked?'shareWxCircle':''}}" data-id="0" formType="submit">
+                        <image src="/images/ic_detail_sharepic.png"></image>
+                        <view>生成分享图</view>
+                    </button>
+                </view>
+            </view>
+            <view bindtap="toQrcode" class="group-box" wx:if="{{enroll.follow.qrcode&&(enroll.follow.visi||enroll.follow.visi==0&&enroll.info_id||showDev)}}">
+                <image class="group-icon" mode="aspectFill" src="{{enroll.follow.header?enroll.follow.header:'/images/ic_detail_group_photo.png'}}"></image>
+                <view class="group-body">
+                    <view class="group-title">{{enroll.follow.title?enroll.follow.title:'官方交流群'}}</view>
+                    <label>{{enroll.follow.desc?enroll.follow.desc:'邀请你进群参加交流讨论'}}</label>
+                </view>
+                <view class="group-join" wx:if="{{enroll.follow.type==0||enroll.group_qr}}">进群</view>
+                <view class="group-join" wx:if="{{enroll.follow.type==1}}">添加</view>
+                <view class="group-join" wx:if="{{enroll.follow.type==2}}">关注</view>
+            </view>
+            <view class="enroll-content">
+                <view class="detail-tabs">
+                    <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab tab-sort {{currentTab==1?'current':''}}" data-id="1" wx:if="{{enroll.is_owner||enroll.is_admin||showDev||enroll.user_visible==1||enroll.user_visible==2}}">
+                        <view>已报名({{total}})</view>
+                        <picker bindchange="changeSort" class="picker-row" mode="selector" range="{{sortType}}" value="{{sortIndex}}">
+                            <image src="/images/{{currentTab==1?'ic_detail_sorting_blue':'ic_detail_sorting_gray'}}.png"></image>
+                        </picker>
+                    </view>
+                    <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==2?'current':''}}" data-id="2" wx:if="{{enroll.is_owner||enroll.is_admin||showDev||enroll.visibility==1||enroll.visibility==2&&enroll.info_id}}">
+                        <view>详细数据</view>
+                    </view>
+                </view>
+                <view class="enroll-user-list" wx:if="{{currentTab==1&&(enroll.is_owner||enroll.is_admin||showDev||enroll.user_visible==1||enroll.user_visible==2)}}">
+                    <view class="empty-tips" wx:if="{{total==0}}">还没有人参与</view>
+                    <view bindtap="inviteData" class="enroll-list-gray" wx:if="{{total>0&&(enroll.is_owner||showDev)}}">
+                        <image src="/images/ic_detail_list_data.png"></image>
+                        <label>查看数据统计</label>
+                    </view>
+                    <view bindtap="{{!buttonClicked?'userDetail':''}}" class="enroll-list-item" data-id="{{item.info_id}}" data-index="{{index}}" data-info_id="{{item.info_id}}" data-verified="{{item.verified}}" wx:if="{{total>0}}" wx:for="{{userList}}" wx:key="{{item.info_id}}">
+                        <image class="user-head" src="{{item.head_img}}"></image>
+                        <view class="enroll-right">
+                            <view class="username" wx:if="{{enroll.user_visible==1}}">{{item.name}}<label class="tag-info" wx:if="{{item.on_behalf}}">代</label>
+                            </view>
+                            <view class="username" wx:else>**</view>
+                            <view class="phone">{{item.date_str}}</view>
+                            <view class="time" wx:if="{{enroll.verify}}">
+                                <label class="blue" wx:if="{{item.verified==-1}}">排队中</label>
+                                <label class="blue" wx:if="{{item.verified==0}}">待审核</label>
+                                <label class="gray" wx:if="{{item.verified==1}}">审核通过<text wx:if="{{item.refund&&(enroll.is_owner||showDev)}}">(已退款)</text>
+                                </label>
+                                <label class="red" wx:if="{{item.verified==2}}">审核未通过</label>
+                            </view>
+                            <view class="time" wx:elif="{{item.verified==-1}}">
+                                <label class="blue">排队中</label>
+                            </view>
+                            <view class="time" wx:else>报名成功<text wx:if="{{item.refund&&(enroll.is_owner||showDev)}}">(已退款)</text>
+                            </view>
+                            <view class="enroll-no">No. {{endCount-index}}</view>
+                        </view>
+                        <image class="arrow-right" src="/images/right_arrow.png" wx:if="{{enroll.is_owner||showDev||enroll.visibility==1||enroll.visibility==2&&enroll.info_id||enroll.is_admin}}"></image>
+                    </view>
+                </view>
+                <view class="enroll-list-gray list-red" wx:if="{{tableData.length>0&&currentTab==2}}">
+                    <image src="{{enroll.visibility==0?'/images/ic_detail_list_lock.png':'/images/ic_detail_list_unlock.png'}}"></image>
+                    <label>{{visibility[enroll.visibility]}}</label>
+                </view>
+                <scroll-view scrollX class="scroll-view" wx:if="{{currentTab==2}}">
+                    <view class="empty-tips" wx:if="{{tableData==null}}">正在努力加载数据...</view>
+                    <view class="empty-tips" wx:if="{{tableData.length==0}}">暂无任何数据</view>
+                    <view class="table" wx:if="{{tableData!=null&&tableData.length>0}}">
+                        <view class="tr bg-gray" style="width:{{width}}">
+                            <view class="th td-index">序号</view>
+                            <view bindtap="showAllTitle" class="th td-name" data-idx="{{idx}}" style="width: {{tdWidth[idx]}}rpx" wx:for="{{field_list}}" wx:for-index="idx" wx:key="{{field_list}}">{{item.field_name}}</view>
+                        </view>
+                        <view class="tr" style="width:{{width}}" wx:for="{{tableData}}" wx:for-item="arr" wx:key="{{tableData}}">
+                            <view class="td td-index">{{(page-1)*count+index+1}}</view>
+                            <view bindtap="showAll" class="td td-name" data-idx="{{idx}}" data-index="{{index}}" style="width: {{tdWidth[idx]}}rpx" wx:for="{{arr}}" wx:for-index="idx" wx:key="{{index}}">{{item.field_value}}</view>
+                        </view>
+                    </view>
+                </scroll-view>
+                <view class="btn-page-panel" wx:if="{{tableData!=null&&currentTab==2}}">
+                    <view bindtap="{{!buttonClicked?'otherUser':''}}" class="btn-page btn-prev" data-type="prev" wx:if="{{page>1}}">上一页</view>
+                    <view bindtap="{{!buttonClicked?'otherUser':''}}" class="btn-page btn-next" data-type="next" wx:if="{{!noMoreUser}}">下一页</view>
+                </view>
+            </view>
+            <view wx:if="{{enroll.is_owner}}">
+                <view bindtap="{{!buttonClicked?'toHelp':''}}" class="help">点击查看「报名工具」使用攻略</view>
+            </view>
+            <view class="footer {{iPhoneX?'iphone-x':''}}" wx:if="{{enroll&&enroll.cid==''&&from!='checkin'||showDev}}">
+                <view class="owner-btn" wx:if="{{enroll.is_owner==1||showDev||enroll.is_admin==1}}">
+                    <button bindtap="{{!buttonClicked?'showShareDialog':''}}" class="btn-bottom" formType="submit">
+                        <image src="/images/ic_bar_share.png"></image>
+                        <view class="btn-text">分享</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'manage':''}}" class="btn-bottom" formType="submit">
+                        <image src="/images/ic_bar_manage.png"></image>
+                        <view class="btn-text">管理</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'toZhini':''}}" class="btn-bottom" formType="submit">
+                        <image src="/images/ic_detail_bar_message.png"></image>
+                        <view class="btn-text">消息</view>
+                        <view class="notice" wx:if="{{enroll.is_owner&&enroll.notice_count}}">{{enroll.notice_count>99?'...':enroll.notice_count}}</view>
+                    </button>
+                </view>
+                <view class="owner-btn" wx:else>
+                    <button bindtap="{{!buttonClicked?'showShareDialog':''}}" class="btn-bottom" formType="submit">
+                        <image src="/images/ic_bar_share.png"></image>
+                        <view class="btn-text">分享</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'collect':''}}" class="btn-bottom" formType="submit">
+                        <image src="{{enroll.is_fav?'/images/ic_bar_favorite_pressed.png':'/images/ic_bar_favorite.png'}}"></image>
+                        <view class="btn-text">{{enroll.is_fav?'取消收藏':'收藏'}}</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'toZhini':''}}" class="btn-bottom" formType="submit">
+                        <image src="/images/ic_detail_bar_message.png"></image>
+                        <view class="btn-text">{{enroll.card_appid?'在线咨询':'消息'}}</view>
+                    </button>
+                </view>
+                <view class="enroll-panel">
+                    <button class="button btn-enroll btn-disabled" formType="submit" wx:if="{{enroll.status==0}}">报名未开始</button>
+                    <button class="button btn-enroll btn-disabled" formType="submit" wx:elif="{{enroll.status==2&&!enroll.info_id&&enroll.on_behalf==0}}">报名已结束</button>
+                    <button bindtap="{{!buttonClicked?'toEnroll':''}}" class="button btn-enroll" formType="submit" wx:elif="{{enroll.count>=enroll.limit&&!enroll.info_id&&enroll.on_behalf==0&&enroll.limit!=0&&enroll.queue}}">我要排队</button>
+                    <button class="button btn-enroll btn-disabled" formType="submit" wx:elif="{{enroll.count>=enroll.limit&&!enroll.info_id&&enroll.on_behalf==0&&enroll.limit!=0}}">报名名额已满</button>
+                    <button bindtap="{{!buttonClicked?'toEnroll':''}}" class="button btn-enroll" formType="submit" wx:elif="{{enroll.status==1&&!enroll.info_id&&enroll.on_behalf==0||enroll.on_behalf&&(enroll.pay_status==1||enroll.pay_status==2)}}">我要报名</button>
+                    <button bindtap="{{!buttonClicked?'toEnroll':''}}" class="button btn-enroll" data-infoid="{{enroll.info_id}}" data-type="detail" formType="submit" wx:elif="{{enroll.status==1&&enroll.info_id&&enroll.on_behalf_limit==0}}">编辑/取消报名</button>
+                    <button bindtap="{{!buttonClicked?'toEditEnroll':''}}" class="button btn-enroll" data-type="detail" formType="submit" wx:elif="{{enroll.status==1&&(enroll.info_id||enroll.on_behalf_limit)}}">编辑/取消报名</button>
+                    <button bindtap="{{!buttonClicked?'selfDetail':''}}" class="button btn-enroll" data-id="{{enroll.info_id}}" data-type="look" formType="submit" wx:elif="{{enroll.status==2&&enroll.info_id&&enroll.on_behalf==0}}">查看/取消报名</button>
+                    <button bindtap="{{!buttonClicked?'userEnroll':''}}" class="button btn-enroll" data-id="{{enroll.info_id}}" data-type="look" formType="submit" wx:elif="{{enroll.status==2&&(enroll.info_id||enroll.on_behalf)}}">查看/取消报名</button>
+                </view>
+            </view>
+            <view class="footer" wx:elif="{{enroll&&enroll.censor_status!=2}}">
+                <view class="owner-btn" wx:if="{{enroll.is_owner==1||showDev}}">
+                    <button bindtap="{{!buttonClicked?'export':''}}" class="btn-bottom" formType="submit">
+                        <image src="/images/ic_bar_exportdata.png"></image>
+                        <view class="btn-text">导出数据</view>
+                    </button>
+                </view>
+            </view>
+        </view>
+        <view class="dialog-share" wx:if="{{showShareDialog}}">
+            <view class="d-content">
+                <image bindtap="showQrcode" class="d-img" data-pic="{{imageUrl}}" mode="aspectFit" src="{{imageUrl}}" wx:if="{{imageUrl}}"></image>
+                <canvas bindtap="prevCanvas" canvasId="shareQrCode" class="canvas-qr-code" wx:else></canvas>
+                <view wx:if="{{shareFriends}}">
+                    <image class="share-tips" src="/images/share_tips.png"></image>
+                    <view>点击上图，然后长按或者点右上角[···]分享给好友或者微信群。</view>
+                </view>
+                <view wx:else>该图片已保存到手机相册</view>
+                <button bindtap="closeDialog" class="button white" formType="submit">我知道了</button>
+            </view>
+        </view>
+        <view class="manage-dialog dialog" wx:if="{{shareDialogAnimate}}">
+            <view bindtap="closeShareDialog" class="mask"></view>
+            <view class="manage-body {{iPhoneX?'iphone-x':''}}">
+                <view class="btn-box">
+                    <button catchtap="closeShareDialog" class="btn-manage" formType="submit" openType="share">
+                        <image src="/images/ic_popmenu_sharefriends.png"></image>
+                        <view class="btn-text">分享给好友</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'shareWxCircle':''}}" class="btn-manage" data-id="0" formType="submit">
+                        <image src="/images/ic_popmenu_pyq.png"></image>
+                        <view class="btn-text">生成分享图</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'shareWxCircle':''}}" class="btn-manage" data-id="1" formType="submit">
+                        <image src="/images/ic_share_minicode.png"></image>
+                        <view class="btn-text">生成小程序码</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'shareWxCircle':''}}" class="btn-manage" data-id="4" formType="submit">
+                        <image src="/images/ic_share_scancode.png"></image>
+                        <view class="btn-text">生成二维码</view>
+                    </button>
+                </view>
+                <view class="btn-box" wx:if="{{enroll.is_admin||enroll.is_owner||showDev}}">
+                    <button bindtap="{{!buttonClicked?'showPath':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_minapp.png"></image>
+                        <view class="btn-text">接入公众号</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'copyWebUrl':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_share_H5.png"></image>
+                        <view class="btn-text">复制链接</view>
+                    </button>
+                    <button bindcontact="contactCallback" class="btn-manage" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">
+                        <image src="/images/ic_detail_share_report.png"></image>
+                        <view class="btn-text">举报/建议</view>
+                    </button>
+                    <button class="btn-manage" formType="submit"></button>
+                </view>
+                <view class="btn-box" wx:else>
+                    <button bindcontact="contactCallback" class="btn-manage" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">
+                        <image src="/images/ic_detail_share_report.png"></image>
+                        <view class="btn-text">举报/建议</view>
+                    </button>
+                    <button class="btn-manage" formType="submit"></button>
+                    <button class="btn-manage" formType="submit"></button>
+                    <button class="btn-manage" formType="submit"></button>
+                </view>
+                <button bindtap="closeShareDialog" class="button button-white" formType="submit">取消</button>
+            </view>
+        </view>
+        <view class="path-dialog dialog" wx:if="{{copyWebUrlDialog}}">
+            <view bindtap="closeWebUrl" class="mask"></view>
+            <view class="dialog-body wx-dialog-body">
+                <view class="dialog-header">报名活动链接</view>
+                <image bindtap="closeWebUrl" class="dialog-close" src="/images/close.png"></image>
+                <view class="wx-dialog-content">
+                    <view class="path-text">
+          http://m.baominggongju.com/?eid={{eid}}&referer={{enroll.unionid}}
+        </view>
+                    <view class="path-desc">以上文本即该活动的网页链接。可设置在公众号菜单、阅读原文等所有需要网页链接的位置。</view>
+                </view>
+                <view class="dialog-footer">
+                    <button bindtap="{{!buttonClicked?'copyWebPath':''}}" class="button" formType="submit">一键复制链接</button>
+                </view>
+            </view>
+        </view>
+        <view class="wx-dialog dialog" wx:if="{{wxDialog}}">
+            <view bindtap="closeWxDialog" class="mask"></view>
+            <view class="dialog-body wx-dialog-body">
+                <view class="dialog-header">添加发起者微信</view>
+                <image bindtap="closeWxDialog" class="dialog-close" src="/images/close.png"></image>
+                <view class="wx-dialog-content">
+                    <image class="head" src="{{enroll.owner_pic}}"></image>
+                    <view class="c-right">
+                        <view class="nickname">{{enroll.sign_name}}</view>
+                        <view class="wx-no">微信号：{{enroll.wx_no}}</view>
+                    </view>
+                </view>
+                <view class="dialog-footer">
+                    <button bindtap="{{!buttonClicked?'copyWx':''}}" class="button" formType="submit">一键复制微信号</button>
+                </view>
+            </view>
+        </view>
+        <view class="manage-dialog dialog" wx:if="{{manageDialogShow}}">
+            <view bindtap="closeManageDialog" class="mask"></view>
+            <view class="manage-body {{iPhoneX?'iphone-x':''}}">
+                <view class="btn-box">
+                    <button bindtap="{{!buttonClicked?'toEdit':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_edit.png"></image>
+                        <view class="btn-text">编辑修改</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'copyEnroll':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_copy.png"></image>
+                        <view class="btn-text">复制创建</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'export':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_importdata.png"></image>
+                        <view class="btn-text">导出数据</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'deleteEnroll':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_delete.png"></image>
+                        <view class="btn-text">删除报名表</view>
+                    </button>
+                </view>
+                <view class="btn-box">
+                    <button bindtap="{{!buttonClicked?'notice':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_notice.png"></image>
+                        <view class="btn-text">发送通知</view>
+                    </button>
+                    <button bindcontact="contactCallback" class="btn-manage" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">
+                        <image src="/images/ic_popmenu_feedback.png"></image>
+                        <view class="btn-text">联系客服</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'entryFee':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_money.png"></image>
+                        <view class="btn-text">查看收款</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'setAdmin':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_management.png"></image>
+                        <view class="btn-text">设置管理员</view>
+                    </button>
+                </view>
+                <view class="btn-box">
+                    <button bindtap="{{!buttonClicked?'followSub':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_follow.png"></image>
+                        <view class="btn-text">报名关注</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'toCheckin':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_register.png"></image>
+                        <view class="btn-text">核销</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'inviteData':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_data.png"></image>
+                        <view class="btn-text">数据统计</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'refundAllDialog':''}}" class="btn-manage" formType="submit" wx:if="{{showDev}}">
+                        <image src="/images/ic_popmenu_drawback.png"></image>
+                        <view class="btn-text">全部退款</view>
+                    </button>
+                    <button class="btn-manage" formType="submit" wx:else></button>
+                </view>
+                <button bindtap="closeManageDialog" class="button button-white" formType="submit">取消</button>
+            </view>
+        </view>
+        <view class="manage-dialog dialog" wx:if="{{adminDialogShow}}">
+            <view bindtap="closeManageDialog" class="mask"></view>
+            <view class="manage-body {{iPhoneX?'iphone-x':''}}">
+                <view class="btn-box">
+                    <button bindtap="{{!buttonClicked?'copyEnroll':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_copy.png"></image>
+                        <view class="btn-text">复制创建</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'export':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_importdata.png"></image>
+                        <view class="btn-text">导出数据</view>
+                    </button>
+                    <button bindcontact="contactCallback" class="btn-manage" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">
+                        <image src="/images/ic_popmenu_feedback.png"></image>
+                        <view class="btn-text">联系客服</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'exitManage':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popupmenu_cancelmanage.png"></image>
+                        <view class="btn-text">退出管理员</view>
+                    </button>
+                </view>
+                <view class="btn-box">
+                    <button bindtap="{{!buttonClicked?'followSub':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_follow.png"></image>
+                        <view class="btn-text">报名关注</view>
+                    </button>
+                    <button bindtap="{{!buttonClicked?'toCheckin':''}}" class="btn-manage" formType="submit">
+                        <image src="/images/ic_popmenu_register.png"></image>
+                        <view class="btn-text">核销</view>
+                    </button>
+                    <button class="btn-manage" formType="submit"></button>
+                    <button class="btn-manage" formType="submit"></button>
+                </view>
+                <button bindtap="closeManageDialog" class="button button-white" formType="submit">取消</button>
+            </view>
+        </view>
+        <view class="path-dialog dialog" wx:if="{{pathDialog}}">
+            <view bindtap="closePathDialog" class="mask"></view>
+            <view class="dialog-body wx-dialog-body" style="width: 600rpx;">
+                <view class="dialog-header">接入公众号</view>
+                <image bindtap="closePathDialog" class="dialog-close" src="/images/close.png"></image>
+                <view class="wx-dialog-content">
+                    <view class="path-title" style="margin-top: 0;">小程序路径</view>
+                    <view class="path-body">
+                        <view class="path-text">/pages/detail/detail?eid={{eid}}</view>
+                        <view bindtap="copyPath" class="btn-copy" data-type="1">复制</view>
+                    </view>
+                    <view class="path-desc">以上即该活动的小程序路径，在公众号菜单和文章插入小程序时，填写上方路径即可正确跳转。</view>
+                    <view class="path-title">AppID</view>
+                    <view class="path-body">
+                        <view class="path-text">wxfaa08012777a431e</view>
+                        <view bindtap="copyPath" class="btn-copy" data-type="2">复制</view>
+                    </view>
+                    <view class="path-title">账号原始ID</view>
+                    <view class="path-body">
+                        <view class="path-text">gh_ae6449501a82</view>
+                        <view bindtap="copyPath" class="btn-copy" data-type="3">复制</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="delete-dialog dialog" wx:if="{{deleteConfirmDialog}}">
+            <view bindtap="closeDeleteConfirmDialog" class="mask"></view>
+            <view class="dialog-body wx-dialog-body">
+                <view class="dialog-header">报名表删除提醒</view>
+                <view class="delete-body">
+                    <view class="delete-title">你确认要删除所有报名信息吗？</view>
+                    <view wx:if="{{enroll.status!=2}}">
+                        <textarea bindfocus="inputWord" bindinput="inputWord" class="delete-desc" placeholder="请输入删除原因，告知参与者"></textarea>
+                    </view>
+                    <view class="confirm-input">
+                        <view>{{code}}</view>
+                        <input bindinput="inputChange" class="input-code" maxlength="6" placeholder="请输入验证码" placeholderStyle="font-size: 28rpx;" type="number"></input>
+                    </view>
+                </view>
+                <view class="dialog-footer">
+                    <button bindtap="{{!buttonClicked?'deleteOk':''}}" class="button" formType="submit">确定</button>
+                    <button bindtap="closeDeleteConfirmDialog" class="button btn-white" formType="submit">取消</button>
+                </view>
+            </view>
+        </view>
+        <view class="delete-dialog notice-dialog dialog" wx:if="{{refundAllDialog}}">
+            <view bindtap="closeRefundAllDialog" class="mask"></view>
+            <view class="dialog-body wx-dialog-body">
+                <view class="dialog-header">确定要全部退款吗？</view>
+                <view class="delete-body">
+                    <view class="delete-title">如果点击“确认”，报名费用将会全部退回，请谨慎处理，还请知晓。</view>
+                    <view class="confirm-input">
+                        <view>{{code}}</view>
+                        <input bindinput="inputChange" class="input-code" maxlength="6" placeholder="请输入验证码" placeholderStyle="font-size: 28rpx;" type="number"></input>
+                    </view>
+                </view>
+                <view class="dialog-footer" style="margin-top: 50rpx;">
+                    <button bindtap="closeRefundAllDialog" class="btn-cancel" formType="submit">取消</button>
+                    <button bindtap="{{!buttonClicked?'refundAll':''}}" class="btn-ok" formType="submit">确定</button>
+                </view>
+            </view>
+        </view>
+        <view class="notice-dialog dialog" wx:if="{{noticeDialogShow}}">
+            <view bindtap="closeNoticeDialog" class="mask"></view>
+            <view class="dialog-body wx-dialog-body">
+                <view class="dialog-header">发送通知给所有参与人</view>
+                <view class="dialog-content">
+                    <textarea bindinput="inputNotice" class="notice-text" maxlength="320" placeholder="请输入发送内容（最多300字）" placeholderClass="placeholder" value="{{noticeDefault}}"></textarea>
+                    <view class="notice-desc">每个活动只能发送一次通知，迄今七天内的参与人员才能收到</view>
+                </view>
+                <view class="dialog-footer">
+                    <button bindtap="closeNoticeDialog" class="btn-cancel" formType="submit">取消</button>
+                    <button bindtap="{{!buttonClicked?'sendNotice':''}}" class="btn-ok" formType="submit">发送</button>
+                </view>
+            </view>
+        </view>
+        <template is="noticeBoard" data="{{noticeBoard:noticeBoard}}"></template>
+        <view class="red-dialog dialog" wx:if="{{redDialog}}">
+            <view bindtap="closeRedDialog" class="mask"></view>
+            <view class="dialog-body red-dialog-body">
+                <image bindtap="closeRedDialog" class="d-red-close" src="/images/close_white.png"></image>
+                <image bindtap="toWishs" class="red-bg" data-index="0" src="{{wish.img}}"></image>
+            </view>
+        </view>
+        <view class="contact-menu-dialog dialog" wx:if="{{contactMenuDialog}}">
+            <view bindtap="closeContactMenuDialog" class="mask"></view>
+            <view class="dialog-body contact-menu-body">
+                <view bindtap="toZhini" class="contact-item" wx:if="{{enroll.card_appid&&enroll.is_owner==0&&!hideMessageItem}}">
+        发消息
+      </view>
+                <view bindtap="toZhini" class="contact-item" wx:if="{{enroll.card_appid&&enroll.is_owner==1}}">
+        查看消息
+      </view>
+                <view bindtap="showWxDialog" class="contact-item" wx:if="{{enroll.wx_no}}">加微信</view>
+                <view bindtap="tellPhone" class="contact-item" wx:if="{{enroll.phone&&(enroll.info_id||showDev)}}">打电话</view>
+                <button bindtap="closeContactMenuDialog" class="contact-item" formType="submit">取消</button>
+            </view>
+        </view>
+        <template is="followDialog" data="{{showFollowDialog:showFollowDialog}}"></template>
+    </form>
+</block>
+<import src="/tmp/tmp.wxml"></import>
+<template is="huomaDialog" data="{{huomaDialog:huomaDialog}}"></template>
+<import src="/tmp/tmp.wxml"></import>
+<template is="auth" data="{{content:'需要授权报名工具访问您的相册权限。'}}" wx:if="{{openSettingDialog}}"></template>

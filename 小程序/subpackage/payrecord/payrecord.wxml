@@ -1,0 +1,17 @@
+<view class="detail-tabs">
+    <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==0?'current':''}}" data-id="0">付款记录</view>
+    <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==1?'current':''}}" data-id="1">退款记录</view>
+</view>
+<view class="no-data" wx:if="{{records.length==0}}">
+  暂无付款记录
+</view>
+<view class="record-list" wx:for="{{records}}" wx:key="{{index}}">
+    <view class="record-left">
+        <view class="record-title">{{item.title}}</view>
+        <view class="record-time">{{item.time}}</view>
+    </view>
+    <view class="record-right">
+        <view class="record-tag-success">
+            <label>{{item.total/100}}</label>元</view>
+    </view>
+</view>

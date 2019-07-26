@@ -1,0 +1,8 @@
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Model\bin\Debug\SignUpTools.Model.dll
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Model\bin\Debug\SignUpTools.Model.pdb
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Model\bin\Debug\Dos.ORM.dll
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Model\bin\Debug\Dos.ORM.xml
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Model\obj\Debug\SignUpTools.Model.csproj.CoreCompileInputs.cache
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Model\obj\Debug\SignUpTools.Model.csproj.CopyComplete
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Model\obj\Debug\SignUpTools.Model.dll
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Model\obj\Debug\SignUpTools.Model.pdb

@@ -1,0 +1,104 @@
+<form bindsubmit="{{!buttonClicked?'submitInfo':''}}" reportSubmit="true">
+    <view wx:if="{{reviewBox}}">
+        <view class="result-body">
+            <image src="/images/ic_identification_ongoing.png"></image>
+            <view>审核中</view>
+        </view>
+        <view class="review-desc">审核人员会在 1 个工作日内完成审核。审核通过或不通过，都会发通知告知。</view>
+        <button bindtap="goBack" class="button mt20 btn-pay">返回</button>
+    </view>
+    <view wx:else>
+        <view class="review-box" wx:if="{{status==1}}">
+            <view class="review-title">
+                <image src="/images/ic_identification_ongoing.png"></image>审核中
+      </view>
+            <view class="review-desc">1个工作日内完成审核，还请耐心等待</view>
+        </view>
+        <view class="review-box" wx:if="{{status==3}}">
+            <view class="review-title">
+                <image src="/images/ic_identification_no.png"></image>审核失败
+      </view>
+            <view class="review-desc">失败原因：{{reason}}</view>
+        </view>
+        <view wx:if="{{status==2}}">
+            <view class="card-info-box">
+                <view>手持证件照正面</view>
+                <image bindtap="showPic" data-type="1" mode="aspectFill" src="{{certFront}}"></image>
+            </view>
+            <view class="card-info-box">
+                <view>证件照背面</view>
+                <image bindtap="showPic" data-type="2" mode="aspectFill" src="{{certBack}}"></image>
+            </view>
+        </view>
+        <view style="padding-bottom: 30rpx;" wx:if="{{status!=2}}">
+            <view class="enroll-card">
+                <view class="card-box">
+                    <view class="text">手持证件照正面</view>
+                    <view class="desc">（上传人像面）</view>
+                    <view class="right">
+                        <image bindtap="showPic" class="logo" data-type="1" mode="aspectFill" src="{{certFront}}" wx:if="{{certFront}}"></image>
+                        <image bindtap="{{!buttonClicked?'openDialogFront':''}}" class="logo" src="/images/ic_upload.png" wx:else></image>
+                        <view bindtap="{{!buttonClicked?'openDialogImage':''}}" class="text-delete" data-type="1" wx:if="{{certFront&&status!=1}}">重新上传</view>
+                    </view>
+                </view>
+            </view>
+            <view class="enroll-card">
+                <view class="card-box">
+                    <view class="text">证件照背面</view>
+                    <view class="desc">（上传国徽面）</view>
+                    <view class="right">
+                        <image bindtap="showPic" class="logo" data-type="2" mode="aspectFill" src="{{certBack}}" wx:if="{{certBack}}"></image>
+                        <image bindtap="{{!buttonClicked?'openDialogBack':''}}" class="logo" src="/images/ic_upload.png" wx:else></image>
+                        <view bindtap="{{!buttonClicked?'openDialogImage':''}}" class="text-delete" data-type="2" wx:if="{{certBack&&status!=1}}">重新上传</view>
+                    </view>
+                </view>
+            </view>
+            <button class="button mt20 btn-disabled" wx:if="{{reviewBox||status==1}}">提交</button>
+            <button class="button mt20 btn-pay" formType="submit" wx:else>提交</button>
+        </view>
+    </view>
+</form>
+<form bindsubmit="{{!buttonClicked?'postFormId':''}}" reportSubmit="true">
+    <view class="dialog image-dialog" wx:if="{{imageDialogFront}}">
+        <view bindtap="closeImageDialog" class="mask"></view>
+        <view class="dialog-box">
+            <view class="image-dialog-header">证件照正面——示意图</view>
+            <view class="image-dialog-body">
+                <image class="img-demo-front" src="https://cdn-xcxcustom.weiyoubot.cn/20180920/daed9e6f05558ea6666d4b980038fbfa.jpg"></image>
+                <view class="image-tips">手持证件正面照片要求：</view>
+                <view class="require-item">
+                    <image src="/images/ic_num_01.png"></image>
+                    <view>确保是<label>本人手持证件正面照</label>，面部<label>全部露出</label>且可辨认；</view>
+                </view>
+                <view class="require-item">
+                    <image src="/images/ic_num_02.png"></image>
+                    <view>证件信息（姓名、号码、免冠照、住址等），<label>必须无遮挡且清晰不模糊</label>；</view>
+                </view>
+                <view class="require-item">
+                    <image src="/images/ic_num_03.png"></image>
+                    <view>手持证件的<label>照片请勿上下、左右倒置或翻转</label>。</view>
+                </view>
+            </view>
+            <button bindtap="{{!buttonClicked?'chooseImage':''}}" class="button" data-type="1" formType="submit">上传图片</button>
+        </view>
+    </view>
+    <view class="dialog image-dialog" wx:if="{{imageDialogBack}}">
+        <view bindtap="closeImageDialog" class="mask"></view>
+        <view class="dialog-box">
+            <view class="image-dialog-header">证件照背面——示意图</view>
+            <view class="image-dialog-body">
+                <image class="img-demo" src="https://cdn-xcxcustom.weiyoubot.cn/20180920/b704ce746a4f470f837ad8f8e6be254c.jpg"></image>
+                <view class="image-tips">证件背面照片要求：</view>
+                <view class="require-item">
+                    <image src="/images/ic_num_01.png"></image>
+                    <view>证件背面信息<label>必须清晰且无遮挡</label>；</view>
+                </view>
+                <view class="require-item">
+                    <image src="/images/ic_num_02.png"></image>
+                    <view>照片<label>请勿上下、左右倒置或翻转</label>。</view>
+                </view>
+            </view>
+            <button bindtap="{{!buttonClicked?'chooseImage':''}}" class="button" data-type="2" formType="submit">上传图片</button>
+        </view>
+    </view>
+</form>

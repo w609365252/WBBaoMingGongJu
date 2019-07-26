@@ -1,0 +1,8 @@
+<form bindsubmit="saveComment" reportSubmit="true">
+    <view class="enroll-item">
+        <textarea name="comment" placeholder="请输入审核附言，比如{{tips}}原因（100字以内）"></textarea>
+    </view>
+    <view class="enroll-tips">温馨提示：附言将会通知到报名参与者</view>
+    <button class="button mb20" formType="submit">提交</button>
+    <button bindtap="{{!buttonClicked?'goBack':''}}" class="button mb20 btn-white">取消</button>
+</form>

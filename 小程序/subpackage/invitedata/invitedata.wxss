@@ -1,0 +1,84 @@
+page {
+}
+
+.header-text {
+    padding: 0 30rpx;
+    font-size: 26rpx;
+    color: #333;
+    height: 76rpx;
+    line-height: 76rpx;
+}
+
+.header-text label {
+    font-weight: 900;
+}
+
+.enroll-list-item {
+    position: relative;
+    overflow: hidden;
+    padding: 20rpx 30rpx;
+    height: 110rpx;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #eee;
+    background: #fff;
+}
+
+.user-head {
+    float: left;
+    width: 72rpx;
+    height: 72rpx;
+    border-radius: 50%;
+    background: #eee;
+}
+
+.enroll-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 102rpx;
+    overflow: hidden;
+    min-height: 72rpx;
+}
+
+.username {
+    font-size: 30rpx;
+    color: #333;
+    line-height: 1.2;
+    max-width: 300rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.time {
+    position: absolute;
+    top: 50%;
+    right: 60rpx;
+    transform: translate(0,-50%);
+    color: #aaa;
+    font-size: 26rpx;
+}
+
+.enroll-no {
+    position: absolute;
+    top: 42rpx;
+    right: 40rpx;
+    color: #aaa;
+    font-size: 24rpx;
+}
+
+.arrow-right {
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    transform: translate(0,-50%);
+    width: 16rpx;
+    height: 25rpx;
+}
+
+.no-data {
+    text-align: center;
+    font-size: 28rpx;
+    color: #999;
+    line-height: 180rpx;
+}

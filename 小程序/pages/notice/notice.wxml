@@ -1,0 +1,6 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="wrapper">
+        <text class="text" selectable="true">{{content}}</text>
+        <button bindtap="{{!buttonClicked?'toDetail':''}}" class="button" formType="submit">查看活动详情</button>
+    </view>
+</form>

@@ -1,0 +1,13 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="box">
+        <view class="title">手动核销</view>
+        <view class="desc">管理员用微信扫描参与者报名凭证核销</view>
+        <button bindtap="scanCode" class="button" formType="submit">去核销</button>
+    </view>
+    <view class="box">
+        <view class="title">自动核销</view>
+        <view class="desc">参与者扫描下方二维码核销</view>
+        <image bindtap="showPic" class="qrcode" data-src="{{qrcode}}" src="{{qrcode}}"></image>
+        <button bindtap="saveImages" class="button" formType="submit">下载图片</button>
+    </view>
+</form>

@@ -1,0 +1,27 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <button bindgetuserinfo="confirmGetUserInfo" class="enroll-item header" formType="submit" openType="getUserInfo">
+        <view class="text">头像</view>
+        <view class="right">
+            <image class="avatar" src="{{avatar}}" wx:if="{{avatar}}"></image>
+            <image class="avatar" src="" wx:else></image>
+            <image class="right-arrow" src="/images/right_arrow.png"></image>
+        </view>
+    </button>
+    <button bindgetuserinfo="confirmGetUserInfo" class="enroll-item" formType="submit" openType="getUserInfo">
+        <view class="text">昵称</view>
+        <view class="right">
+            <view class="nickname">{{nickname}}</view>
+            <image class="right-arrow" src="/images/right_arrow.png"></image>
+        </view>
+    </button>
+    <button bindtap="{{!buttonClicked?'toAuthPage':''}}" class="enroll-item" formType="submit" wx:if="{{status>0}}">
+        <view class="text">身份信息</view>
+        <view class="right">
+            <view class="text" wx:if="{{status==0}}">去设置</view>
+            <view class="text-blue" wx:elif="{{status==1}}">审核中</view>
+            <view class="text-green" wx:elif="{{status==2}}">审核通过</view>
+            <view class="text-red" wx:elif="{{status==3}}">审核未通过</view>
+            <image class="right-arrow" src="/images/right_arrow.png"></image>
+        </view>
+    </button>
+</form>

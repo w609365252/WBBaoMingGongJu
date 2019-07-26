@@ -1,0 +1,22 @@
+.setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    height: 100rpx;
+    border-bottom: 1rpx solid #eee;
+    padding: 0 30rpx;
+}
+
+.setting-title {
+    font-size: 30rpx;
+}
+
+.ic-right {
+    width: 16rpx;
+    height: 25rpx;
+}
+
+.button-hover {
+    color: #000;
+}

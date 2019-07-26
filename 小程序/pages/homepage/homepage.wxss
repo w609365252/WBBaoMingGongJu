@@ -1,0 +1,469 @@
+image {
+    vertical-align: top;
+}
+
+.wrapper {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 110rpx;
+}
+
+.header {
+    position: relative;
+    background: #fff;
+}
+
+.banner {
+    width: 100%;
+    height: 422rpx;
+}
+
+.header-body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.3);
+}
+
+.avatar {
+    display: block;
+    margin: 80rpx auto 20rpx;
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 100rpx;
+    border: 1rpx solid #ddd;
+    background: #e5e5e5;
+}
+
+.name {
+    display: -webkit-box;
+    font-size: 36rpx;
+    color: #fff;
+    text-align: center;
+    word-break: break-all;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+    padding: 0 30rpx;
+}
+
+.info-box {
+    background: #fff;
+    padding: 30rpx;
+}
+
+.info-label {
+    position: relative;
+    padding-top: 10rpx;
+    padding-bottom: 10rpx;
+    color: #999;
+    font-size: 26rpx;
+}
+
+.btn-edit {
+    position: absolute;
+    right: 0;
+    top: -10rpx;
+    font-size: 26rpx;
+    color: #333;
+    border: 1rpx solid #ccc;
+    height: 60rpx;
+    line-height: 60rpx;
+    padding: 0 20rpx;
+    border-radius: 10rpx;
+}
+
+.info-desc {
+    display: block;
+    padding: 20rpx 0 40rpx;
+    font-size: 32rpx;
+    color: #333;
+    border-bottom: 1rpx solid #e5e5e5;
+    word-break: break-all;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.label {
+    font-size: 32rpx;
+    color: #333;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    font-size: 30rpx;
+    color: #333;
+}
+
+.contact-icon {
+    overflow: hidden;
+}
+
+.contact-icon image {
+    float: left;
+    width: 52rpx;
+    height: 52rpx;
+    padding: 10rpx 0 10rpx 30rpx;
+    margin-top: 4rpx;
+}
+
+.auth-body .icon {
+    width: 32rpx;
+    height: 32rpx;
+    margin-right: 10rpx;
+}
+
+.auth-body .right {
+    width: 16rpx;
+    height: 25rpx;
+    margin-left: 20rpx;
+}
+
+.my-enroll {
+    background: #fff;
+    margin-top: 20rpx;
+    padding: 0 30rpx;
+}
+
+.my-enroll-title {
+    height: 88rpx;
+    line-height: 88rpx;
+    font-size: 30rpx;
+}
+
+.no-more-data {
+    position: relative;
+    padding: 40rpx 30rpx;
+    font-size: 24rpx;
+    text-align: center;
+    color: #aaa;
+}
+
+.no-more-data::after {
+    content: "";
+    position: absolute;
+    left: 30rpx;
+    right: 30rpx;
+    top: 56rpx;
+    z-index: -1;
+    border: 1rpx solid #d8d8d8;
+    height: 0;
+}
+
+.no-more-data label {
+    background: #efeff4;
+    padding: 0 30rpx;
+}
+
+.no-data {
+    padding: 50rpx 30rpx;
+    text-align: center;
+    color: #666;
+}
+
+.no-data-title {
+    font-size: 36rpx;
+}
+
+.no-data-desc {
+    padding-top: 10rpx;
+    font-size: 24rpx;
+    line-height: 1.5;
+}
+
+.btn-setting {
+    margin: 20rpx auto 0;
+    height: 80rpx;
+    line-height: 80rpx;
+    width: 260rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 30rpx;
+    background: #00a8f3;
+    border-radius: 10rpx;
+}
+
+.no-data-text {
+    font-size: 28rpx;
+    color: #999;
+    text-align: center;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #f7f7fa;
+    display: flex;
+    justify-content: space-between;
+    height: 100rpx;
+    border-top: 1rpx solid #bfbfc3;
+    padding: 10rpx 20rpx;
+}
+
+.footer .btn-bottom {
+    width: 340rpx;
+    text-align: center;
+    border: 1rpx solid #ccc;
+    font-size: 32rpx;
+    color: #666;
+    border-radius: 10rpx;
+    height: 76rpx;
+    line-height: 76rpx;
+}
+
+.footer .btn-share {
+    border: 1rpx solid #00a8f3;
+    background: #00a8f3;
+    color: #fff;
+}
+
+.wx-dialog .mask,.path-dialog .mask {
+    background: rgba(0,0,0,.4);
+}
+
+.wx-dialog-body {
+    box-sizing: border-box;
+    width: 580rpx;
+    padding: 40rpx;
+}
+
+.wx-dialog-body .dialog-header {
+    text-align: center;
+    font-size: 32rpx;
+    color: #333;
+    padding-bottom: 50rpx;
+}
+
+.wx-dialog-body .dialog-close,.red-dialog-body .dialog-close {
+    position: absolute;
+    right: 40rpx;
+    top: 40rpx;
+    width: 30rpx;
+    height: 30rpx;
+    padding: 10rpx;
+}
+
+.wx-dialog-content {
+    overflow: hidden;
+    background: #f8f8f8;
+    min-height: 140rpx;
+    box-sizing: border-box;
+    padding: 20rpx;
+}
+
+.wx-dialog-body .head {
+    float: left;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.wx-dialog-body .c-right {
+    margin-left: 120rpx;
+}
+
+.wx-dialog-body .nickname {
+    font-size: 32rpx;
+    color: #333;
+    line-height: 1.8;
+}
+
+.wx-dialog-body .wx-no {
+    font-size: 28rpx;
+    color: #999;
+    display: inline-block;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.wx-dialog-body .dialog-footer {
+    padding-top: 40rpx;
+}
+
+.wx-dialog-body .button {
+    width: 100%;
+}
+
+.share-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 12;
+}
+
+.share-dialog .mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+    background-image: -webkit-linear-gradient(90deg,rgba(0,0,0,.1),transparent);
+}
+
+.share-dialog .body {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.share-dialog .inner {
+    margin: 0 30rpx 30rpx;
+    background: #fff;
+    font-size: 32rpx;
+    line-height: 3.4;
+    text-align: center;
+    border-radius: 20rpx;
+    box-shadow: 1rpx 1rpx 8rpx rgba(0,0,0,.1),-1rpx -1rpx 8rpx rgba(0,0,0,.1);
+}
+
+.share-dialog button {
+    border: 0!important;
+    background: none;
+    font-size: 32rpx;
+    line-height: 3;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.share-dialog button::after {
+    border: 0;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.share-show {
+    display: block;
+    -webkit-animation: moveFromBottom 0.4s ease;
+}
+
+.share-hide {
+    -webkit-animation: moveFromTop 0.4s ease;
+}
+
+.hide {
+    display: none;
+}
+
+@-webkit-keyframes moveFromBottom {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes moveFromTop {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+}
+
+.dialog-share {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: rgba(0,0,0,.7);
+}
+
+.d-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: #fff;
+    border-radius: 10rpx;
+    width: 80%;
+    transform: translate(-50%,-50%);
+    font-size: 32rpx;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.d-content image {
+    width: 100%;
+    height: 800rpx;
+}
+
+.d-content .button {
+    width: 330rpx;
+    margin-top: 30rpx;
+}
+
+.d-content .share-tips {
+    display: block;
+    margin: 0 auto;
+    width: 56rpx;
+    height: 56rpx;
+}
+
+.enroll-item {
+    padding: 20rpx 0;
+}
+
+.path-dialog .wx-dialog-content {
+    background: none;
+    padding: 0;
+}
+
+.path-text {
+    font-size: 28rpx;
+    color: #333;
+    background: #f8f8f8;
+    line-height: 1.7;
+    padding: 20rpx;
+    white-space: normal;
+    word-break: break-all;
+}
+
+.path-desc {
+    font-size: 26rpx;
+    color: #999;
+    padding-top: 20rpx;
+    line-height: 1.5;
+}
+
+.report-panel {
+    position: relative;
+    text-align: center;
+    height: 60rpx;
+    overflow: hidden;
+}
+
+.report-panel label {
+    display: block;
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 10rpx;
+}
+
+.report-panel button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}

@@ -1,0 +1,84 @@
+<import src="/tmp/tmp.wxml"></import>
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="enroll-list pt20" wx:if="{{hasUserInfo==false}}" >
+        <view bindtap="openPcDialog" class="header"hidden="{{true}}">
+            <label class="text">选择模板创建</label>
+            <view class="pc-create">
+                <image src="/images/ic_home_pc.png"></image>
+                <view>试试电脑端创建 ></view>
+            </view>
+        </view>
+        <view class="enroll-create-box">
+            <button bindgetuserinfo="login" class="tem-item" data-type="0" formType="submit" openType="getUserInfo">
+                <image src="{{createImages[2]}}"></image>
+            </button>
+            <button hidden="{{true}}" bindgetuserinfo="login" class="tem-item" data-type="4" formType="submit" openType="getUserInfo">
+                <image src="{{createImages[5]}}"></image>
+            </button>
+        </view>
+        <view class="enroll-create-box" hidden="{{true}}">
+            <button bindgetuserinfo="login" class="tem-item" data-type="1" formType="submit" openType="getUserInfo">
+                <image src="{{createImages[0]}}"></image>
+            </button>
+            <button bindgetuserinfo="login" class="tem-item" data-type="6" formType="submit" openType="getUserInfo">
+                <image src="{{createImages[3]}}"></image>
+            </button>
+        </view>
+        <view class="enroll-create-box" hidden="{{true}}">
+            <button bindgetuserinfo="login" class="tem-item" data-type="3" formType="submit" openType="getUserInfo">
+                <image src="{{createImages[4]}}"></image>
+            </button>
+            <button bindgetuserinfo="login" class="tem-item" data-type="2" formType="submit" openType="getUserInfo">
+                <image src="{{createImages[1]}}"></image>
+            </button>
+        </view>
+    </view>
+    <view class="enroll-list" wx:if="{{hasUserInfo}}">
+        <view hidden="{{true}}" bindtap="openPcDialog" class="header">
+            <label class="text">选择模板创建</label>
+            <view class="pc-create">
+                <image src="/images/ic_home_pc.png"></image>
+                <view>试试电脑端创建 ></view>
+            </view>
+        </view>
+        <view class="enroll-create-box">
+            <button bindtap="{{!buttonClicked?'toCreate':''}}" class="tem-item" data-type="0" formType="submit">
+                <image src="{{createImages[2]}}"></image>
+            </button>
+            <button bindtap="{{!buttonClicked?'toCreate':''}}" hidden="{{true}}" class="tem-item" data-type="4" formType="submit">
+                <image src="{{createImages[5]}}"></image>
+            </button>
+        </view>
+        <view class="enroll-create-box" hidden="{{true}}">
+            <button bindtap="{{!buttonClicked?'toCreate':''}}" class="tem-item" data-type="1" formType="submit">
+                <image src="{{createImages[0]}}"></image>
+            </button>
+            <button bindtap="{{!buttonClicked?'toCreate':''}}" class="tem-item" data-type="6" formType="submit">
+                <image src="{{createImages[3]}}"></image>
+            </button>
+        </view>
+        <view class="enroll-create-box" hidden="{{true}}">
+            <button bindtap="{{!buttonClicked?'toCreate':''}}" class="tem-item" data-type="3" formType="submit">
+                <image src="{{createImages[4]}}"></image>
+            </button>
+            <button bindtap="{{!buttonClicked?'toCreate':''}}" class="tem-item" data-type="2" formType="submit">
+                <image src="{{createImages[1]}}"></image>
+            </button>
+        </view>
+    </view>
+    <view class="ad-box">
+        <template is="ads" data="{{adsList:adsList}}"></template>
+    </view>
+    <view class="dialog pc-dialog" wx:if="{{pcDialog}}">
+        <view bindtap="closePcDialog" class="mask"></view>
+        <view class="dialog-body pc-dialog-body">
+            <image bindtap="closePcDialog" class="dialog-close" src="/images/close.png"></image>
+            <image class="pc-icon" src="/images/ic_home_popup_pc.png"></image>
+            <view class="pc-title">电脑创建报名</view>
+            <view class="pc-desc">如需在电脑上创建报名活动，请访问网址：<label>http://baominggongju.com</label>。电脑上创建后，小程序端会同步数据。</view>
+            <view class="pc-footer">
+                <button bindtap="copyUrl" class="button">一键复制网址</button>
+            </view>
+        </view>
+    </view>
+</form>

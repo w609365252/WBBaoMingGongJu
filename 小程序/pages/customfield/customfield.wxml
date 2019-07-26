@@ -1,0 +1,62 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="enroll-info">
+        <view class="label">字段名称<label class="red">*</label>
+        </view>
+        <input bindblur="inputTitle" bindinput="inputTitle" class="form-control" maxlength="30" name="{{item.field_name}}" placeholder="请输入字段名称" placeholderStyle="color:#aaa;" type="text" value="{{defaultName}}"></input>
+    </view>
+    <view class="enroll-info">
+        <view class="label">字段描述</view>
+        <input bindblur="inputDesc" bindinput="inputDesc" class="form-control" maxlength="30" name="{{item.field_desc}}" placeholder="请说明该字段怎么填写（选填）" placeholderStyle="color:#aaa;" type="text" value="{{defaultDesc}}"></input>
+    </view>
+    <view class="enroll-info">
+        <view class="label">字段类型<label>（支持文本/数字/图片/日期/单选/多选/位置/手写）</label>
+        </view>
+        <view bindtap="openUiFieldType" class="enroll-info-item">
+            <view class="text">{{fieldType[fieldTypeIndex]}}</view>
+            <view class="right">
+                <image class="right-arrow" src="../../images/right_arrow.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="enroll-info" wx:if="{{fieldTypeIndex==0}}">
+        <view class="label">最少字符数</view>
+        <picker bindchange="changeMinLength" range="{{limitLength}}" value="{{minIndex}}">
+            <view class="enroll-info-item">
+                <view class="text">{{limitLength[minIndex]}}</view>
+                <view class="right">
+                    <image class="right-arrow" src="../../images/right_arrow.png"></image>
+                </view>
+            </view>
+        </picker>
+        <view class="label">最多字符数</view>
+        <picker bindchange="changeMaxLength" range="{{limitLength}}" value="{{maxIndex}}">
+            <view class="enroll-info-item">
+                <view class="text">{{limitLength[maxIndex]}}</view>
+                <view class="right">
+                    <image class="right-arrow" src="../../images/right_arrow.png"></image>
+                </view>
+            </view>
+        </picker>
+    </view>
+    <view class="enroll-info" wx:if="{{fieldTypeIndex==4||fieldTypeIndex==5||fieldTypeIndex==10||fieldTypeIndex==11}}">
+        <view class="label">选项</view>
+        <view class="vote-options-content">
+            <label class="vote-options-content-item selected" wx:for="{{fieldOptions}}" wx:key="id">
+                <view class="vote-options-content-image">
+                    <input bindblur="inputOptionText" class="options-item" data-item="{{item}}" maxlength="30" placeholder="请输入选项（30字以内）" placeholderClass="placeholder" type="text" value="{{item.text}}"></input>
+                    <image bindtap="deleteOption" class="minus fl" data-item="{{item}}" src="../../images/minus.png"></image>
+                </view>
+            </label>
+            <view bindtap="addOption" class="vote-options-add">
+                <image class="icon" src="../../images/plus.png"></image>
+                <view class="text">添加选项</view>
+            </view>
+        </view>
+    </view>
+    <view class="enroll-info">
+        <view class="label tips">{{fieldTips[fieldTypeIndex]}}</view>
+    </view>
+    <button bindtap="{{!buttonClicked?'saveField':''}}" class="button mt20" formType="submit">保存</button>
+</form>
+<import src="/tmp/tmp.wxml"></import>
+<template is="uiFieldType" data="{{fieldType:fieldType2,fieldTypeDialog:fieldTypeDialog}}"></template>

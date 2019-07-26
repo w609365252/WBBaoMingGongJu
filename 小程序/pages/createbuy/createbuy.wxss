@@ -1,0 +1,521 @@
+.tips {
+    padding: 30rpx;
+    color: #9a9a9a;
+    font-size: 28rpx;
+}
+
+.space {
+    height: 20rpx;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    height: 420rpx;
+}
+
+.header .banner {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-change,.header .btn-delete {
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+    padding: 0 20rpx;
+    width: auto;
+    height: 64rpx;
+    line-height: 64rpx;
+    font-size: 28rpx;
+    color: #666;
+    border: 1rpx solid #999;
+    background: #fff;
+}
+
+.header .btn-delete {
+    color: #ff6d6d;
+}
+
+.enroll-info {
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.enroll-info-item {
+    height: 88rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30rpx;
+    border-top: 1rpx solid #e5e5e5;
+    color: #000;
+    font-size: 32rpx;
+}
+
+.enroll-info-item.first {
+    border: 0;
+}
+
+.enroll-info-item .text {
+    width: 370rpx;
+}
+
+.enroll-info-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.picker-row {
+    width: 100%;
+}
+
+.picker-row .text {
+    float: left;
+    width: 320rpx;
+}
+
+.enroll-info-row.right {
+    float: right;
+}
+
+.flex-row .text,.flex-row .right {
+    line-height: 88rpx;
+}
+
+.rule {
+    height: 218rpx;
+    align-items: flex-start;
+    padding: 10rpx 30rpx 10rpx;
+}
+
+input {
+    flex-grow: 1;
+    height: 88rpx;
+}
+
+textarea {
+    flex-grow: 1;
+    height: 188rpx;
+    margin-right: 60rpx;
+}
+
+.placeholder {
+    color: #ccc;
+}
+
+.titlePlaceholder {
+    font-size: 34rpx;
+    color: #ccc;
+}
+
+.label {
+    flex-shrink: 0;
+    margin-right: 50rpx;
+}
+
+.clear {
+    flex-shrink: 0;
+    padding: 20rpx;
+}
+
+.arrow {
+    width: 16rpx;
+    height: 25rpx;
+    margin-left: 20rpx;
+}
+
+.arrow-down {
+    width: 24rpx;
+    height: 24rpx;
+    margin-left: 20rpx;
+}
+
+.enroll-time,.enroll-tab {
+    position: relative;
+    padding: 0 20rpx;
+    height: 64rpx;
+    line-height: 64rpx;
+    margin-left: 20rpx;
+    border: 1rpx solid #999;
+    color: #999;
+    font-size: 26rpx;
+}
+
+.enroll-limit {
+    height: 62rpx;
+    line-height: 62rpx;
+}
+
+.enroll-time.selected,.enroll-tab.selected {
+    border: 1rpx solid #12b7f5;
+    color: #12b7f5;
+}
+
+.enroll-time image,.enroll-tab image {
+    width: 24rpx;
+    height: 22rpx;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.address {
+    justify-content: flex-start;
+}
+
+.address .text {
+    width: 150rpx;
+}
+
+.address image {
+    width: 36rpx;
+    height: 36rpx;
+    margin-left: 15rpx;
+}
+
+.address input,.address .label {
+    color: #60769b;
+    font-size: 28rpx;
+    text-align: right;
+}
+
+.address .label {
+    min-width: 490rpx;
+    margin-right: 0;
+}
+
+.button {
+    margin-top: 20rpx;
+}
+
+.enroll-more .enroll-info-item {
+    background: #fff;
+}
+
+.enroll-more .enroll-gray {
+    background: #f8f8f8;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.token-input {
+    font-size: 30rpx;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.icon-panel image {
+    width: 28rpx;
+    height: 28rpx;
+    margin-left: 20rpx;
+    vertical-align: top;
+    padding-top: 8rpx;
+}
+
+.enroll-info-item .label,.enroll-info-item .text {
+    font-size: 30rpx;
+}
+
+.form-label {
+    float: left;
+    font-size: 30rpx;
+    margin-top: 40rpx;
+    margin-left: 30rpx;
+}
+
+.form-label view {
+    font-size: 26rpx;
+    color: #aaa;
+    margin-top: 10rpx;
+}
+
+.form-banner {
+    float: right;
+    width: 214rpx;
+    height: 120rpx;
+    margin: 20rpx 30rpx;
+    border: 1rpx solid #ddd;
+}
+
+.enroll-info .remove {
+    position: absolute;
+    right: 0;
+    top: -4rpx;
+    width: 30rpx;
+    height: 30rpx;
+    padding: 20rpx;
+}
+
+.qr-code-box .remove-qr {
+    top: -10rpx;
+    padding-bottom: 30rpx;
+}
+
+.limit {
+    text-align: right;
+    height: 30rpx;
+    padding-right: 60rpx;
+}
+
+.limit-clear {
+    position: absolute;
+    right: -20rpx;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
+.sub-title {
+    padding: 25rpx 30rpx 10rpx;
+    color: #888;
+    font-size: 28rpx;
+}
+
+.checked-tabs {
+    background: #fff;
+    padding: 20rpx 30rpx;
+    font-size: 30rpx;
+    line-height: 1.5;
+    color: #333;
+}
+
+.tabs-panel {
+    overflow: hidden;
+    background: #fff;
+    padding: 30rpx;
+}
+
+.enroll-tab {
+    float: left;
+    white-space: nowrap;
+    margin-left: 0;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.tabs-footer {
+    overflow: hidden;
+    width: 100%;
+}
+
+.tabs-footer .button {
+    float: left;
+    width: 210rpx;
+    margin: 0;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+}
+
+.btn-tips {
+    float: left;
+    color: #aaa;
+    font-size: 26rpx;
+    margin-left: 10rpx;
+    line-height: 60rpx;
+}
+
+.enroll-info-item .right {
+    float: right;
+    color: black;
+    font-size: 30rpx;
+}
+
+.enroll-info-item .w380 {
+    width: 380rpx;
+    overflow: hidden;
+}
+
+.alias {
+    position: relative;
+    height: 80rpx;
+}
+
+.alias input {
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: right;
+    margin-right: 50rpx;
+}
+
+.alias icon {
+    position: absolute;
+    top: 32%;
+    right: 0;
+}
+
+.btn-blue {
+    font-size: 26rpx;
+    border: 1rpx solid #00a8f3;
+    color: #00a8f3;
+    padding: 10rpx 8rpx;
+    border-radius: 6rpx;
+}
+
+.get-verify-code {
+    flex-shrink: 0;
+    padding: 15rpx 20rpx;
+    margin-left: 10rpx;
+    background-color: #12b7f5;
+    border: 1rpx solid #ccc;
+    border-radius: 8rpx;
+    color: #fff;
+    font-size: 30rpx;
+}
+
+.get-verify-code.disabled {
+    background-color: #efeff4;
+    color: #999;
+}
+
+.text-red {
+    font-size: 24rpx;
+    line-height: 1.5;
+    color: #ff6d6d;
+    padding: 20rpx 30rpx 0;
+}
+
+.text-left {
+    text-align: left;
+    padding-left: 30rpx;
+}
+
+.qr-code-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qr-code-box .form-label {
+    width: 550rpx;
+    margin-top: 8rpx;
+    margin-bottom: 14rpx;
+    overflow: hidden;
+}
+
+.qr-code-box .qr-code-title {
+    font-size: 30rpx;
+    color: #333;
+}
+
+.qr-code-box .qr-code-desc {
+    font-size: 24rpx;
+    line-height: 1.5;
+}
+
+.qr-code-box .qr-code-desc label {
+    color: #00a8f3;
+    padding: 0 6rpx;
+}
+
+.qr-code-box .qr-code-desc image {
+    display: inline-block;
+    width: 26rpx;
+    height: 26rpx;
+    vertical-align: top;
+    margin-top: 4rpx;
+}
+
+.qr-code {
+    width: 120rpx;
+    height: 120rpx;
+    margin-right: 30rpx;
+    border: 1rpx solid #ddd;
+}
+
+.goods-title {
+    display: block;
+    font-size: 30rpx;
+    line-height: 88rpx;
+    border-bottom: 1rpx solid #e5e5e5!important;
+}
+
+.goods-title label {
+    color: #999;
+    font-size: 28rpx;
+}
+
+.good-box {
+    display: block;
+    height: auto;
+    border-top: 0;
+}
+
+.good-item {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.good-item.first {
+    padding-top: 20rpx;
+}
+
+.good-item image {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 12rpx;
+    opacity: 0;
+}
+
+.good-item.first image {
+    opacity: 1;
+}
+
+.good-label {
+    width: 168rpx;
+    font-size: 30rpx;
+    white-space: nowrap;
+}
+
+.good-pics {
+    position: absolute;
+    top: 50%;
+    right: 20rpx;
+    transform: translate(0,-50%);
+    margin-top: 10rpx;
+    color: #607fa6;
+    font-size: 30rpx;
+}
+
+.good-item input {
+    width: 380rpx;
+}
+
+.good-item.first input {
+    width: 280rpx;
+    flex-grow: 0;
+}
+
+.good-item.first .clear {
+    position: absolute;
+    right: 150rpx;
+    z-index: 10;
+}
+
+.add-good {
+    margin: 20rpx 30rpx;
+    padding-top: 10rpx;
+    display: flex;
+    align-items: center;
+}
+
+.add-good image {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 12rpx;
+}
+
+.add-good view {
+    color: #12b7f5;
+    font-size: 30rpx;
+}

@@ -1,0 +1,21 @@
+<import src="/tmp/tmp.wxml"></import>
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="detail-tabs">
+        <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==1?'current':''}}" data-id="1">最多</view>
+        <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==2?'current':''}}" data-id="2">最新</view>
+        <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==3?'current':''}}" data-id="3">收费</view>
+        <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==5?'current':''}}" data-id="5">违规</view>
+        <view bindtap="{{!buttonClicked?'tabChange':''}}" class="tab {{currentTab==6?'current':''}}" data-id="6">已冻结</view>
+    </view>
+    <view class="enroll-list pt20">
+        <template is="enrollList" data="{{enrollList:enrollList,type:0,isDev:1}}"></template>
+    </view>
+    <view class="search-box">
+        <picker bindchange="changeSearchType" mode="selector" range="{{searchType}}" value="{{searchTypeIndex}}">
+            <view>{{searchType[searchTypeIndex]}}</view>
+            <image class="arrow" src="/images/arrow_down.png"></image>
+        </picker>
+        <input bindconfirm="search" bindinput="inputEid" class="search-text" confirmType="search" placeholder="请输入ID" placeholderClass="placeholder" value="{{eidDefault}}"></input>
+        <icon bindtap="clearEid" size="18" type="clear" wx:if="{{eid}}"></icon>
+    </view>
+</form>

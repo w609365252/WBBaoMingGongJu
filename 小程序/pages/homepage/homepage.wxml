@@ -1,0 +1,143 @@
+<block wx:if="{{hasUserInfo==false}}">
+    <import src="/tmp/tmp.wxml"></import>
+    <view>
+        <template is="wxLogin" data></template>
+    </view>
+</block>
+<form bindsubmit="postFormId" class="wrapper" reportSubmit="true" wx:if="{{hasUserInfo}}">
+    <view class="header">
+        <image class="banner" mode="aspectFill" src="{{info.banner?info.banner:'/images/bg_personhome.jpg'}}"></image>
+        <view class="header-body">
+            <image class="avatar" src="{{info.logo?info.logo:'/images/ic_personahome_default.png'}}"></image>
+            <view class="name">{{info.name}}</view>
+        </view>
+    </view>
+    <view class="info-box">
+        <view class="info-label">
+            <label>{{info.is_owner?'我的资料':'Ta的简介'}}</label>
+            <button bindtap="{{!buttonClicked?'toEdit':''}}" class="btn-edit" wx:if="{{info.is_owner}}">编辑资料</button>
+        </view>
+        <text class="info-desc" selectable="true" wx:if="{{info.is_owner}}">{{info.summary?info.summary:'简单介绍下自己，让别人更了解你'}}</text>
+        <text class="info-desc" selectable="true" wx:else>{{info.summary?info.summary:'Ta组织活动太忙，还没腾空写简介'}}</text>
+        <view class="info-item">
+            <view class="label">联系方式</view>
+            <view class="content contact-icon">
+                <image catchtap="showWxDialog" src="/images/ic_detail_wechat.png" wx:if="{{info.wx_no}}"></image>
+                <image catchtap="tellPhone" src="/images/ic_detail_phone.png" wx:if="{{info.phone}}"></image>
+            </view>
+        </view>
+        <view bindtap="{{!buttonClicked?'toAuthType':''}}" class="info-item">
+            <view class="label">身份认证</view>
+            <view class="content auth-body" wx:if="{{info.auth_status!=2}}">
+                <image class="icon" src="/images/ic_identification_no_small.png"></image>
+                <view>未认证</view>
+            </view>
+            <view class="content auth-body" wx:elif="{{info.auth_type==1&&info.auth_status==2}}">
+                <image class="icon" src="/images/ic_identification_person_small.png"></image>
+                <view>个人认证</view>
+                <image class="right" src="/images/right_arrow.png"></image>
+            </view>
+            <view class="content auth-body" wx:elif="{{info.auth_type==2&&info.auth_status==2}}">
+                <image class="icon" src="/images/ic_identification_company_small.png"></image>
+                <view>企业认证</view>
+                <image class="right" src="/images/right_arrow.png"></image>
+            </view>
+            <view class="content auth-body" wx:elif="{{info.auth_type==3&&info.auth_status==2}}">
+                <image class="icon" src="/images/ic_identification_organization_small.png"></image>
+                <view>组织认证</view>
+                <image class="right" src="/images/right_arrow.png"></image>
+            </view>
+            <view class="content auth-body" wx:elif="{{info.auth_type==4&&info.auth_status==2}}">
+                <image class="icon" src="/images/ic_identification_gzh_small.png"></image>
+                <view>公众号认证</view>
+                <image class="right" src="/images/right_arrow.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="my-enroll">
+        <view class="my-enroll-title">{{info.is_owner?'我的':'Ta的'}}公开活动</view>
+        <view class="enroll-panel">
+            <view bindlongtap="{{!buttonClicked?'longtap':''}}" bindtap="{{!buttonClicked?'toDetail':''}}" class="enroll-item {{type==6?'border-top':''}}" data-id="{{item.eid}}" data-index="{{index}}" data-type="{{type}}" wx:for="{{enrollList}}" wx:key="{{item.eid}}">
+                <image class="enroll-img" mode="aspectFill" src="{{item.banner?item.banner:'/images/ic_list_dfpicture.png'}}"></image>
+                <view class="enroll-body">
+                    <view class="enroll-title">{{item.title}}</view>
+                    <view class="enroll-count">
+                        <image class="enroll-person" src="/images/ic_persons.png"></image>
+                        <view>{{item.user_visible==0&&type==1?'**':item.count}}/{{item.limit?item.limit:'无限制'}} <label wx:if="{{item.fee&&item.charge==0}}">￥{{item.fee/100}}</label>
+                        </view>
+                    </view>
+                    <image catchtap="{{!buttonClicked?'longtap':''}}" class="btn-more" data-cid="{{item.cid}}" data-count="{{item.count}}" data-drawstatus="{{item.draw_status}}" data-fee="{{item.fee}}" data-hasbalance="{{item.has_balance}}" data-index="{{index}}" data-status="{{item.status}}" data-type="{{type}}" src="/images/ic_more_opt1.png" wx:if="{{info.is_owner}}"></image>
+                </view>
+                <label class="enroll-status" wx:if="{{item.status==0}}">未开始</label>
+                <label class="enroll-status blur" wx:elif="{{item.status==1}}">进行中</label>
+                <label class="enroll-status red" wx:else>已结束</label>
+            </view>
+        </view>
+        <view class="no-data" wx:if="{{enrollList.length==0}}">
+            <view wx:if="{{info.is_owner}}">
+                <view class="no-data-title">暂无任何公开活动</view>
+                <view class="no-data-desc">设置方法：我的报名-我管理的-点击列表右上角“三个点点”-设置为公开活动</view>
+                <button bindtap="{{!buttonClicked?'toIndex':''}}" class="btn-setting">立即去设置</button>
+            </view>
+            <view class="no-data-text" wx:else>暂无任何公开活动</view>
+        </view>
+    </view>
+    <view class="no-more-data" wx:if="{{enrollList.length>0&&moreData==false}}">
+        <label>已到底了</label>
+    </view>
+    <view class="footer">
+        <button bindtap="toIndex" class="btn-bottom" formType="submit">回首页</button>
+        <button bindtap="{{!buttonClicked?'showShareDialog':''}}" class="btn-bottom btn-share" formType="submit">分享给好友</button>
+    </view>
+    <view class="wx-dialog dialog" wx:if="{{wxDialog}}">
+        <view bindtap="closeWxDialog" class="mask"></view>
+        <view class="dialog-body wx-dialog-body">
+            <view class="dialog-header">添加主办方微信</view>
+            <image bindtap="closeWxDialog" class="dialog-close" src="/images/close.png"></image>
+            <view class="wx-dialog-content">
+                <image class="head" src="{{info.logo}}"></image>
+                <view class="c-right">
+                    <view class="nickname">{{info.name}}</view>
+                    <view class="wx-no">微信号：{{info.wx_no}}</view>
+                </view>
+            </view>
+            <view class="dialog-footer">
+                <button bindtap="{{!buttonClicked?'copyWx':''}}" class="button" formType="submit">一键复制微信号</button>
+            </view>
+        </view>
+    </view>
+    <view class="share-dialog {{shareDialogAnimate?'share-show':'share-hide'}} {{shareDialogHide?'hide':''}}">
+        <view bindtap="closeShareDialog" class="mask"></view>
+        <view class="body">
+            <view class="inner">
+                <button bindtap="closeShareDialog" formType="submit" openType="share">转发到微信群</button>
+                <button bindtap="closeShareDialog" formType="submit" openType="share">转发给好友</button>
+                <button bindtap="showPath" formType="submit">复制页面路径</button>
+                <button bindtap="{{!buttonClicked?'shareWxCircle':''}}" data-id="1" formType="submit">生成二维码</button>
+            </view>
+        </view>
+    </view>
+    <view class="dialog-share" wx:if="{{showShareDialog}}">
+        <view class="d-content">
+            <image bindtap="showQrcode" class="d-img" data-pic="{{imageUrl}}" mode="aspectFit" src="{{imageUrl}}"></image>
+            <view>该图片已保存到手机相册</view>
+            <button bindtap="closeDialog" class="button white" formType="submit">我知道了</button>
+        </view>
+    </view>
+    <view class="path-dialog dialog" wx:if="{{pathDialog}}">
+        <view bindtap="closePathDialog" class="mask"></view>
+        <view class="dialog-body wx-dialog-body">
+            <view class="dialog-header">小程序路径</view>
+            <image bindtap="closePathDialog" class="dialog-close" src="/images/close.png"></image>
+            <view class="wx-dialog-content">
+                <view class="path-text">
+          /pages/homepage/homepage?unionid={{unionid}}
+        </view>
+                <view class="path-desc">以上文本即该活动的小程序跳转路径。公众号关联报名工具后，在设置小程序路径时，请填写上面的路径即可正确跳转。</view>
+            </view>
+            <view class="dialog-footer">
+                <button bindtap="{{!buttonClicked?'copyPath':''}}" class="button" formType="submit">一键复制路径</button>
+            </view>
+        </view>
+    </view>
+</form>

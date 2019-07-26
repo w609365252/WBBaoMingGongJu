@@ -1,0 +1,113 @@
+<form bindsubmit="{{!buttonClicked?'submitInfo':''}}" reportSubmit="true">
+    <view class="label">请填写运营者信息</view>
+    <view class="enroll-info">
+        <view class="enroll-info-item first">
+            <view class="text">真实姓名</view>
+            <view class="right alias w380">
+                <input bindblur="inputOpName" bindinput="inputOpName" maxlength="50" placeholder="请输入你的真实姓名" type="text" value="{{defaultOpName}}"></input>
+                <icon bindtap="clearOpName" size="15" type="clear" wx:if="{{opName}}"></icon>
+            </view>
+        </view>
+        <view class="enroll-info-item">
+            <view class="text">证件类型</view>
+            <picker bindchange="changeCardType" mode="selector" range="{{cardType}}" value="{{cardTypeIndex}}">
+                <view class="right">{{cardType[cardTypeIndex]}}<image class="arrow" src="../../images/right_arrow.png"></image>
+                </view>
+            </picker>
+        </view>
+        <view class="enroll-info-item">
+            <view class="text">证件号码</view>
+            <view class="right alias w380">
+                <input bindblur="inputOpCertNo" bindinput="inputOpCertNo" maxlength="50" placeholder="请输入你的证件号码" type="text" value="{{defaultOpCertNo}}"></input>
+                <icon bindtap="clearOpCertNo" size="15" type="clear" wx:if="{{opCertNo}}"></icon>
+            </view>
+        </view>
+        <view class="enroll-info-item">
+            <view class="text">手机号</view>
+            <button bindgetphonenumber="getPhoneNumber" class="btn-blue" openType="getPhoneNumber" wx:if="{{!defaultOpPhone&&noAuthPhone==null}}">自动填写</button>
+            <view class="right alias w380" wx:else>
+                <input bindblur="inputOpPhone" bindinput="inputOpPhone" maxlength="50" placeholder="请输入你的手机号码" type="text" value="{{defaultOpPhone}}"></input>
+                <icon bindtap="clearOpPhone" size="15" type="clear" wx:if="{{opPhone}}"></icon>
+            </view>
+        </view>
+        <form bindsubmit="{{verifyCodeText=='获取验证码'?'getVerifyCode':''}}" reportSubmit="true">
+            <view class="enroll-info-item verify-code-box" wx:if="{{noAuthPhone}}">
+                <input bindinput="inputVerifyCode" maxlength="6" name="verifyCode" placeholder="请输入短信验证码" placeholderClass="placeholder" type="number"></input>
+                <button class="get-verify-code {{verifyCodeText=='获取验证码'?'':'disabled'}}" formType="submit">{{verifyCodeText}}</button>
+            </view>
+        </form>
+    </view>
+    <view class="space"></view>
+    <view class="enroll-card">
+        <view class="card-box">
+            <view class="text">手持证件照正面</view>
+            <view class="right">
+                <image bindtap="showPic" class="logo" data-type="1" mode="aspectFill" src="{{opCertFront}}" wx:if="{{opCertFront}}"></image>
+                <image bindtap="{{!buttonClicked?'openDialogFront':''}}" class="logo" src="/images/ic_upload.png" wx:else></image>
+                <view bindtap="{{!buttonClicked?'openDialogImage':''}}" class="text-delete" data-type="1" wx:if="{{opCertFront}}">重新上传</view>
+            </view>
+        </view>
+        <view class="card-box">
+            <view class="text">证件照背面</view>
+            <view class="right">
+                <image bindtap="showPic" class="logo" data-type="2" mode="aspectFill" src="{{opCertBack}}" wx:if="{{opCertBack}}"></image>
+                <image bindtap="{{!buttonClicked?'openDialogBack':''}}" class="logo" src="/images/ic_upload.png" wx:else></image>
+                <view bindtap="{{!buttonClicked?'openDialogImage':''}}" class="text-delete" data-type="2" wx:if="{{opCertBack}}">重新上传</view>
+            </view>
+        </view>
+    </view>
+    <button class="button mt20 btn-pay" formType="submit" wx:if="{{needPay}}">
+        <image class="weixin-pay" src="/images/ic_weixin_pay.png"></image>提交认证并支付￥199元
+  </button>
+    <button class="button mt20 btn-pay" formType="submit" wx:else>
+    提交认证
+  </button>
+</form>
+<view class="contact-box">
+    <view>如有问题，请</view>
+    <button class="contact" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">联系客服</button>
+</view>
+<form bindsubmit="{{!buttonClicked?'postFormId':''}}" reportSubmit="true">
+    <view class="dialog image-dialog" wx:if="{{imageDialogFront}}">
+        <view bindtap="closeImageDialog" class="mask"></view>
+        <view class="dialog-box">
+            <view class="image-dialog-header">证件照正面——示意图</view>
+            <view class="image-dialog-body">
+                <image class="img-demo-front" src="https://cdn-xcxcustom.weiyoubot.cn/20180920/daed9e6f05558ea6666d4b980038fbfa.jpg"></image>
+                <view class="image-tips">手持证件正面照片要求：</view>
+                <view class="require-item">
+                    <image src="/images/ic_num_01.png"></image>
+                    <view>确保是<label>本人手持证件正面照</label>，面部<label>全部露出</label>且可辨认；</view>
+                </view>
+                <view class="require-item">
+                    <image src="/images/ic_num_02.png"></image>
+                    <view>证件信息（姓名、号码、免冠照、住址等），<label>必须无遮挡且清晰不模糊</label>；</view>
+                </view>
+                <view class="require-item">
+                    <image src="/images/ic_num_03.png"></image>
+                    <view>手持证件的<label>照片请勿上下、左右倒置或翻转</label>。</view>
+                </view>
+            </view>
+            <button bindtap="{{!buttonClicked?'chooseImage':''}}" class="button" data-type="1" formType="submit">上传图片</button>
+        </view>
+    </view>
+    <view class="dialog image-dialog" wx:if="{{imageDialogBack}}">
+        <view bindtap="closeImageDialog" class="mask"></view>
+        <view class="dialog-box">
+            <view class="image-dialog-header">证件照背面——示意图</view>
+            <view class="image-dialog-body">
+                <image class="img-demo" src="https://cdn-xcxcustom.weiyoubot.cn/20180920/b704ce746a4f470f837ad8f8e6be254c.jpg"></image>
+                <view class="image-tips">证件背面照片要求：</view>
+                <view class="require-item">
+                    <image src="/images/ic_num_01.png"></image>
+                    <view>证件背面信息<label>必须清晰且无遮挡</label>；</view>
+                </view>
+                <view class="require-item">
+                    <image src="/images/ic_num_02.png"></image>
+                    <view>照片<label>请勿上下、左右倒置或翻转</label>。</view>
+                </view>
+            </view>
+            <button bindtap="{{!buttonClicked?'chooseImage':''}}" class="button" data-type="2" formType="submit">上传图片</button>
+        </view>
+    </view>
+</form>

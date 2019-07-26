@@ -1,0 +1,22 @@
+<block wx:if="{{hasUserInfo==false}}">
+    <import src="/tmp/tmp.wxml"></import>
+    <view>
+        <template is="wxLogin" data></template>
+    </view>
+</block>
+<block wx:if="{{hasUserInfo}}">
+    <import src="/tmp/tmp.wxml"></import>
+    <form bindsubmit="postFormId" class="canvasbox" reportSubmit="true">
+        <canvas bindtap="prevCanvas" canvasId="share" class="canvas" style="height: {{canvas_h}}px;margin:30rpx auto 30rpx auto;"></canvas>
+        <button bindtap="{{!buttonClicked?'saveImg':''}}" class="button" formType="submit">下载报名凭证</button>
+        <view class="footer">
+            <view class="footer-tips">
+                <view>1. 请不要把凭证随意分享给他人，以免被盗用</view>
+                <view>2. 线下活动入场时，请展示凭证给活动发起者扫码校验</view>
+            </view>
+        </view>
+        <view class="ad-box">
+            <template is="ads" data="{{adsList:adsList}}"></template>
+        </view>
+    </form>
+</block>

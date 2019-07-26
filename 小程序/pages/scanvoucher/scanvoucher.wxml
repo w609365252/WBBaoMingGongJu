@@ -1,0 +1,61 @@
+<block wx:if="{{hasUserInfo==false}}">
+    <import src="/tmp/tmp.wxml"></import>
+    <view>
+        <template is="wxLogin" data></template>
+    </view>
+</block>
+<form bindsubmit="postFormId" reportSubmit="true" wx:if="{{enroll&&hasUserInfo}}">
+    <view class="voucher-body">
+        <view class="header">
+            <view class="title">{{enroll.title}}</view>
+            <view class="start-time">
+                <image src="../../images/end_time.png"></image>
+                <view>开始时间：{{enroll.startTime}}</view>
+            </view>
+            <view class="start-time">
+                <image src="../../images/end_time.png"></image>
+                <view>截止时间：{{enroll.endTime}}</view>
+            </view>
+            <view class="subtitle" wx:if="{{enroll.valid==1}}">
+                <view wx:if="{{enroll.cert_cancel==0}}">
+                    <view wx:if="{{enroll.is_end}}">
+                        <image class="icon" src="/images/ic_pinzheng_outdate.png"></image>
+                        <view>凭证已过期</view>
+                    </view>
+                    <view wx:else>
+                        <image class="icon" src="/images/ic_certificate_valid.png"></image>
+                        <view class="{{enroll.is_admin?'green':''}}">有效凭证</view>
+                    </view>
+                </view>
+                <view wx:else>
+                    <image class="icon" src="/images/ic_certificate_invalid.png"></image>
+                    <view>凭证已核销</view>
+                </view>
+            </view>
+            <view class="subtitle warning" wx:if="{{enroll.valid==0}}">
+                <icon size="68" type="warn"></icon>
+                <view>无效凭证</view>
+            </view>
+        </view>
+        <image class="img-line" src="/images/ic_evidence_detail_divideline.png"></image>
+        <view class="user-info" wx:if="{{enroll.name}}">
+            <view class="user-name">参与者：{{enroll.name}}</view>
+            <view class="user-time">报名时间：{{enroll.enrollTime}}</view>
+            <view class="user-fee">报名费用：{{enroll.fee?enroll.fee/100+'元':'免费'}}</view>
+        </view>
+    </view>
+    <button bindtap="{{!buttonClicked?'toDetail':''}}" class="button" openType="submit" wx:if="{{enroll.is_admin==0||enroll.is_end}}">查看活动详情</button>
+    <button bindtap="{{!buttonClicked?'toVerify':''}}" class="button" openType="submit" wx:elif="{{enroll.cert_cancel==0}}">核销</button>
+    <view wx:else>
+        <button class="button btn-disabled" openType="submit">已核销</button>
+        <button bindtap="scanCode" class="button" openType="submit">继续核销下一个</button>
+    </view>
+    <view class="voucher-user-box" wx:if="{{records.length&&enroll.is_admin}}">
+        <view class="voucher-title">校验记录（{{records.length}}次）</view>
+        <view class="voucher-user-item" wx:for="{{records}}" wx:key="{{index}}">
+            <image class="voucher-user-head" src="{{item.img}}"></image>
+            <view class="voucher-user-name">{{item.name}}</view>
+            <view class="voucher-user-date">{{item.date}}</view>
+        </view>
+    </view>
+</form>

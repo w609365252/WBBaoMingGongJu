@@ -1,0 +1,114 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 30rpx;
+}
+
+.header .text {
+    font-size: 30rpx;
+    color: #333;
+}
+
+.pc-create {
+    display: flex;
+    align-items: center;
+    color: #00a8f3;
+    font-size: 28rpx;
+    font-weight: 900;
+}
+
+.pc-create image {
+    width: 36rpx;
+    height: 36rpx;
+    vertical-align: top;
+    margin-right: 10rpx;
+}
+
+.button image {
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.btn-create {
+    margin: 10rpx auto 0;
+}
+
+.enroll-list {
+    padding-top: 30rpx;
+}
+
+.enroll-create-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tem-item {
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 10rpx;
+    width: 330rpx;
+    height: 234rpx;
+    margin-bottom: 30rpx;
+}
+
+.tem-item image {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.pb20 {
+    padding-bottom: 20rpx;
+}
+
+.slide-image,.ad-box ad {
+    margin: 0rpx 0 30rpx!important;
+}
+
+.pc-dialog-body {
+    box-sizing: border-box;
+    width: 580rpx;
+}
+
+.pc-icon {
+    display: block;
+    width: 132rpx;
+    height: 132rpx;
+    margin: 60rpx auto 30rpx;
+}
+
+.pc-title {
+    font-size: 34rpx;
+    color: #333;
+    text-align: center;
+}
+
+.pc-desc {
+    padding: 20rpx 40rpx 40rpx;
+    color: #666;
+    font-size: 30rpx;
+    line-height: 1.6;
+    white-space: normal;
+    word-break: break-all;
+}
+
+.pc-desc label {
+    color: #00a8f3;
+}
+
+.pc-footer button {
+    width: 510rpx;
+    margin-bottom: 40rpx;
+    font-size: 34rpx;
+    line-height: 86rpx;
+}
+
+.dialog-close {
+    position: absolute;
+    right: 30rpx;
+    top: 30rpx;
+    width: 30rpx;
+    height: 30rpx;
+    padding: 10rpx;
+}

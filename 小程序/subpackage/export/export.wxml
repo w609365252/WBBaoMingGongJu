@@ -1,0 +1,12 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="top-tips">
+        <view>【操作方法】</view>
+        <view>1. 请复制下面的链接，粘贴到电脑浏览器地址栏中下载报名数据。</view>
+        <view>2. 该链接有效期为30分钟，过期后请重新点击「导出数据」生成链接。</view>
+        <view>3. 导出的报名数据格式为Excel兼容格式，请在电脑上打开和操作。</view>
+        <view>4. 遇到任何导出问题，请<button bindcontact="contactCallback" openType="contact" sessionFrom="{{contactUserInfo}}">联系客服</button>
+        </view>
+    </view>
+    <input bindconfirm="exportData" class="exportUrl" confirmType="send" disabled="true" focus="{{focus}}" placeholder="导出地址" type="text" value="{{url}}"></input>
+    <button bindtap="{{!buttonClicked?'copy':''}}" class="button" formType="submit">复制</button>
+</form>

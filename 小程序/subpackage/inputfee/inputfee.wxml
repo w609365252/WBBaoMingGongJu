@@ -1,0 +1,32 @@
+<view class="fee-box">
+    <view class="fee-title">提现金额<label>（今日还可提现{{20-today_count}}次，今日剩余额度￥{{restFee/100}}）</label>
+    </view>
+    <view class="fee-total">
+        <view>￥</view>
+        <input bindblur="inputFee" bindinput="inputFee" maxlength="7" placeholder="0.00" type="digit" value="{{feeDefault}}"></input>
+    </view>
+    <view bindtap="inputAll" class="fee-item">
+        <view>可提取余额 {{totalFee/100}} 元</view>
+        <label>全部提现</label>
+    </view>
+</view>
+<button class="button btn-disabled" wx:if="{{btnStatus==3}}">提款处理中<label>（5分钟内到账）</label>
+</button>
+<button bindtap="{{!buttonClicked?'draw':''}}" class="button" wx:elif="{{btnStatus==1||btnStatus==2}}">确认提现<label>（预计 5 分钟内到账）</label>
+</button>
+<button bindtap="{{!buttonClicked?'showDialogTips':''}}" class="button" wx:elif="{{revenue>draw_amount&&amount_limit<2000000}}">确认提现</button>
+<button bindtap="{{!buttonClicked?'maxAmountTips':''}}" class="button" wx:elif="{{today_amount==2000000}}">确认提现</button>
+<button class="button btn-disabled" wx:elif="{{btnStatus==5}}">提取失败，请联系客服</button>
+<view class="fee-tips">
+    <view class="fee-tips-item">【温馨提示】</view>
+    <view class="fee-tips-item">1. 已认证用户报名结束后可立即提款；未认证用户，报名结束24小时后可提款。</view>
+    <view class="fee-tips-empty"></view>
+    <view class="fee-tips-item">2. 未认证用户单日提款额度为 5000 元，认证用户是 20000 元。 <label bindtap="toAuth" class="to-auth" wx:if="{{auth==0}}">点击认证</label>
+    </view>
+    <view class="fee-tips-empty"></view>
+    <view class="fee-tips-item">3. 付费报名会收取<label class="text-red"> 1% </label>服务费，用于微信支付服务，提现时自动扣除</view>
+    <view class="fee-tips-empty"></view>
+    <view class="fee-tips-item">4. 遇到任何提款问题，请<button bindcontact="contactCallback" openType="contact" sessionFrom="{{contactUserInfo}}">联系客服</button>
+    </view>
+    <view class="fee-tips-empty"></view>
+</view>

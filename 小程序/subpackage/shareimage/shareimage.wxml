@@ -1,0 +1,56 @@
+<view class="bd">
+    <view class="wrapper {{canvasShow?'opacity':''}}" id="wrapper">
+        <view class="header">
+            <image class="avatar" src="{{enroll.owner_pic}}"></image>
+            <view class="h-body">
+                <view class="h-name">{{enroll.sign_name_copy}}</view>
+                <view class="h-desc">邀请你一起参加活动，快来报名吧~</view>
+            </view>
+        </view>
+        <view class="share-body">
+            <view bindtap="uploadImage" class="edit-banner">点击更换图片</view>
+            <view bindtap="openEditText" class="edit-box">
+                <view class="eidt-text">点击编辑文字</view>
+            </view>
+            <image bindload="imageLoad" class="banner" mode="aspectFill" src="{{enroll.banner}}"></image>
+            <view bindtap="openEditText" class="share-title">{{enroll.title}}</view>
+            <view class="share-item">
+                <image src="/images/end_time.png"></image>
+                <label>报名时间：{{enroll.startTime}} - {{enroll.endTime}}</label>
+            </view>
+            <view class="share-item" wx:if="{{enroll.act_start}}">
+                <image src="/images/end_time.png"></image>
+                <label>活动时间：{{enroll.actStartTime}} - {{enroll.actEndTime}}</label>
+            </view>
+            <view class="share-item" wx:if="{{enroll.address}}">
+                <image src="/images/address_selected.png"></image>
+                <label>活动地址：{{enroll.address}}</label>
+            </view>
+            <image class="qrcode" src="{{qrcode}}"></image>
+            <view class="qrcode-desc">长按识别图中二维码查看</view>
+        </view>
+    </view>
+</view>
+<canvas bindtap="prevCanvas" canvasId="share" class="canvas {{canvasShow?'canvas-show':'canvas-hide'}}" style="height: {{canvas_h}}px;"></canvas>
+<cover-view class="canvas-text" style="display: {{canvasShow?'block':'none'}}">点击图片后长按可直接发送给朋友</cover-view>
+<cover-view class="footer" wx:if="{{!editTextDialog}}">
+    <cover-view bindtap="saveQrcode" class="btn-share btn-save">
+        <cover-image src="/images/ic_sharepic_save.png"></cover-image>
+        <cover-view>保存分享图</cover-view>
+    </cover-view>
+</cover-view>
+<import src="/tmp/tmp.wxml"></import>
+<template is="auth" data="{{content:'需要授权报名工具访问您的相册权限。'}}" wx:if="{{openSettingDialog}}"></template>
+<view class="code-dialog dialog" wx:if="{{editTextDialog}}">
+    <view bindtap="closeCodeDialog" class="mask"></view>
+    <view class="dialog-body code-dialog-body">
+        <view class="code-header">输入替换文案</view>
+        <view class="space"></view>
+        <input bindinput="inputText" class="input-verify-code" focus="{{focus}}" maxlength="50" placeholder="输入文案内容，限制50字以内" placeholderClass="placeholder" placeholderStyle="color:#ccc;" value="{{enroll.title}}"></input>
+        <view class="space"></view>
+        <view class="code-footer">
+            <button bindtap="{{!buttonClicked?'editText':''}}" class="btn-blue" formType="submit">确定修改</button>
+            <button bindtap="closeCodeDialog" class="btn-white" formType="submit">取消</button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,17 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="wrapper">
+        <button bindtap="{{!buttonClicked?'toAuthentication':''}}" class="list-item" data-index="{{index}}" formType="submit" wx:for="{{list}}" wx:key="{{index}}">
+            <image class="icon" src="{{item.icon}}"></image>
+            <view class="item-body">
+                <view class="title">{{item.title}}<label wx:if="{{item.type!=1}}">可开发票</label>
+                </view>
+                <view class="desc">{{item.desc}}</view>
+            </view>
+            <image class="item-right" src="/images/right_arrow.png"></image>
+        </button>
+    </view>
+    <view class="contact-box">
+        <view>如有问题，请</view>
+        <button class="contact" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">联系客服</button>
+    </view>
+</form>

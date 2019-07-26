@@ -1,0 +1,10 @@
+<view class="wrapper">
+    <view bindtap="{{!buttonClick?'toEnroll':''}}" class="user-info" data-index="{{index}}" wx:for="{{userList}}" wx:key="{{index}}">
+        <view class="label">{{item.name}}<label class="tag-info" wx:if="{{item.on_behalf}}">代</label>
+        </view>
+        <view class="right">
+            <view>编辑/取消报名</view>
+            <image class="arrow" src="/images/right_arrow.png"></image>
+        </view>
+    </view>
+</view>

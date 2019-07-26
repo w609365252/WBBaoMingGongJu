@@ -1,0 +1,30 @@
+<view>
+    <view class="error" wx:if="{{showLoadError}}">
+        <image class="error-icon" src="/images/error.png"></image>
+        <view class="error-text">加载失败，请检查网络</view>
+        <button bindtap="refresh" class="error-refresh" formType="submit">重新加载</button>
+    </view>
+    <swiper autoplay="{{swiper.autoplay}}" circular="true" class="swiper-box" current="{{swiper.current}}" duration="{{swiper.duration}}" indicatorActiveColor="#fff" indicatorColor="rgba(255,255,255, .5)" indicatorDots="{{swiper.indicatorDots}}" interval="{{swiper.interval}}">
+        <swiper-item wx:for="{{swiper.imgUrls}}" wx:key="{{index}}">
+            <image bindtap="toDetail" class="slide-image" data-index="{{index}}" src="{{item}}"></image>
+        </swiper-item>
+    </swiper>
+    <view bindtap="try" class="recommend" data-index="{{index}}" wx:for="{{recommends}}" wx:key="{{index}}">
+        <image class="logo" src="{{item.logo}}"></image>
+        <view class="middle">
+            <view class="title">{{item.title}} <image class="star" src="/images/customized/star.png"></image>
+            </view>
+            <text class="description" selectable="true">{{item.description}}</text>
+        </view>
+        <image class="arrow" src="/images/customized/arrow_right.png"></image>
+    </view>
+    <view bindtap="toDetail" class="recommend" data-index="{{index}}" wx:for="{{recommendsOther}}" wx:key="{{index}}">
+        <image class="logo" src="{{item.logo}}"></image>
+        <view class="middle">
+            <view class="title">{{item.title}} <image class="star" src="/images/customized/star.png"></image>
+            </view>
+            <text class="description" selectable="true">{{item.description}}</text>
+        </view>
+        <image class="arrow" src="/images/customized/arrow_right.png"></image>
+    </view>
+</view>

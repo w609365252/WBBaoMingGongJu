@@ -1,0 +1,112 @@
+<block wx:if="{{hasUserInfo==false}}">
+    <import src="/tmp/tmp.wxml"></import>
+    <view>
+        <template is="wxLogin" data></template>
+    </view>
+</block>
+<form bindsubmit="postFormId" reportSubmit="true" wx:if="{{hasUserInfo}}">
+    <button bindgetuserinfo="getUserInfo" bindlongtap="longtap" class="user" openType="getUserInfo">
+        <image class="avatar" src="{{avatar}}" wx:if="{{avatar}}"></image>
+        <image class="avatar" src="" wx:else></image>
+        <view class="nickname">{{nickname}}</view>
+    </button>
+    <button bindtap="{{!buttonClicked?'toPersonalInfo':''}}" class="auth-box" formType="submit">
+        <view class="content personal-info">
+            <view>个人信息</view>
+            <view class="dot-red" wx:if="{{!personalInfoClicked}}">
+                <label></label>
+            </view>
+            <image class="right" src="/images/right_arrow.png"></image>
+        </view>
+    </button>
+    <view class="header-box" hidden="{{true}}">
+        <button bindtap="{{!buttonClicked?'toAuthType':''}}" class="row" formType="submit">
+            <view wx:if="{{status==0}}">
+                <image class="row-icon" src="/images/ic_me_waiting_recognition.png"></image>
+                <view class="row-label">待认证</view>
+            </view>
+            <view wx:elif="{{status==1}}">
+                <image class="row-icon" src="/images/ic_me_waiting.png"></image>
+                <view class="row-label">审核中</view>
+            </view>
+            <view wx:elif="{{status==2}}">
+                <image class="icon" src="/images/ic_identification_person.png" wx:if="{{type==1}}"></image>
+                <image class="icon" src="/images/ic_identification_company.png" wx:if="{{type==2}}"></image>
+                <image class="icon" src="/images/ic_identification_organization.png" wx:if="{{type==3}}"></image>
+                <image class="icon" src="/images/ic_identification_gzh.png" wx:if="{{type==4}}"></image>
+                <view class="row-label" wx:if="{{type==1}}">个人认证</view>
+                <view class="row-label" wx:if="{{type==2}}">企业认证</view>
+                <view class="row-label" wx:if="{{type==3}}">组织认证</view>
+                <view class="row-label" wx:if="{{type==4}}">公众号认证</view>
+            </view>
+            <view wx:elif="{{status==3}}">
+                <image class="icon" src="/images/ic_identification_no_small.png"></image>
+                <view>认证失败</view>
+            </view>
+        </button>
+        <button bindtap="{{!buttonClicked?'payRecord':''}}" class="row" formType="submit">
+            <image class="row-icon" src="/images/ic_me_pay_record.png"></image>
+            <view class="row-label">支付订单</view>
+        </button>
+        <button bindtap="{{!buttonClicked?'drawRecord':''}}" class="row" formType="submit">
+            <image class="row-icon" src="/images/ic_me_withdraw_record.png"></image>
+            <view class="row-label">提款记录</view>
+        </button>
+        <button bindtap="{{!buttonClicked?'toVoucher':''}}" class="row" formType="submit">
+            <image class="row-icon" src="/images/ic_me_evidence.png"></image>
+            <view class="row-label">报名凭证</view>
+        </button>
+    </view>
+    <view hidden="{{true}}">
+    <button class="row mt20" formType="submit" openType="share">
+        <view class="row-info">
+            <image class="row-icon" src="/images/ic_me_share.png"></image>
+            <view class="row-label">推荐给好友</view>
+        </view>
+        <image class="right-arrow" src="/images/ic_arrow_right.png"></image>
+    </button>
+    <button bindtap="{{!buttonClicked?'openNoticeBoard':''}}" class="row" formType="submit">
+        <view class="row-info">
+            <image class="row-icon" src="/images/ic_me_connect.png"></image>
+            <view class="row-label">公众号怎样使用小程序</view>
+        </view>
+        <image class="right-arrow" src="/images/ic_arrow_right.png"></image>
+    </button>
+    <button bindtap="{{!buttonClicked?'toRecommend':''}}" class="row" formType="submit">
+        <view class="row-info">
+            <image class="row-icon" src="/images/ic_me_moreapps.png"></image>
+            <view class="row-label">其它好玩推荐</view>
+        </view>
+        <image class="right-arrow" src="/images/ic_arrow_right.png"></image>
+    </button>
+    <button bindtap="{{!buttonClicked?'toHelp':''}}" class="row" formType="submit">
+        <view class="row-info">
+            <image class="row-icon" src="/images/ic_me_help.png"></image>
+            <view class="row-label">帮助中心</view>
+        </view>
+        <image class="right-arrow" src="/images/ic_arrow_right.png"></image>
+    </button>
+    <button bindcontact="contactCallback" class="row" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">
+        <view class="row-info">
+            <image class="row-icon" src="/images/ic_me_feedback.png"></image>
+            <view class="row-label">反馈和建议</view>
+        </view>
+        <image class="right-arrow" src="/images/ic_arrow_right.png"></image>
+    </button>
+    </view>
+    <button bindtap="{{!buttonClicked?'toDev':''}}" class="row" formType="submit" wx:if="{{showDev}}">
+        <view class="row-info">
+            <image class="row-icon" src="/images/ic_me_godmode.png"></image>
+            <view class="row-label">上帝模式</view>
+        </view>
+        <image class="right-arrow" src="/images/ic_arrow_right.png"></image>
+    </button>
+    <button bindtap="{{!buttonClicked?'changeHost':''}}" class="button {{testHost?'red':''}}" formType="submit" wx:if="{{showDev}}">
+        <view>{{testHost?'切换为线上环境':'切换为线下环境'}}</view>
+    </button>
+    <view class="ad-box">
+        <ad unitId="adunit-6c64a34771a361ce"></ad>
+    </view>
+</form>
+<import src="/tmp/tmp.wxml"></import>
+<template is="noticeBoard" data="{{noticeBoard:noticeBoard}}"></template>

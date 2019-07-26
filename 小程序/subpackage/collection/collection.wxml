@@ -1,0 +1,11 @@
+<view class="no-data" wx:if="{{enrollList.length==0}}">
+    <image class="empty" src="/images/ic_empty.png"></image>
+    <view class="empty-title">暂无任何收藏</view>
+    <view class="empty-desc">您可以去收藏自己喜欢的报名表</view>
+</view>
+<block wx:else>
+    <import src="/tmp/tmp.wxml"></import>
+    <view class="enroll-list">
+        <template is="enrollList" data="{{enrollList:enrollList,type:type}}"></template>
+    </view>
+</block>

@@ -1,0 +1,49 @@
+<form bindsubmit="{{!buttonClicked?'submitInfo':''}}" reportSubmit="true">
+    <view class="space"></view>
+    <view class="enroll-info">
+        <view class="enroll-info-item first">
+            <view class="text">公众号名称</view>
+            <view class="right alias w380">
+                <input bindblur="inputFullName" bindinput="inputFullName" maxlength="50" placeholder="请输入公众号名称" placeholderStyle="color: #aaa;" type="text" value="{{defaultFullName}}"></input>
+                <icon bindtap="clearFullName" size="15" type="clear" wx:if="{{fullName}}"></icon>
+            </view>
+        </view>
+    </view>
+    <view class="space"></view>
+    <view class="enroll-info">
+        <view class="logo-body">
+            <view class="text">公众号后台-公众号设置-账号详情页面截图</view>
+            <view class="right">
+                <image bindtap="showPic" class="logo" mode="aspectFill" src="{{licensePic}}" wx:if="{{licensePic}}"></image>
+                <image bindtap="{{!buttonClicked?'openImageDialog':''}}" class="logo" src="/images/ic_upload.png" wx:else></image>
+                <view bindtap="{{!buttonClicked?'openImageDialog':''}}" class="btn-blue" wx:if="{{licensePic}}">重新上传</view>
+            </view>
+        </view>
+    </view>
+    <button class="button mt30" formType="submit">下一步</button>
+</form>
+<view class="contact-box">
+    <view>如有问题，请</view>
+    <button class="contact" formType="submit" openType="contact" sessionFrom="{{contactUserInfo}}">联系客服</button>
+</view>
+<form bindsubmit="{{!buttonClicked?'postFormId':''}}" reportSubmit="true">
+    <view class="dialog image-dialog" wx:if="{{imageDialogShow}}">
+        <view bindtap="closeImageDialog" class="mask"></view>
+        <view class="dialog-box">
+            <view class="image-dialog-header">账号详情页面截图——示意图</view>
+            <view class="image-dialog-body">
+                <image bindtap="previewDemoSrc" class="img-demo" src="{{demoSrc}}"></image>
+                <view class="image-tips">截图要求：</view>
+                <view class="require-item">
+                    <image src="/images/ic_num_01.png"></image>
+                    <view>公众号<label>必须通过微信官方认证和年审</label>，未认证账号不予通过。</view>
+                </view>
+                <view class="require-item">
+                    <image src="/images/ic_num_02.png"></image>
+                    <view>截图<label>必须是电脑端完整页面截图</label>，公众号后台-公众号设置-账号详情页面。</view>
+                </view>
+            </view>
+            <button bindtap="{{!buttonClicked?'chooseImage':''}}" class="button" formType="submit">上传图片</button>
+        </view>
+    </view>
+</form>

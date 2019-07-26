@@ -1,0 +1,11 @@
+<view class="title">微信扫码添加管理员</view>
+<view class="sub-title">让管理员打开微信，扫描下方二维码，即可成为该报名活动管理员</view>
+<view class="qrcode">
+    <image bindtap="showPic" src="{{qrcode}}"></image>
+</view>
+<view bindtap="copyCode" class="code" wx:if="{{code}}">验证码：{{code}}<label>复制</label>
+</view>
+<view class="desc" wx:if="{{code}}">
+    <view>验证码10分钟内（{{expire}}前）有效。</view>
+    <view>仅供一人使用。过期，请重新生成。</view>
+</view>

@@ -1,0 +1,102 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="label goods-label" wx:if="{{goods.length>0}}">报名项目<label>*</label>
+    </view>
+    <view class="goods-box" wx:if="{{goods.length>0}}">
+        <view class="good-item" wx:for="{{goods}}" wx:key="{{index}}">
+            <view class="pic-count">{{item.pics.length}}图</view>
+            <image bindtap="showGoodPic" class="good-pic" data-index="{{index}}" mode="aspectFill" src="{{item.pics.length?item.pics[0]:'/images/ic_project_default_pic.png'}}"></image>
+            <view class="good-body">
+                <view class="good-title">{{item.name}}</view>
+                <view class="good-desc">{{item.desc}}</view>
+                <view class="good-bottom">
+                    <view class="good-price">￥{{item.fee/100}}</view>
+                    <view class="count-buy">已购买 {{item.count}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="enroll-info" wx:if="{{item.status}}" wx:for="{{formItems}}" wx:key="{{item.field_name}}">
+        <view wx:if="{{item.field_type!=2&&item.field_type!=7&&item.field_type!=9&&item.field_type!=14}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <text class="form-control" selectable="true">{{item.field_value&&item.field_value.length!=0?item.field_value:'无'}}</text>
+        </view>
+        <view wx:elif="{{item.field_type==2||item.field_type==14}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="form-control image-control">
+                <label wx:if="{{item.field_value&&item.field_value.length!=0}}">
+                    <image bindtap="showPic" class="big-img" data-src="{{item}}" mode="aspectFill" src="{{item}}" wx:for="{{item.field_value}}"></image>
+                </label>
+                <label wx:else>无</label>
+            </view>
+        </view>
+        <view wx:elif="{{item.field_type==9}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="form-control image-control">
+                <label wx:if="{{item.field_value&&item.field_value.length!=0}}">
+                    <image bindtap="showPic" class="big-img" data-src="{{item.field_value}}" mode="aspectFill" src="{{item.field_value}}"></image>
+                </label>
+                <label wx:else>无</label>
+            </view>
+        </view>
+        <view wx:elif="{{item.field_type==7}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <text class="form-control" selectable="true">{{item.field_value&&item.field_value.length!=0?item.field_value:'无'}}</text>
+        </view>
+    </view>
+    <view class="enroll-info" wx:if="{{fee>0}}">
+        <view class="label">报名费用<label>*</label>
+        </view>
+        <input class="form-control" disabled="true" type="text" value="{{fee/100}}元（{{refunded?'已退款':'已支付'}}）"></input>
+    </view>
+    <view class="enroll-info" wx:if="{{charge}}">
+        <view class="label">报名费用<label>*</label>
+        </view>
+        <input class="form-control" disabled="true" type="text" value="{{refunded?'已退款':'已支付'}}"></input>
+    </view>
+    <view class="enroll-info mb20">
+        <view wx:if="{{verify==1&&verified>0}}">
+            <view class="label">审核结果</view>
+            <text class="form-control blue" selectable="true" wx:if="{{verified==1}}">审核通过{{comment?'，'+comment:''}}</text>
+            <text class="form-control text-red" selectable="true" wx:elif="{{verified==2}}">审核未通过{{comment?'，'+comment:''}}</text>
+        </view>
+    </view>
+    <view class="mb20" wx:if="{{verified==0&&status!=2}}">
+        <button bindtap="{{!buttonClicked?'review':''}}" class="button mb20" data-type="1" formType="submit">审核通过</button>
+        <button bindtap="{{!buttonClicked?'review':''}}" class="button btn-white" data-type="2" formType="submit">审核不通过</button>
+    </view>
+    <view class="mb20" wx:if="{{verified==1}}">
+        <button bindtap="{{!buttonClicked?'toVoucherDetail':''}}" class="button" formType="submit">查看报名凭证</button>
+    </view>
+    <view class="mb20">
+        <button bindtap="{{!buttonClicked?'deleteEnroll':''}}" class="button btn-warning" formType="submit">取消报名</button>
+    </view>
+</form>
+<import src="/tmp/tmp.wxml"></import>
+<template is="dialogConfirm" data="{{confirm:confirm,confirmDialog:confirmDialog}}"></template>
+<view class="dialog-confirm" wx:if="{{noCanQuit}}">
+    <view bindtap="closeCanQuit" class="mask"></view>
+    <view class="dialog-box">
+        <view class="dialog-title">{{confirm.title}}</view>
+        <view class="dialog-desc">
+            <view bindtap="makeCall" class="text-phone">报名已结束，如需退款，请联系发起人处理，联系方式：<label>{{phone}}</label>
+            </view>
+            <view class="dialog-rich-text">
+                <label>如有其它问题咨询，可以去个人中心联系客服。</label>
+            </view>
+        </view>
+        <view class="dialog-footer">
+            <view bindtap="closeCanQuit" class="button">我知道了</view>
+        </view>
+    </view>
+</view>
+<view class="ad-box" style="padding-bottom: 60rpx;">
+    <ad unitId="adunit-446a5d9afab9de63"></ad>
+</view>

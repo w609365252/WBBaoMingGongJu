@@ -1,0 +1,9 @@
+<view class="header-text">共 <label>{{total_referer}}</label> 位用户分享了活动，邀请到 <label>{{auth||showDev?total_follower:'**'}}</label> 位参与者</view>
+<view bindtap="{{!buttonClicked?'userDetail':''}}" class="enroll-list-item" data-index="{{index}}" wx:for="{{list}}" wx:key="{{index}}">
+    <image class="user-head" src="{{item.upic}}"></image>
+    <view class="enroll-right">
+        <view class="username">{{item.uname}}</view>
+    </view>
+    <view class="time">邀请了 {{auth||showDev?item.num:'**'}} 位用户</view>
+    <image class="arrow-right" src="/images/right_arrow.png"></image>
+</view>

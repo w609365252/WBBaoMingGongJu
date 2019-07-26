@@ -1,0 +1,7 @@
+<view class="enroll-list-item" data-index="{{index}}" wx:for="{{list}}" wx:key="{{index}}">
+    <image class="user-head" src="{{item.upic}}"></image>
+    <view class="enroll-right">
+        <view class="username">{{item.uname}}</view>
+    </view>
+    <view class="time">{{item.time}}</view>
+</view>

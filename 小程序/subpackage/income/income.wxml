@@ -1,0 +1,15 @@
+<view class="no-data" wx:if="{{records.length==0}}">
+  暂无提款记录
+</view>
+<view class="record-list" wx:for="{{records}}">
+    <view class="record-left">
+        <view class="record-title">{{item.title}}</view>
+        <view class="record-time" wx:if="{{item.draw_status==3}}">{{item.time}}</view>
+    </view>
+    <view class="record-right">
+        <view class="record-tag" wx:if="{{item.draw_status==1||item.draw_status==2}}">处理中..</view>
+        <view class="record-tag-success" wx:elif="{{item.draw_status==3}}">
+            <label>{{item.total/100}}</label>元</view>
+        <view class="record-tag" wx:elif="{{item.draw_status==4}}">提款失败å</view>
+    </view>
+</view>

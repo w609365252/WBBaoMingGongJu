@@ -1,0 +1,131 @@
+{
+  "pages": [
+    "pages/default/default",
+    "pages/myenroll/myenroll",
+    "pages/ads/ads",
+    "pages/create/create",
+    "pages/createbuy/createbuy",
+    "pages/customfield/customfield",
+    "pages/detail/detail",
+    "pages/edit/edit",
+    "pages/enroll/enroll",
+    "pages/editbuy/editbuy",
+    "pages/enrolldelete/enrolldelete",
+    "pages/enrollmanage/enrollmanage",
+    "pages/enrollresult/enrollresult",
+    "pages/enrollsuccess/enrollsuccess",
+    "pages/enrollusers/enrollusers",
+    "pages/homepage/homepage",
+    "pages/notice/notice",
+    "pages/personal/personal",
+    "pages/personalinfo/personalinfo",
+    "pages/scanvoucher/scanvoucher",
+    "pages/selfdetail/selfdetail",
+    "pages/userdetail/userdetail",
+    "pages/voucherlist/voucherlist",
+    "pages/webview/webview"
+  ],
+  "window": {
+    "backgroundColor": "#efeff4",
+    "navigationBarBackgroundColor": "#f7f7f7",
+    "navigationBarTitleText": "报名工具",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7f8389",
+    "selectedColor": "#00a8f3",
+    "borderStyle": "black",
+    "backgroundColor": "#f7f7fa",
+    "list": [
+      {
+        "pagePath": "pages/default/default",
+        "text": "创建报名",
+        "iconPath": "images/ic_create_normal.png",
+        "selectedIconPath": "images/ic_create_pressed.png"
+      },
+      {
+        "pagePath": "pages/myenroll/myenroll",
+        "text": "我的报名",
+        "iconPath": "images/ic_myactivity_normal.png",
+        "selectedIconPath": "images/ic_myactivity_pressed.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "个人中心",
+        "iconPath": "images/ic_me_normal.png",
+        "selectedIconPath": "images/ic_me_pressed.png"
+      }
+    ]
+  },
+  "subPackages": [
+    {
+      "root": "groupbuy/",
+      "pages": [
+        "pages/groupbuy/create",
+        "pages/groupbuy/detail",
+        "pages/groupbuy/edit",
+        "pages/enroll/enroll",
+        "pages/groupbuy/shoppinglist",
+        "pages/enroll/userdetail",
+        "pages/enroll/userlist",
+        "pages/team/alldata",
+        "pages/team/result",
+        "pages/enroll/shareimage"
+      ]
+    },
+    {
+      "root": "subpackage/",
+      "pages": [
+        "uploadimages/uploadimages",
+        "admin/admin",
+        "addadmin/addadmin",
+        "drawing/drawing",
+        "refuse/refuse",
+        "export/export",
+        "recommend/recommend",
+        "entryfee/entryfee",
+        "inputfee/inputfee",
+        "payrecord/payrecord",
+        "income/income",
+        "qrcode/qrcode",
+        "network/network",
+        "edithome/edithome",
+        "authentication/authentication",
+        "authtype/authtype",
+        "companyinfor/companyinfor",
+        "personalinfo/personalinfo",
+        "subscription/subscription",
+        "authdetail/authdetail",
+        "authinfo/authinfo",
+        "enrollpay/enrollpay",
+        "collection/collection",
+        "moresetting/moresetting",
+        "refundlist/refundlist",
+        "dev/dev",
+        "voucher/voucher",
+        "checkin/checkin",
+        "checkinresult/checkinresult",
+        "enrollfollow/enrollfollow",
+        "adminverify/adminverify",
+        "shareimage/shareimage",
+        "invitedata/invitedata",
+        "invitee/invitee",
+        "personalauth/personalauth",
+        "authresult/authresult"
+      ]
+    }
+  ],
+  "navigateToMiniProgramAppIdList": [
+    "wxee55405953922c86",
+    "wx9301aa654c7cb6b2",
+    "wxb141cac5a4da3378",
+    "wx3dd29bfe3e5f0d1d",
+    "wx58607abe7f57b91c",
+    "wx56c8f077de74b07c",
+    "wxfd5b9439675c4321",
+    "wx751a5d8b5c047c30",
+    "wxa344448166586158",
+    "wxfa9bf10f9947e15d"
+  ],
+  "sitemapLocation": "sitemap.json"
+}

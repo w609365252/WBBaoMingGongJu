@@ -1,0 +1,11 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="wrapper">
+        <icon size="96" type="warn"></icon>
+        <view class="rs-title">{{eid?'报名活动已删除':'你的报名已删除'}}</view>
+        <view class="rs-subtitle" wx:if="{{comment}}">删除原因：{{comment}}</view>
+        <button bindtap="{{!buttonClicked?'toIndex':''}}" class="button" formType="submit">回到报名首页</button>
+    </view>
+    <view class="ad-box">
+        <ad unitId="adunit-694a0a0b5a80b291"></ad>
+    </view>
+</form>

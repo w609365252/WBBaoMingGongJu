@@ -1,0 +1,11 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view class="tips-text">温馨提示：由于微信限制单笔支付最高金额不能超过3000元，为了不影响报名，系统已自动将本次报名费用拆分成多笔订单，请完成以下订单支付。</view>
+    <view class="body">
+        <view class="title">报名费用：{{fee/100}}</view>
+        <view class="pay-item" wx:for="{{payItems}}" wx:key="{{index}}">
+            <view>{{item.text}}</view>
+            <button bindtap="{{!buttonClicked&&item.status==0?'singlePay':''}}" class="button btn-small {{item.status?'btn-disabled':''}}" data-index="{{index}}" formType="submit">{{item.status?'已付款':'去支付'}}</button>
+        </view>
+    </view>
+    <button bindtap="paySuccess" class="button" formType="submit">完成</button>
+</form>

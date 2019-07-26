@@ -1,0 +1,82 @@
+<form bindsubmit="saveFollow" reportSubmit="true">
+    <view class="enroll-info">
+        <view class="enroll-info-item good-box">
+            <view class="good-item">
+                <picker bindchange="changeImgType" class="picker-row" mode="selector" range="{{imgType}}" value="{{imgTypeIndex}}">
+                    <view class="text">参与者报名</view>
+                    <view class="enroll-info-row right">
+                        <view>{{imgType[imgTypeIndex]}}</view>
+                        <image class="arrow" src="/images/right_arrow.png"></image>
+                    </view>
+                </picker>
+            </view>
+            <view class="good-item">
+                <view class="good-label">图标</view>
+                <view class="good-pics">
+                    <image bindtap="chooseImage" data-type="header" mode="aspectFill" src="{{imgInfo.header?imgInfo.header:'/images/add_img.png'}}"></image>
+                    <image catchtap="clearInfo" class="clear" data-name="header" src="/images/delete.png" wx:if="{{imgInfo.header}}"></image>
+                </view>
+                <label class="text-gray">(点击上传)</label>
+            </view>
+            <view class="good-item">
+                <view class="good-label">名称</view>
+                <input bindblur="inputInfo" class="good-title" data-name="title" maxlength="40" placeholder="请输入名称，10个字以内" placeholderClass="placeholder" value="{{imgInfo.title}}"></input>
+                <icon catchtap="clearInfo" class="clear" data-name="title" size="15" type="clear" wx:if="{{imgInfo.title}}"></icon>
+            </view>
+            <view class="good-item">
+                <view class="good-label">描述</view>
+                <input bindblur="inputInfo" class="good-title" data-name="desc" maxlength="40" placeholder="请输入描述，20个字以内" placeholderClass="placeholder" value="{{imgInfo.desc}}"></input>
+                <icon catchtap="clearInfo" class="clear" data-name="desc" size="15" type="clear" wx:if="{{imgInfo.desc}}"></icon>
+            </view>
+            <view class="enroll-info pr qr-code-box">
+                <view class="form-label">
+                    <view class="qr-code-title">上传二维码</view>
+                    <view class="qr-code-desc" wx:if="{{imgTypeIndex==0}}">
+            由于微信群二维码有7天有效期和超过百人无法扫码进群限制，建议使用突破上述限制的
+            <label bindtap="huomaDialog">微友活码</label>
+                        <image bindtap="huomaDialog" src="/images/ic_help.png"></image>
+                    </view>
+                    <view class="qr-code-desc" wx:if="{{imgTypeIndex==1}}">
+            请上传有效的个人微信/qq号
+          </view>
+                    <view class="qr-code-desc" wx:if="{{imgTypeIndex==2}}">
+            请上传需要关注的微信公众号
+          </view>
+                </view>
+                <image bindtap="chooseImage" class="qr-code" data-type="qrcode" data-url="{{imgInfo.qrcode}}" mode="aspectFill" src="{{imgInfo.qrcode}}" wx:if="{{imgInfo.qrcode}}"></image>
+                <image bindtap="chooseImage" class="qr-code" data-type="qrcode" mode="aspectFill" src="/images/defalut_banner.jpg" wx:else></image>
+                <image bindtap="removeImg" class="remove remove-qr" data-type="qrcode" src="/images/delete.png" wx:if="{{imgInfo.qrcode}}"></image>
+            </view>
+            <view class="good-item">
+                <picker bindchange="changeVisi" class="picker-row" mode="selector" range="{{visi}}" value="{{visiIndex}}">
+                    <view class="text">查看权限</view>
+                    <view class="enroll-info-row right">
+                        <view>{{visi[visiIndex]}}</view>
+                        <image class="arrow" src="/images/right_arrow.png"></image>
+                    </view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="enroll-demo">
+        <view class="enroll-demo-title">预览效果</view>
+        <view bindtap="showPic" class="enroll-demo-bd">
+            <image mode="aspectFill" src="{{imgInfo.header?imgInfo.header:'/images/add_img.png'}}"></image>
+            <view class="enroll-demo-right">
+                <view>{{imgInfo.title?imgInfo.title:'你输入的名称'}}</view>
+                <label>{{imgInfo.desc?imgInfo.desc:'你输入的描述'}}</label>
+            </view>
+            <view class="btn-demo" wx:if="{{imgTypeIndex==0}}">进群</view>
+            <view class="btn-demo" wx:if="{{imgTypeIndex==1}}">添加</view>
+            <view class="btn-demo" wx:if="{{imgTypeIndex==2}}">关注</view>
+        </view>
+    </view>
+    <button class="button mt20" formType="submit">保存</button>
+    <button bindtap="clearData" class="button btn-warning mt20">清空数据</button>
+    <view class="ad-more-box">
+        <image bindtap="toWeiyou" src="https://cdn-xcxcustom.weiyoubot.cn/20190117/82c84e270c52a4a52be74564b18c96a7.jpg"></image>
+        <image bindtap="toKefu" src="https://cdn-xcxcustom.weiyoubot.cn/20190117/728f7efa14dd01d13e875f89ce8965c0.jpg"></image>
+    </view>
+</form>
+<import src="/tmp/tmp.wxml"></import>
+<template is="huomaDialog" data="{{huomaDialog:huomaDialog}}"></template>

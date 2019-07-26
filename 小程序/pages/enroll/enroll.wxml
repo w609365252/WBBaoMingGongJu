@@ -1,0 +1,230 @@
+<block wx:if="{{hasUserInfo==false}}">
+    <import src="/tmp/tmp.wxml"></import>
+    <view>
+        <template is="wxLogin" data></template>
+    </view>
+</block>
+<form bindsubmit="postFormId" reportSubmit="true" wx:if="{{hasUserInfo}}">
+    <view class="label goods-label" wx:if="{{goods.length>0}}">报名项目<label>*</label>
+    </view>
+    <view class="goods-box" wx:if="{{goods.length>0}}">
+        <view class="good-item" wx:for="{{goods}}" wx:key="{{index}}">
+            <view class="pic-count" wx:if="{{item.pics.length}}">{{item.pics.length}}图</view>
+            <image bindtap="showGoodPic" class="good-pic" data-index="{{index}}" mode="aspectFill" src="{{item.pics.length?item.pics[0]:'/images/ic_project_default_pic.png'}}"></image>
+            <view class="good-body">
+                <view class="good-title">{{item.name}}</view>
+                <view class="good-desc">{{item.desc}}</view>
+                <view class="good-bottom">
+                    <view class="good-price" wx:if="{{item.fee}}">￥{{item.fee/100}}</view>
+                    <view class="good-remain" wx:if="{{!info_id}}">剩余{{item.remain}}</view>
+                    <view class="count-box" wx:if="{{!info_id}}">
+                        <image bindtap="setCount" data-index="{{index}}" data-type="minus" src="{{item.consume==0?'/images/ic_item_delete_disable.png':'/images/ic_item_delete.png'}}"></image>
+                        <view>{{item.consume}}</view>
+                        <image bindtap="setCount" data-index="{{index}}" data-type="plus" src="{{item.consume==item.remain?'/images/ic_item_add_disable.png':'/images/ic_item_add.png'}}"></image>
+                    </view>
+                    <view class="count-buy" wx:else>已购买 {{item.count}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="total" wx:if="{{!info_id&&totalFee}}">共计费用：<label>{{fee?fee/100:0}} 元</label>
+        </view>
+    </view>
+    <view class="enroll-info" wx:if="{{item.status}}" wx:for="{{tmpItems}}" wx:key="{{item.field_name}}">
+        <view wx:if="{{item.field_type==0}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require=='1'}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <input bindblur="fieldInput" bindinput="fieldInput" class="form-control" data-id="{{item.require}}" data-index="{{index}}" data-name="{{item.field_name}}" data-type="{{item.field_type}}" maxlength="500" name="{{item.field_name}}" placeholder="请输入{{item.field_name}}" placeholderStyle="color:#aaa;" type="text" value="{{item.field_value}}"></input>
+        </view>
+        <view wx:if="{{item.field_type==1}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <input bindinput="fieldInput" class="form-control" data-id="{{item.require}}" data-index="{{index}}" data-name="{{item.field_name}}" data-type="{{item.field_type}}" maxlength="500" name="{{item.field_name}}" placeholder="请输入{{item.field_name}}" placeholderStyle="color:#aaa;" type="number" value="{{item.field_value}}"></input>
+        </view>
+        <view wx:if="{{item.field_type==2||item.field_type==14}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="enroll-info-img">
+                <view bindtap="showPic" class="img-item" data-index="{{index}}" data-src="{{item}}" wx:for="{{formItems[index].field_value}}" wx:for-index="idx">
+                    <image class="big-img" mode="aspectFill" src="{{item}}"></image>
+                    <image catchtap="deleteOption" class="minus fl" data-idx="{{idx}}" data-index="{{index}}" data-item="{{item}}" src="../../images/minus.png"></image>
+                </view>
+                <view bindtap="chooseImage" class="img-item" data-index="{{index}}">
+                    <image class="big-img" src="/images/ic_pic_upload.png"></image>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.field_type==3}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="enroll-info-item">
+                <picker bindchange="changeEndDate" data-index="{{index}}" mode="date" value="{{formItems[index].end_date}}">
+                    <view class="left" style="margin-right:20rpx;">{{formItems[index].end_date}}</view>
+                    <image class="arrow" src="/images/right_arrow.png"></image>
+                </picker>
+            </view>
+        </view>
+        <view wx:if="{{item.field_type==4}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <radio-group bindchange="radioChange" class="radio-group" data-index="{{index}}" data-name="{{item.field_name}}">
+                <label class="radio" wx:for="{{item.options}}" wx:key="{{item.name}}">
+                    <radio checked="{{1==item.checked}}" color="#00a8f3" value="{{item.name}}"></radio> {{item.name}}
+        </label>
+            </radio-group>
+        </view>
+        <view wx:if="{{item.field_type==5}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <checkbox-group bindchange="checkboxChange" class="radio-group" data-index="{{index}}" data-name="{{item.field_name}}">
+                <label class="radio" wx:for="{{item.options}}" wx:key="{{item.name}}">
+                    <checkbox checked="{{1==item.checked}}" color="#00a8f3" value="{{item.name}}"></checkbox> {{item.name}}
+        </label>
+            </checkbox-group>
+        </view>
+        <view wx:if="{{item.field_type==6}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="enroll-info-item">
+                <picker bindchange="changeEndTime" data-index="{{index}}" mode="time" value="{{formItems[index].end_time||'00:00'}}">
+                    <view class="left" style="margin-right:20rpx;">{{formItems[index].end_time}}</view>
+                    <image class="arrow" src="/images/right_arrow.png"></image>
+                </picker>
+            </view>
+        </view>
+        <view wx:if="{{item.field_type==7}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="enroll-info-item">
+                <view class="text" wx:if="{{enrollSuccessDialog}}">{{formItems[index].field_value}}</view>
+                <textarea bindblur="fieldInput" bindinput="fieldInput" class="form-control" data-id="{{item.require}}" data-index="{{index}}" data-name="{{item.field_name}}" data-type="{{item.field_type}}" maxlength="500" name="{{item.field_name}}" placeholder="请输入{{item.field_name}}" placeholderStyle="color:#aaa;" type="text" value="{{item.field_value}}" wx:else></textarea>
+            </view>
+        </view>
+        <view wx:if="{{item.field_type==8}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="enroll-info-item address">
+                <view wx:if="{{formItems[index].field_value}}">
+                    <view class="text">{{formItems[index].field_value}}</view>
+                    <icon catchtap="clearAddress" class="clear" data-index="{{index}}" size="15" type="clear"></icon>
+                </view>
+                <view bindtap="chooseLocation" class="btn-address" data-index="{{index}}">
+                    <button>获取位置</button>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.field_type==9}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="enroll-info-img">
+                <view bindtap="{{!buttonClicked?'toDrawing':''}}" class="img-item" data-index="{{index}}" wx:if="{{!formItems[index].field_value}}">
+                    <image class="big-img" src="/images/ic_pic_upload.png"></image>
+                </view>
+                <view bindtap="showPic" class="img-item" data-index="{{index}}" data-src="{{formItems[index].field_value}}" wx:else>
+                    <image class="big-img" mode="aspectFill" src="{{formItems[index].field_value}}"></image>
+                    <image catchtap="deleteDraw" class="minus fl" data-index="{{index}}" data-item="{{formItems[index].field_value}}" src="../../images/minus.png"></image>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.field_type==10}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="enroll-info-item">
+                <picker bindchange="changeDropDown" data-index="{{index}}" mode="selector" range="{{item.options}}" value="{{item.index}}">
+                    <view class="left" style="margin-right:20rpx;">{{formItems[index].field_value}}</view>
+                    <image class="arrow" src="/images/right_arrow.png"></image>
+                </picker>
+            </view>
+        </view>
+        <view wx:if="{{item.field_type==11}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="enroll-info-item enroll-tab-box">
+                <view bindtap="changeTabs" class="enroll-tab {{formItems[index].field_value==item?'selected':'unselected'}}" data-idx="{{idx}}" data-index="{{index}}" wx:for="{{item.options}}" wx:for-index="idx" wx:key="{{index}}">
+                    <view>{{item}}</view>
+                    <image src="/images/selected.png" wx:if="{{formItems[index].field_value==item}}"></image>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.field_type==12}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <view class="enroll-info-item">
+                <picker bindchange="bindRegionChange" customItem="{{formItems[index].custom_item}}" data-index="{{index}}" mode="region" value="{{formItems[index].field_value}}">
+                    <view class="left" style="margin-right:20rpx;">{{formItems[index].field_value[0]}}-{{formItems[index].field_value[1]}}-{{formItems[index].field_value[2]}}</view>
+                    <image class="arrow" src="/images/right_arrow.png"></image>
+                </picker>
+            </view>
+        </view>
+        <view class="pr" wx:if="{{item.field_type==13}}">
+            <view class="label">{{item.field_name}}<label wx:if="{{item.require==1}}">*</label>
+            </view>
+            <view class="desc" wx:if="{{item.field_desc}}">{{item.field_desc}}</view>
+            <input bindblur="fieldInput" bindinput="fieldInput" class="form-control" data-id="{{item.require}}" data-index="{{index}}" data-name="{{item.field_name}}" data-type="{{item.field_type}}" maxlength="50" name="{{item.field_name}}" placeholder="请输入{{item.field_name}}" placeholderStyle="color:#aaa;" type="text" value="{{item.field_value}}"></input>
+            <button bindgetphonenumber="getPhoneNumber" class="btn-address btn-phone" data-index="{{index}}" openType="getPhoneNumber">
+                <view>自动填写</view>
+            </button>
+        </view>
+    </view>
+    <view class="enroll-info" wx:if="{{payed_fee>0&&info_id}}">
+        <view class="label">报名费用<label>*</label>
+        </view>
+        <view class="form-control">{{payed_fee/100}}元（已支付）, <label>{{(fee-payed_fee)/100}}元（未支付）</label>
+        </view>
+    </view>
+    <view class="enroll-info" wx:elif="{{fee>0&&info_id}}">
+        <view class="label">报名费用<label>*</label>
+        </view>
+        <input class="form-control" disabled="true" type="text" value="{{fee/100}}元（{{refunded?'已退款':'已支付'}}）"></input>
+    </view>
+    <view class="enroll-info" wx:if="{{charge}}">
+        <view class="label">报名费用<label>*</label>
+        </view>
+        <input class="form-control" disabled="true" type="text" value="{{refunded?'已退款':'已支付'}}"></input>
+    </view>
+    <view class="enroll-info">
+        <view class="mb20" wx:if="{{verified==2}}">
+            <view class="label">审核结果</view>
+            <view class="form-control text-red" wx:if="{{comment=='无'}}">审核未通过</view>
+            <text class="form-control text-red" selectable="true" wx:else>审核未通过，{{comment}}</text>
+        </view>
+    </view>
+    <view class="footer" wx:if="{{type&&info_id}}">
+        <button bindtap="{{!buttonClicked?'enrollData':''}}" class="button mt20" disabled="{{buttonClicked}}" formType="submit">保存信息</button>
+        <button bindtap="{{!buttonClicked?'toVoucherDetail':''}}" class="button btn-exit" formType="submit" wx:if="{{verified==1}}">查看报名凭证</button>
+        <view wx:if="{{can_quit}}">
+            <button bindtap="{{!buttonClicked?'exitEnroll':''}}" class="button btn-exit" formType="submit">取消报名</button>
+        </view>
+        <view wx:else>
+            <button bindtap="{{!buttonClicked?'exitEnroll':''}}" class="button btn-exit" formType="submit">取消报名</button>
+        </view>
+    </view>
+    <view class="footer" wx:else>
+        <button bindtap="{{!buttonClicked?'enrollData':''}}" class="button mt20 btn-pay" data-type="2" disabled="{{buttonClicked}}" formType="submit" wx:if="{{payed_fee}}">
+      报名支付未完成，继续支付
+    </button>
+        <button bindtap="{{!buttonClicked?'enrollData':''}}" class="button mt20 btn-pay" data-type="1" disabled="{{buttonClicked}}" formType="submit" wx:else>
+            <image class="weixin-pay" src="/images/ic_weixin_pay.png" wx:if="{{fee>0}}"></image>提交<label wx:if="{{fee>0}}">并支付￥{{fee/100}}</label>
+        </button>
+    </view>
+    <view class="bottom-tips" wx:if="{{kf.card_appid}}">
+        <view>如有疑问？请</view>
+        <navigator appId="{{kf.card_appid}}" class="loginout loginout-btn" openType="navigate" path="{{kf.card_path}}" target="miniProgram" version="release">
+        联系发起者
+      </navigator>
+    </view>
+</form>
+<import src="/tmp/tmp.wxml"></import>
+<template is="dialogConfirm" data="{{confirm:confirm,confirmDialog:confirmDialog}}"></template>

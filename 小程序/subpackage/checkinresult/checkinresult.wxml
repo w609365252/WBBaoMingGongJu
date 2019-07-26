@@ -1,0 +1,36 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view wx:if="{{status==1}}">
+        <view class="box-error">
+            <icon size="60" type="warn"></icon>
+            <view class="error-title">核销失败</view>
+            <view class="error-desc">你未参与活动，或者报名被删除，请去活动详情查看。</view>
+        </view>
+        <button bindtap="toDetail" class="button btn-white" formType="submit" wx:if="{{banner}}">查看活动详情</button>
+    </view>
+    <view wx:elif="{{status==2}}">
+        <view class="box-error">
+            <icon size="60" type="info"></icon>
+            <view class="error-title">报名未结束</view>
+            <view class="error-desc">仅结束后的报名，才可以核销</view>
+        </view>
+        <button bindtap="toDetail" class="button btn-white" formType="submit">查看活动详情</button>
+    </view>
+    <view style="padding-bottom: 20rpx;" wx:if="{{status==3}}">
+        <view class="box">
+            <image class="banner" mode="aspectFill" src="{{banner}}" wx:if="{{banner}}"></image>
+            <view class="title">{{title}}</view>
+            <view class="box-item">报名时间：{{startDate}}~{{endDate}}</view>
+            <view class="box-item">报名人数：{{count}}人</view>
+            <view class="box-item">报名费用：{{feeText}}</view>
+            <view class="box-list" wx:if="{{infos.length}}">
+                <view class="list-item {{index==infos.length-1?'last':''}}" data-id="{{item.info_id}}" wx:for="{{infos}}" wx:key="{{item.info_id}}">
+                    <view class="nickname">{{item.name}}<label wx:if="{{item.on_behalf}}">代</label>
+                    </view>
+                    <button class="button btn-checkin btn-disable" wx:if="{{item.verify_cancel}}">已核销</button>
+                    <button bindtap="toCert" class="button btn-checkin" data-id="{{item.info_id}}" data-verified="{{item.verified}}" wx:else>核销</button>
+                </view>
+            </view>
+        </view>
+        <button bindtap="toDetail" class="button btn-white" formType="submit">查看活动详情</button>
+    </view>
+</form>

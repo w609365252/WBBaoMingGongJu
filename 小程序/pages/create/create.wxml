@@ -1,0 +1,270 @@
+<form bindsubmit="postFormId" reportSubmit="true">
+    <view wx:if="{{!checkinHide}}">
+        <view class="header">
+            <image bindtap="{{!buttonClicked?'chooseImage':''}}" class="banner" data-type="banner" data-url="{{banner}}" mode="aspectFill" src="{{banner}}" wx:if="{{banner}}"></image>
+            <image bindtap="{{!buttonClicked?'chooseImage':''}}" class="banner" data-type="banner" data-url="" mode="aspectFill" src="/images/bg_creat_topbanner.jpg" wx:else></image>
+            <view bindtap="{{!buttonClicked?'chooseImage':''}}" class="btn-change" data-type="banner" data-url="" wx:if="{{!banner}}">上传图片</view>
+            <view bindtap="removeImg" class="btn-delete" data-type="banner" data-url="" wx:else>删除图片</view>
+        </view>
+        <view class="enroll-info">
+            <view class="enroll-info-item first title">
+                <input autoFocus="{{autoFocus}}" bindblur="inputTitle" bindinput="inputTitle" name="title" placeholder="请输入标题" placeholderClass="titlePlaceholder" placeholderStyle="color: #ccc;" type="text" value="{{titleDefault}}"></input>
+                <icon catchtap="clearTitle" class="clear" size="15" type="clear" wx:if="{{!titleEmpty}}"></icon>
+            </view>
+            <view class="enroll-info-item rule">
+                <text wx:if="{{fieldTypeDialog}}">{{rule}}</text>
+                <textarea bindblur="inputRule" bindinput="inputRule" maxlength="-1" name="rule" placeholder="请输入详细信息" placeholderClass="placeholder" value="{{ruleDefault}}" wx:else></textarea>
+                <icon catchtap="clearRule" class="clear" size="15" type="clear" wx:if="{{!ruleEmpty}}"></icon>
+            </view>
+        </view>
+        <view class="space"></view>
+        <view class="enroll-info">
+            <view class="enroll-info-item first">
+                <view class="text">报名开始时间</view>
+                <picker bindchange="changeStartDate" end="{{endDate}}" mode="date" start="{{minDate}}" value="{{startDate}}">
+                    <view class="right" style="margin-right:20rpx;">{{startDate}}</view>
+                </picker>
+                <picker bindchange="changeStartTime" mode="time" value="{{startTime}}">
+                    <view class="right">{{startTime}}<image class="arrow" src="../../images/right_arrow.png"></image>
+                    </view>
+                </picker>
+            </view>
+            <view class="enroll-info-item">
+                <view class="text">报名截止时间</view>
+                <picker bindchange="changeEndDate" end="{{maxDate}}" mode="date" start="{{startDate}}" value="{{endDate}}">
+                    <view class="right" style="margin-right:20rpx;">{{endDate}}</view>
+                </picker>
+                <picker bindchange="changeEndTime" mode="time" value="{{endTime}}">
+                    <view class="right">{{endTime}}<image class="arrow" src="../../images/right_arrow.png"></image>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="space"></view>
+        <view class="enroll-info">
+            <view class="enroll-info-item first">
+                <view class="label">报名人数</view>
+                <view class="enroll-info-row pr">
+                    <input bindinput="inputLimit" class="limit" cursor="6" maxlength="6" name="limit" placeholder="填写报名人数" placeholderClass="placeholder" type="number" value="{{limit}}"></input>
+                    <icon catchtap="clearLimit" class="clear limit-clear" size="15" type="clear" wx:if="{{!limitEmpty}}"></icon>
+                </view>
+            </view>
+        </view>
+        <view class="space"></view>
+        <view class="enroll-info">
+            <view class="enroll-info-item first">
+                <view class="text">报名收费（最高50万元）</view>
+                <switch bindchange="changeFeeVisible" checked="{{feeVisible}}" color="#12b7f5" type="switch"></switch>
+            </view>
+        </view>
+        <view class="enroll-info" wx:if="{{feeVisible}}">
+            <view class="enroll-info-item">
+                <view class="text">报名费用（元）</view>
+                <view class="right alias w380">
+                    <input bindblur="inputFee" maxlength="8" name="fee" placeholder="请输入费用金额" placeholderClass="placeholder" type="digit" value="{{feeDefault}}"></input>
+                    <icon bindtap="clearFee" size="15" type="clear" wx:if="{{fee}}"></icon>
+                </view>
+            </view>
+        </view>
+        <view class="text-red" wx:if="{{feeVisible}}">温馨提示：会收取 1% 的费用，用于微信支付服务。</view>
+        <view class="space"></view>
+        <view class="enroll-info">
+            <view class="enroll-info-item first">
+                <view class="text">活动开始/截止时间</view>
+                <switch bindchange="changeActVisible" checked="{{actVisible}}" color="#12b7f5" type="switch"></switch>
+            </view>
+            <view class="enroll-info-item" wx:if="{{actVisible}}">
+                <view class="text">活动开始时间</view>
+                <picker bindchange="changeActStartDate" mode="date" value="{{actStartDate}}">
+                    <view class="right" style="margin-right:20rpx;">{{actStartDate}}</view>
+                </picker>
+                <picker bindchange="changeActStartTime" mode="time" value="{{actStartTime}}">
+                    <view class="right">{{actStartTime}}<image class="arrow" src="../../images/right_arrow.png"></image>
+                    </view>
+                </picker>
+            </view>
+            <view class="enroll-info-item" wx:if="{{actVisible}}">
+                <view class="text">活动结束时间</view>
+                <picker bindchange="changeActEndDate" mode="date" value="{{actEndDate}}">
+                    <view class="right" style="margin-right:20rpx;">{{actEndDate}}</view>
+                </picker>
+                <picker bindchange="changeActEndTime" mode="time" value="{{actEndTime}}">
+                    <view class="right">{{actEndTime}}<image class="arrow" src="../../images/right_arrow.png"></image>
+                    </view>
+                </picker>
+            </view>
+            <view class="enroll-info-item address">
+                <view class="text">活动地址</view>
+                <input bindblur="inputAddress" type="text" value="{{address}}" wx:if="{{address}}"></input>
+                <view bindtap="chooseLocation" class="label" wx:else>添加活动地址</view>
+                <image bindtap="chooseLocation" src="/images/ic_creat_location.png"></image>
+            </view>
+        </view>
+        <view class="space"></view>
+        <view class="enroll-info pic-box">
+            <view class="title">相关图片（最多9张图片）</view>
+            <view class="pics">
+                <view class="pic" wx:for="{{pics}}" wx:key="{{index}}">
+                    <image bindtap="chooseImage" data-type="pic" data-url="{{item}}" mode="aspectFill" src="{{item}}"></image>
+                    <image bindtap="removeImg" class="remove" data-index="{{index}}" data-type="pic" src="../../images/delete.png" wx:if="{{item}}"></image>
+                </view>
+                <view class="pic">
+                    <image bindtap="chooseImage" data-type="pic" mode="aspectFill" src="/images/defalut_banner.jpg"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="sub-title">已选项目(*代表必选)</view>
+    <view class="checked-tabs">
+        <view class="label" wx:if="{{selectTabs}}">{{selectTabs}}</view>
+        <view class="label" wx:else>无</view>
+    </view>
+    <view class="sub-title">点击选择需要填写的信息</view>
+    <view class="tabs-panel">
+        <view bindtap="changeTabs" class="enroll-tab {{item.status?'selected':'unselected'}}" data-index="{{index}}" wx:for="{{tabs}}" wx:key="{{index}}">
+            <view>{{item.field_name}}</view>
+            <image src="/images/selected.png" wx:if="{{item.status}}"></image>
+        </view>
+        <view class="tabs-footer">
+            <button bindtap="{{!buttonClicked?'openUiFieldType':''}}" class="button">添加自定义</button>
+            <view class="btn-tips">（没有合适信息，可以自定义创建）</view>
+        </view>
+    </view>
+    <view wx:if="{{!checkinHide}}">
+        <view class="space"></view>
+        <view class="enroll-more">
+            <view class="more-content show">
+                <view class="enroll-info">
+                    <view class="enroll-info-item first">
+                        <picker bindchange="changeUserVisible" class="picker-row" mode="selector" range="{{userVisible}}" value="{{userVisibleIndex}}">
+                            <view class="text">报名列表显示</view>
+                            <view class="enroll-info-row right">
+                                <view>{{userVisible[userVisibleIndex]}}</view>
+                                <image class="arrow" src="/images/right_arrow.png"></image>
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+                <view class="enroll-info" wx:if="{{userVisible&&(userVisibleIndex==1||userVisibleIndex==2)}}">
+                    <view class="enroll-info-item">
+                        <picker bindchange="changeVisibility" class="picker-row" mode="selector" range="{{visibility}}" value="{{visibilityIndex}}">
+                            <view class="text">报名数据权限</view>
+                            <view class="enroll-info-row right">
+                                <view>{{visibility[visibilityIndex]}}</view>
+                                <image class="arrow" src="/images/right_arrow.png"></image>
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+                <view class="space"></view>
+                <view class="enroll-info">
+                    <view class="enroll-info-item first">
+                        <view class="text">参与报名需审核</view>
+                        <switch bindchange="changeVerify" checked="{{onVerify}}" color="#12b7f5" type="switch"></switch>
+                    </view>
+                    <view class="enroll-info-item">
+                        <view class="text">允许一人多次报名</view>
+                        <switch bindchange="changeOnBehalf" checked="{{onBehalf}}" color="#12b7f5" type="switch"></switch>
+                    </view>
+                    <view class="enroll-info-item" wx:if="{{onBehalf}}">
+                        <picker bindchange="changeBehalfLimit" class="picker-row" mode="selector" range="{{behalfLimit}}" value="{{behalfIndex}}">
+                            <view class="text">代报名人数</view>
+                            <view class="enroll-info-row right">
+                                <view>{{behalfLimit[behalfIndex]}}</view>
+                                <image class="arrow" src="/images/right_arrow.png"></image>
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="enroll-info-item">
+                        <view class="text">报名后不允许取消报名</view>
+                        <switch bindchange="changeCanQuit" checked="{{!canQuit}}" color="#12b7f5" type="switch"></switch>
+                    </view>
+                    <view class="enroll-info-item" hidden="{{true}}">
+                        <view class="text">名额满后允许排队</view>
+                        <switch bindchange="changeQueue" checked="{{queue}}" color="#12b7f5" type="switch"></switch>
+                    </view>
+                </view>
+                <view class="space"></view>
+                <view class="enroll-info">
+                    <view class="enroll-info-item">
+                        <picker bindchange="changeRole" class="picker-row" mode="selector" range="{{role}}" value="{{roleIndex}}">
+                            <view class="text">发起人信息</view>
+                            <view class="enroll-info-row right">
+                                <view>{{role[roleIndex]}}</view>
+                                <image class="arrow" src="/images/right_arrow.png"></image>
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="enroll-info-item" wx:if="{{roleIndex==1}}">
+                        <view class="text">认证类型</view>
+                        <view class="right no-wrap">
+                            <label>{{authType}}</label>
+                        </view>
+                    </view>
+                    <view bindtap="" class="enroll-info-item">
+                        <view class="text">发起人署名</view>
+                        <view class="right no-wrap" wx:if="{{roleIndex==1}}">
+                            <label>{{authInfo.name}}</label>
+                        </view>
+                        <view class="right no-wrap" wx:else>
+                            <label>{{signName}}</label>
+                        </view>
+                    </view>
+                    <view class="enroll-info" wx:if="{{roleIndex==0}}">
+                        <view class="enroll-info-item">
+                            <view class="text">手机号（必填）</view>
+                            <button bindgetphonenumber="getPhoneNumber" class="btn-blue" openType="getPhoneNumber" wx:if="{{!phoneDefault&&noAuthPhone==null}}">自动填写</button>
+                            <view class="right alias w380" wx:else>
+                                <input bindinput="inputPhone" name="phone" placeholder="请输入手机号" placeholderClass="placeholder" type="text" value="{{phoneDefault}}"></input>
+                                <icon catchtap="clearPhone" size="15" type="clear" wx:if="{{phone}}"></icon>
+                            </view>
+                        </view>
+                        <form hidden="{{true}}" bindsubmit="{{verifyCodeText=='获取验证码'?'getVerifyCode':''}}" reportSubmit="true">
+                            <view class="enroll-info" wx:if="{{noAuthPhone}}">
+                                <view class="enroll-info-item">
+                                    <input bindinput="inputVerifyCode" maxlength="6" name="verifyCode" placeholder="请输入短信验证码" placeholderClass="placeholder" type="number"></input>
+                                    <icon catchtap="clearVerifyCode" class="clear" size="15" type="clear" wx:if="{{!verifyCodeEmpty}}"></icon>
+                                    <button class="get-verify-code {{verifyCodeText=='获取验证码'?'':'disabled'}}" formType="submit">{{verifyCodeText}}</button>
+                                </view>
+                            </view>
+                        </form>
+                    </view>
+                    <view wx:if="{{roleIndex==1}}">
+                        <view bindtap="authDialogTips" class="enroll-info-item">
+                            <view class="text">手机号（必填）</view>
+                            <view class="right text-right">{{authInfo.phone}}</view>
+                        </view>
+                    </view>
+                    <view>
+                        <view bindtap="{{roleIndex==1?'authDialogTips':''}}" class="enroll-info-item">
+                            <view class="text">发起人微信号</view>
+                            <view class="right alias w380" wx:if="{{roleIndex==0}}">
+                                <input bindblur="inputWxno" bindinput="inputWxno" maxlength="20" name="wxNo" placeholder="请输入微信号" type="text" value="{{defaultWxNo}}"></input>
+                                <icon bindtap="clearWxno" size="15" type="clear" wx:if="{{wxNo}}"></icon>
+                            </view>
+                            <view class="right text-right" wx:if="{{roleIndex==1}}">
+                {{authInfo.wx_no?authInfo.wx_no:'未填写'}}
+              </view>
+                        </view>
+                    </view>
+                    <view wx:if="{{roleIndex==1}}">
+                        <view class="enroll-info-item">
+                            <view class="text">设为公开活动</view>
+                            <switch bindchange="changePublic" checked="{{isPublic}}" color="#12b7f5" type="switch"></switch>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <button bindgetuserinfo="login" class="button" formType="submit" openType="getUserInfo" wx:if="{{hasUserInfo==false}}">确认</button>
+    <button bindtap="{{!buttonClicked?'createEnroll':''}}" class="button" formType="submit" wx:if="{{hasUserInfo}}">确认</button>
+    <view class="f-text pb20">
+        <view class="f-text-body">点击确认即代表阅读并同意</view>
+        <view catchtap="toProtocol" class="protocol">《报名工具服务协议》</view>
+    </view>
+</form>
+<import src="/tmp/tmp.wxml"></import>
+<template is="huomaDialog" data="{{huomaDialog:huomaDialog}}"></template>
+<import src="/tmp/tmp.wxml"></import>
+<template is="uiFieldType" data="{{fieldType:fieldType,fieldTypeDialog:fieldTypeDialog}}"></template>

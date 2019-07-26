@@ -1,0 +1,30 @@
+<view wx:if="{{hasUserInfo==false}}">
+    <image class="detail-bg" src="/images/bg_souquan.jpg"></image>
+    <view class="dialog dialog-userinfo">
+        <view class="mask"></view>
+        <view class="dialog-body">
+            <view class="dialog-userinfo-title">欢迎</view>
+            <view class="dialog-userinfo-desc">请允许授权后放心使用小程序，你的信息和数据将受到保护</view>
+            <button bindgetuserinfo="login" class="button btn-auth" openType="getUserInfo">
+                <image src="/images/wx_logo.png"></image>
+                <view>微信授权登录</view>
+            </button>
+        </view>
+    </view>
+</view>
+<form bindsubmit="postFormId" reportSubmit="true" wx:if="{{hasUserInfo}}">
+    <view class="set-success" wx:if="{{successBoxShow}}">
+        <icon color="#00a8f3" size="45" type="success"></icon>
+        <view class="set-title">恭喜你已成为管理员</view>
+        <view class="set-desc">管理员除了不能编辑活动、删除活动、提款、设置他人为管理员外，拥有活动发起者的其它权限。</view>
+        <button bindtap="{{!buttonClicked?'toDetail':''}}" class="button" formType="submit">查看报名活动</button>
+    </view>
+    <view class="code-box" wx:else>
+        <view class="enroll-info-item">
+            <label>管理员验证码</label>
+            <input bindblur="inputCode" bindinput="inputCode" maxlength="8" placeholder="请输入验证码" placeholderClass="titlePlaceholder" placeholderStyle="color: #ccc;" type="text" value="{{codeDefault}}"></input>
+        </view>
+        <view class="tips">温馨提示：如不知道验证码，请向活动发起者索取。</view>
+        <button bindtap="{{!buttonClicked?'verifyCode':''}}" class="button" formType="submit">提交</button>
+    </view>
+</form>

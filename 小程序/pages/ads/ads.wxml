@@ -1,0 +1,25 @@
+<view>
+    <view class="error" wx:if="{{showLoadError}}">
+        <image class="error-icon" src="/images/error.png"></image>
+        <view class="error-text">加载失败，请检查网络</view>
+        <button bindtap="refresh" class="error-refresh" formType="submit">重新加载</button>
+    </view>
+    <view bindtap="try" class="recommend" data-index="{{index}}" wx:for="{{recommends}}">
+        <image class="logo" src="{{item.logo}}"></image>
+        <view class="middle">
+            <view class="title">{{item.title}} <image class="star" src="/images/customized/star.png"></image>
+            </view>
+            <text class="description" selectable="true">{{item.description}}</text>
+        </view>
+        <image class="arrow" src="/images/customized/arrow_right.png"></image>
+    </view>
+    <view bindtap="toDetail" class="recommend" data-index="{{index}}" wx:for="{{recommendsOther}}">
+        <image class="logo" src="{{item.logo}}"></image>
+        <view class="middle">
+            <view class="title">{{item.title}} <image class="star" src="/images/customized/star.png"></image>
+            </view>
+            <text class="description" selectable="true">{{item.description}}</text>
+        </view>
+        <image class="arrow" src="/images/customized/arrow_right.png"></image>
+    </view>
+</view>

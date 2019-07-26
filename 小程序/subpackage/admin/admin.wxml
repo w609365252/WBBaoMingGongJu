@@ -1,0 +1,13 @@
+<view wx:if="{{admin.length}}">
+    <view class="title">管理员（最多添加20位）</view>
+    <view class="admin-item" wx:for="{{admin}}" wx:key="{{index}}">
+        <image class="admin-head" src="{{item.img}}"></image>
+        <view class="admin-body">
+            <view class="admin-name">{{item.name}}</view>
+            <view class="admin-date" wx:if="{{item.date}}">添加时间：{{item.date}}</view>
+        </view>
+        <image bindtap="{{!buttonClicked?'deleteAdmin':''}}" class="admin-delete" data-index="{{index}}" src="/images/ic_delete_gray.png" wx:if="{{item.date}}"></image>
+    </view>
+    <view class="desc">温馨提示：管理员除了不能编辑活动、删除活动、提款、设置他人为管理员外，拥有活动发起者的其他权限</view>
+    <button bindtap="{{!buttonClicked?'addAdmin':''}}" class="button">添加管理员</button>
+</view>
