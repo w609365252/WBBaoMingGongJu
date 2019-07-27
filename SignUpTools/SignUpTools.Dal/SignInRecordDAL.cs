@@ -126,7 +126,7 @@ where t.ActiveID={ActiveID}  ";
             }
         }
 
-        public bool UpdateSignInRecordByTran( List<CustomFieldValueModel> values,int infoid)
+        public bool UpdateSignInRecordByTran( List<CustomFieldValueModel> values,int infoid, SignInRecordModel signInRecordModel)
         {
 
             SqlConnection connection = new SqlConnection(ConnStr);
@@ -137,6 +137,7 @@ where t.ActiveID={ActiveID}  ";
                 Context.Delete<CustomFieldValueModel>(tran, m => m.SignInID == infoid);
                 values.ForEach(m => m.SignInID = infoid);
                 Context.Insert(tran, values);
+                Context.Update(tran, signInRecordModel);
                 tran.Commit();
                 connection.Close();
                 return true;
@@ -183,8 +184,10 @@ where t.ActiveID={ActiveID}  ";
 (select [Name]+'!|' from CustomField where t2.ActiveID=ActiveID  order by Sort asc for xml Path('')) as fieldNames,
 (select cast(t1.[Value] as nvarchar(max))+'!|' from CustomField t
 left join CustomFieldValue t1 on t.ID=t1.CustomFieldID
-where t2.ActiveID=t.ActiveID and t1.SignInID=t2.ID for xml Path('')) as fieldVals
+where t2.ActiveID=t.ActiveID and t1.SignInID=t2.ID for xml Path('')) as fieldVals,
+t3.UserName CreateUserName
 from SignInRecord t2
+left join [User] t3 on t2.CreateUserID=t3.ID
 where t2.ActiveID={eid} order by t2.CreateTime desc";
             return Context.FromSql(sql).ToList<SignInRecordModel>().GetPage(pageFliter);
         }

@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditLogBussiness.cs" />
+    <Compile Include="ActiveManagesBussiness.cs" />
+    <Compile Include="ActivesManageApplyBussiness.cs" />
     <Compile Include="CustomOptionsBussiness.cs" />
     <Compile Include="UserFormIDBussiness.cs" />
     <Compile Include="ActivesBussiness.cs" />

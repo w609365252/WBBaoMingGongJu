@@ -44,9 +44,9 @@ namespace SignUpTools.DAL
             return GetEntity(m => m.ID == id);
         }
 
-        public List<ActivesModel> GetActivesModels(Expression<Func<ActivesModel, bool>> expression, int PageSize = 20, int pageIndex = 1)
+        public List<ActivesModel> GetActivesModels(Expression<Func<ActivesModel, bool>> expression)
         {
-            return GetList(expression, PageSize,pageIndex);
+            return GetList(expression);
         }
 
         public List<ActivesModel> GetList(int type,int userid,PageFliter pageFliter)

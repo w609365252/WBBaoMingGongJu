@@ -1,6 +1,6 @@
 function a(t) {
     i.showLoading("加载中"), wx.request({
-        url: e.globalData.host + "/enroll/v1/admin/list",
+      url: e.globalData.host + "/SignUpForm/AdminList",
         data: {
             eid: t.data.eid,
             access_token: wx.getStorageSync("accessToken")
@@ -29,7 +29,7 @@ function t(d, n) {
     i.showLoading("正在删除");
     var o = (d.data.admin[n] || {}).unionid;
     wx.request({
-        url: e.globalData.host + "/enroll/v1/admin/remove",
+      url: e.globalData.host + "/SignUpForm/RemoveAdmin",
         data: {
             unionid: o,
             access_token: wx.getStorageSync("accessToken"),

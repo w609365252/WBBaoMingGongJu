@@ -8,7 +8,7 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using SignUpTools.Model;
 using SignUpTools.Bussiness;
-using Leo.MiniprogramApiHelper;
+using LeoTools.MiniprogramApiHelper;
 
 namespace SignUpTools.Api.Controllers
 {

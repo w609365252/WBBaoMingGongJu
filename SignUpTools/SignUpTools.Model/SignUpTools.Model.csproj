@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditLogModel.cs" />
+    <Compile Include="ActiveManagesModel.cs" />
+    <Compile Include="ActivesManageApplyModel.cs" />
     <Compile Include="ActivesModel.cs" />
     <Compile Include="CustomFieldModel.cs" />
     <Compile Include="CustomFieldValueModel.cs" />

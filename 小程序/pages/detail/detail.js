@@ -481,7 +481,7 @@ Page({
         last_update: 0,
         tableData: null,
         ruleShow: !0,
-        showDev: 1,
+        showDev: 0,
         noticeBoard: v.globalData.noticeBoard,
         huoma: v.globalData.huoma,
         page: 1,

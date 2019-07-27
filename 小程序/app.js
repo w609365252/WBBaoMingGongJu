@@ -1,4 +1,5 @@
 // 120.77.208.228: 82
+//http://192.168.0.119:9998
 App({
     onLaunch: function(e) {},
     onShow: function(e) {
@@ -8,7 +9,7 @@ App({
         this.SDKVersion = i.SDKVersion, this.globalData.systemInfo = i;
     },
     globalData: {
-      host: "http://120.77.208.228:82",
+      host: "http://192.168.0.119:9998",
         showDev: 0,
         settingDialog: !1,
         proName: "enroll",

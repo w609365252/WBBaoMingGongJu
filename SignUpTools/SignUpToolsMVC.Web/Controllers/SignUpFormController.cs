@@ -9,7 +9,7 @@ using LeoTools.Common;
 using LeoTools.Extension;
 using System.Threading.Tasks;
 using System.Collections;
-using Leo.MiniprogramApiHelper;
+using LeoTools.MiniprogramApiHelper;
 using System.Drawing;
 using System.IO;
 
@@ -33,7 +33,7 @@ namespace SignUpToolsMVC.Web.Controllers
             actives.CollectFees = decimal.Parse(data.fee);
             actives.Content = data.content;
             actives.Img = data.banner;
-            actives.ImgDetails = string.Join(",", data.pics);
+            actives.ImgDetails = data.pics!=null? string.Join(",", data.pics):"";
             actives.IsAllowCancel = data.can_quit;
             actives.SigninBeginTIme = LeoUtils.ConvertIntDateTime1(double.Parse(data.start_time));
             actives.SigninEndTime = LeoUtils.ConvertIntDateTime1(double.Parse(data.end_time));
@@ -92,7 +92,7 @@ namespace SignUpToolsMVC.Web.Controllers
             actives.CreateUserID = user.ID;
             actives.Content = data.content;
             actives.Img = data.banner;
-            actives.ImgDetails = string.Join(",", data.pics);
+            actives.ImgDetails = data.pics != null ? string.Join(",", data.pics) : "";
             actives.IsAllowCancel = data.can_quit;
             actives.ListReportPermission = data.visibility;
             actives.ListShowType = data.user_visible;
@@ -184,11 +184,8 @@ namespace SignUpToolsMVC.Web.Controllers
         {
             int UserID = LoginUserInfo.ID;
             var model = ActivesBussiness.GetActivesModel(eid);
-
             var list = CustomFieldBussiness.GetCustomFieldModels(m => m.ActiveID == eid);
-
-            var signInModel = SignInRecordBussiness.GetSignInRecordModel(m => m.CreateUserID == UserID && m.ActiveID == eid);
-
+            var signInList = SignInRecordBussiness.GetSignInRecordModels(m => m.CreateUserID == UserID && m.ActiveID == eid).OrderBy(m => m.type).ToList();
             List<VM_Feild> req_info = new List<VM_Feild>();
             foreach (var item in list)
             {
@@ -217,19 +214,24 @@ namespace SignUpToolsMVC.Web.Controllers
                 ActivesBussiness.UpdateActiveModel(a);
             });
 
+            int is_owner = 0;
+            var mng = ActiveManagesBussiness.GetActiveManagesModel(m => m.ManageUserID == UserID);
+            if (model.CreateUserID == UserID || mng != null) is_owner = 1;
+            
+
             return Success(new
             {
                 cid = "",
-                start_time = model.SigninBeginTIme!=null? LeoUtils.ConvertDateTimeInt1(model.SigninBeginTIme.Value).ToString():"",
-                end_time = LeoUtils.ConvertDateTimeInt1(model.SigninEndTime.Value).ToString(),
-                act_start = LeoUtils.ConvertDateTimeInt1(model.ActiveBeginTime.Value).ToString(),
-                act_end = LeoUtils.ConvertDateTimeInt1(model.ActiveEndTime.Value).ToString(),
+                start_time = LeoUtils.ConvertDateTimeInt1(model.SigninBeginTIme).ToString(),
+                end_time = LeoUtils.ConvertDateTimeInt1(model.SigninEndTime).ToString(),
+                act_start = LeoUtils.ConvertDateTimeInt1(model.ActiveBeginTime).ToString(),
+                act_end = LeoUtils.ConvertDateTimeInt1(model.ActiveEndTime).ToString(),
                 pics = model.ImgDetails.SplitExtension(","),
                 req_info,
                 is_admin = model.CreateUserID == UserID,
                 sign_name = model.PromoterName,
-                fee = (model.CollectFees / model.SignIntMaxCount)*100,
-                status = model.SigninEndTime.Value <= DateTime.Now ? 2 : model.SigninBeginTIme.Value <= DateTime.Now ? 1 : 0,
+                fee = model.SignIntMaxCount!=null?(model.CollectFees??0 / model.SignIntMaxCount):0,
+                status = model.SigninEndTime!=null&& model.SigninEndTime.Value <= DateTime.Now ? 2 : model.SigninBeginTIme!=null&& model.SigninBeginTIme.Value <= DateTime.Now ? 1 : 0,
                 verify = model.verify,
                 banner = model.Img,
                 count = model.SignInCount,
@@ -248,12 +250,13 @@ namespace SignUpToolsMVC.Web.Controllers
                 owner_pic = createUser?.Avatars ?? "",
                 title = model.Title,
                 views = model.ReadCount ?? 0,
-                is_owner = model.CreateUserID == UserID ? "owner" : "",
+                is_owner,
                 eid = model.ID,
-                on_behalf = signInModel?.type??0,
-                info_id = signInModel?.ID ?? 0,
+                on_behalf = signInList.Count(),
+                info_id = signInList.FirstOrDefault()?.ID ?? 0,
                 phone=model.PromoterMobile,
                 can_quit=model.can_quit,
+                verified= signInList.FirstOrDefault()?.Status ?? 0,
             });
         }
 
@@ -278,6 +281,7 @@ namespace SignUpToolsMVC.Web.Controllers
                 items = list.Select(m => new
                 {
                     name = m.CreateUserName,
+                    verified=m.Status??0,
                     head_img = m.CreateUserAvatars,
                     user_visible = 1,
                     info_id = m.ID,
@@ -329,6 +333,7 @@ namespace SignUpToolsMVC.Web.Controllers
 
         public JsonResult user_detail(int eid,int info_id)
         {
+            var sign = SignInRecordBussiness.GetSignInRecordModel(info_id);
             var list = CustomFieldBussiness.GetustomFieldValueBySignIn(eid, info_id);
             
 
@@ -358,7 +363,10 @@ namespace SignUpToolsMVC.Web.Controllers
             return Success(new
             {
                 req_info,
-                info=req_info
+                info=req_info,
+                comment= sign.AuditDesc,
+                remark=sign.Remark,
+                verified=sign.Status
             });
         }
 
@@ -402,6 +410,7 @@ namespace SignUpToolsMVC.Web.Controllers
         {
             var m=SignInRecordBussiness.GetSignInRecordModel(info_id);
             List<CustomFieldModel> customFieldModels = CustomFieldBussiness.GetCustomFieldModels(K => K.ActiveID == m.ActiveID);
+            m.Status = 0;
             List<CustomFieldValueModel> list = new List<CustomFieldValueModel>();
             foreach (var item in info)
             {
@@ -413,7 +422,7 @@ namespace SignUpToolsMVC.Web.Controllers
                 valueModel.Value = item.field_value ?? "";
                 list.Add(valueModel);
             }
-            bool flag = SignInRecordBussiness.UpdateSignInRecordByTran(list, info_id);
+            bool flag = SignInRecordBussiness.UpdateSignInRecordByTran(list, info_id,m);
             if (flag) return Success("success");
             else return Fail("请重试");
         }
@@ -439,6 +448,11 @@ namespace SignUpToolsMVC.Web.Controllers
             var list = SignInRecordBussiness.GetAllSignInRecord(eid, pageFliter);
             List<VM_Feild> field_list = new List<VM_Feild>();
             var customs = CustomFieldBussiness.GetCustomFieldModels(m => m.ActiveID == eid);
+            field_list.Add(new VM_Feild()
+            {
+                field_key = "XWNo",
+                field_name = "微信名称"
+            });
 
             foreach (var item in customs)
             { 
@@ -447,11 +461,12 @@ namespace SignUpToolsMVC.Web.Controllers
                 feild.field_name = item.Name;
                 field_list.Add(feild);
             }
+
             field_list.Add(new VM_Feild()
             {
                 field_key="Status",
                 field_name="报名状态"
-            })   ;
+            });
 
             field_list.Add(new VM_Feild()
             {
@@ -478,12 +493,19 @@ namespace SignUpToolsMVC.Web.Controllers
                 var names = item.fieldNames.SplitExtension("!|",StringSplitOptions.None);
                 var vals = item.fieldVals.SplitExtension("!|", StringSplitOptions.None);
                 List<VM_Feild> feilds = new List<VM_Feild>();
+                feilds.Add(new VM_Feild()
+                {
+                    field_key = "XWNo",
+                    field_name = "微信名称",
+                    field_value = item.CreateUserName
+                });
+
                 for (int i = 0; i < keys.Length; i++)
                 {
                     VM_Feild feild = new VM_Feild();
                     feild.field_key = keys[i];
-                    feild.field_name = names.Count() < i ? names[i]:"";
-                    feild.field_value = vals.Count()<i? vals[i]:"";
+                    feild.field_name = names.Count() >= i ? names[i]:"";
+                    feild.field_value = vals.Count()>=i? vals[i]:"";
                     feilds.Add(feild);
                 }
 
@@ -505,7 +527,7 @@ namespace SignUpToolsMVC.Web.Controllers
                 {
                     field_key = "Desc",
                     field_name = "备注说明",
-                    field_value=item.AuditDesc
+                    field_value=item.Remark
                 });
 
                 feilds.Add(new VM_Feild()
@@ -515,7 +537,6 @@ namespace SignUpToolsMVC.Web.Controllers
                     field_value=item.CreateTime.Value.ToString("yyyy-MM-dd HH:mm")
                 });
 
-
                 user_infos.Add(feilds);
             }
 
@@ -524,6 +545,100 @@ namespace SignUpToolsMVC.Web.Controllers
                 field_list,
                 user_infos
             });
+        }
+
+        public JsonResult RemoveAdmin(int unionid,int eid)
+        {
+            bool flag = ActiveManagesBussiness.DeleteActiveManages(unionid);
+            return Success("success");
+        }
+
+        public JsonResult AdminQRCode(int eid)
+        {
+            var md = ActivesManageApplyBussiness.GetActivesManageApplyModel(m =>m.ActiveID== eid&& m.ExpirseDate <= DateTime.Now && m.Status == 0);
+            if (md == null)
+            {
+                string floder = "/Image/AdminQRCode";
+                string path = Server.MapPath(floder);
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                string url = Common.HostUrl + floder + "/" + Guid.NewGuid().ToString() + ".png";
+                try
+                {
+                    MiniprogramApiHelper.CreateShareCode(eid.ToString(), "subpackage/addadmin/addadmin").Save(url);
+                }
+                catch (Exception)
+                {
+                    url = "https://res.wx.qq.com/wxdoc/dist/assets/img/WXAQRCode.053ccc63.png";
+                }
+                md = new ActivesManageApplyModel();
+                md.Status = 0;
+                md.CreateUserID = LoginUserInfo.ID;
+                md.URL = url;
+                md.Code = LeoUtils.GetRandomStr();
+                md.CreateTime = DateTime.Now;
+                md.ExpirseDate = md.CreateTime.Value.AddMinutes(10);
+                ActivesManageApplyBussiness.InsertActivesManageApplyModel(md);
+            }
+            else
+            {
+                md.Code = LeoUtils.GetRandomStr();
+                md.UpdateTime = DateTime.Now;
+                md.ExpirseDate = md.UpdateTime.Value.AddMinutes(10);
+            }
+
+            return Success(new {
+                url= md.URL,
+                code=md.Code,
+                expire_at = LeoUtils.ConvertDateTimeInt1(md.ExpirseDate)
+            });
+        }
+
+        public JsonResult AdminAdd(string eid,string code,string access_token)
+        {
+            int id = eid.ToInt32();
+            var user = UserBussiness.GetUserModel(m => m.OpenID == access_token);
+
+            var model = ActivesBussiness.GetActivesModel(id);
+            var md = ActivesManageApplyBussiness.GetActivesManageApplyModel(m => m.ActiveID == id && m.ExpirseDate <= DateTime.Now && m.Status == 0);
+            if (md == null) return Fail("请找管理员索要验证码");
+            if (code != md.Code) return Fail("验证码错误");
+            var userid = user.ID;
+            if (model.CreateUserID == userid) return Fail("您已经是管理员了");
+            var isManage=ActiveManagesBussiness.GetActiveManagesModel(m => m.ActiveID == id && m.ManageUserID == userid);
+            if (isManage != null) return Fail("您已经是管理员了");
+            md.UseUserID = md.ID;
+            md.JoinTime = DateTime.Now;
+            md.Status = 1;
+
+            ActiveManagesModel activeManagesModel = new ActiveManagesModel();
+            activeManagesModel.ManageUserID = user.ID;
+            activeManagesModel.ActiveID = id;
+            activeManagesModel.ApplyUserID = md.CreateUserID;
+            activeManagesModel.CreateTime = DateTime.Now;
+            bool flag=ActiveManagesBussiness.AddAdmin(activeManagesModel, md);
+            if (flag) return Success("success");
+            else return Fail("fail");
+        }
+
+        public JsonResult AdminList(int eid)
+        {
+            var active = ActivesBussiness.GetActivesModel(eid);
+            var userInfo = UserBussiness.GetUserModel(active.CreateUserID.Value);
+            List<ActiveManagesModel> manages = new List<ActiveManagesModel>();
+            manages.Add(new ActiveManagesModel()
+            {
+                ID = 0,
+                CreateUserName = userInfo.UserName,
+                CreateUserAvatars = userInfo.Avatars
+            });
+            manages.AddRange(ActiveManagesBussiness.GetListByActiveID(eid));
+            return Success(manages.Select(m => new
+            {
+                unionid = m.ID,
+                date = LeoUtils.ConvertDateTimeInt1(m.CreateTime),
+                name = m.CreateUserName,
+                img = m.CreateUserAvatars
+            }));
         }
 
         public ActionResult Test()
@@ -550,6 +665,42 @@ namespace SignUpToolsMVC.Web.Controllers
             {
                 url = fileName
             });
+        }
+
+        public ActionResult comment(int info_id,string remark)
+        {
+            var model = SignInRecordBussiness.GetSignInRecordModel(info_id);
+            model.Remark = remark;
+            bool flag = SignInRecordBussiness.UpdateSignInRecordModel(model);
+            if (flag) return Success("");
+            else return Success("请重试");
+        }
+
+        public ActionResult verify(string access_token,string comment,int info_id,int verified)
+        {
+            var user = UserBussiness.GetUserModel(m => m.OpenID == access_token);
+            var si = SignInRecordBussiness.GetSignInRecordModel(info_id);
+            si.Status = verified;
+            si.AuditDesc = comment;
+           bool flag= SignInRecordBussiness.UpdateSignInRecordModel(si);
+            if (flag)
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    AuditLogModel auditLogModel = new AuditLogModel();
+                    auditLogModel.CreateTime = DateTime.Now;
+                    auditLogModel.CreateUserID = user.ID;
+                    auditLogModel.remark = comment;
+                    auditLogModel.Status = verified;
+                    auditLogModel.SignInRecordID = info_id;
+                    AuditLogBussiness.InsertActiveModel(auditLogModel);
+                });
+                return Success("操作成功");
+            }
+            else
+            {
+                return Fail("请重试");
+            }
         }
 
         public class VM_FormModel

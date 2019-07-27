@@ -31,6 +31,8 @@ namespace SignUpTools.Model
         private int? _Status;
         private string _AuditDesc;
         private int? _IsDel;
+        private int? _paystatus;
+        private string _Remark;
 
         /// <summary>
         /// 
@@ -111,7 +113,7 @@ namespace SignUpTools.Model
             }
         }
         /// <summary>
-        /// _1代报名
+        /// _1代报名 0非代报名
         /// </summary>
         [Field("type")]
         public int? type
@@ -124,7 +126,7 @@ namespace SignUpTools.Model
             }
         }
         /// <summary>
-        /// //1审核 0未审核
+        /// -1排队中 0未审核 1已审核 2审核未通过
         /// </summary>
         [Field("Status")]
         public int? Status
@@ -162,6 +164,32 @@ namespace SignUpTools.Model
                 this._IsDel = value;
             }
         }
+        /// <summary>
+        /// _0 未付款 1已付款 2已退款
+        /// </summary>
+        [Field("paystatus")]
+        public int? paystatus
+        {
+            get { return _paystatus; }
+            set
+            {
+                this.OnPropertyValueChange("paystatus");
+                this._paystatus = value;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        [Field("Remark")]
+        public string Remark
+        {
+            get { return _Remark; }
+            set
+            {
+                this.OnPropertyValueChange("Remark");
+                this._Remark = value;
+            }
+        }
         #endregion
 
         #region Method
@@ -197,6 +225,8 @@ namespace SignUpTools.Model
                 _.Status,
                 _.AuditDesc,
                 _.IsDel,
+                _.paystatus,
+                _.Remark,
             };
         }
         /// <summary>
@@ -215,6 +245,8 @@ namespace SignUpTools.Model
                 this._Status,
                 this._AuditDesc,
                 this._IsDel,
+                this._paystatus,
+                this._Remark,
             };
         }
         /// <summary>
@@ -262,13 +294,13 @@ namespace SignUpTools.Model
 			/// </summary>
 			public readonly static Field UpdateUserID = new Field("UpdateUserID", "SignInRecord", "");
             /// <summary>
-			/// _1代报名
+			/// _1代报名 0非代报名
 			/// </summary>
-			public readonly static Field type = new Field("type", "SignInRecord", "_1代报名");
+			public readonly static Field type = new Field("type", "SignInRecord", "_1代报名 0非代报名");
             /// <summary>
-			/// //1审核 0未审核
+			/// -1排队中 0未审核 1已审核 2审核未通过
 			/// </summary>
-			public readonly static Field Status = new Field("Status", "SignInRecord", "//1审核 0未审核");
+			public readonly static Field Status = new Field("Status", "SignInRecord", "-1排队中 0未审核 1已审核 2审核未通过");
             /// <summary>
 			/// 
 			/// </summary>
@@ -277,10 +309,18 @@ namespace SignUpTools.Model
 			/// _1删除
 			/// </summary>
 			public readonly static Field IsDel = new Field("IsDel", "SignInRecord", "_1删除");
+            /// <summary>
+			/// _0 未付款 1已付款 2已退款
+			/// </summary>
+			public readonly static Field paystatus = new Field("paystatus", "SignInRecord", "_0 未付款 1已付款 2已退款");
+            /// <summary>
+			/// 
+			/// </summary>
+			public readonly static Field Remark = new Field("Remark", "SignInRecord", "");
         }
+       
         #endregion
     }
-
     public partial class SignInRecordModel
     {
         public string CreateUserName { get; set; }
@@ -292,3 +332,4 @@ namespace SignUpTools.Model
         //可以继续扩展table2中的字段
     }
 }
+

@@ -105,3 +105,9 @@ E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api\obj\Debug\SignUpTools.Api.csproj.CopyComplete
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api\obj\Debug\SignUpTools.Api.dll
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api\obj\Debug\SignUpTools.Api.pdb
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api\bin\zxing.dll
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api\bin\Aliyun.OSS.dll
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api\bin\NLog.dll
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api\bin\zxing.pdb
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api\bin\zxing.xml
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Api\bin\NLog.xml

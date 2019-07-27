@@ -11,7 +11,13 @@ namespace SignUpTools.DAL
 {
     public class SqlProvider<TEntity> where TEntity : Entity
     {
-        public static readonly DbSession Context = new DbSession("DosConn");
+        public static DbSession Context
+        {
+            get
+            {
+                return new DbSession("DosConn");
+            }
+        }
         public static readonly string ConnStr = ConfigurationManager.ConnectionStrings["DosConn"].ToString();
 
         protected bool Insert(TEntity entity)
@@ -39,10 +45,9 @@ namespace SignUpTools.DAL
             return Context.Delete<TEntity>(expression) > 0;
         }
 
-        protected List<TEntity> GetList(Expression<Func<TEntity, bool>> expression,int PageSize=20,int pageIndex=1)
+        protected List<TEntity> GetList(Expression<Func<TEntity, bool>> expression)
         {
             return Context.From<TEntity>()
-                .Page(PageSize, pageIndex)
                 .Where(expression)
                 .ToList();
         }

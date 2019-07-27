@@ -1,1 +1,9 @@
 /* subpackage/addadmin/addadmin.wxss */
+page{padding:60rpx;box-sizing: border-box;}
+.title{text-align: center;color:#aaa;font-size:40rpx;margin-bottom:30rpx;}
+.sub-title{text-align:cetner;font-size:30rpx;margin-bottom:30rpx;color:#999}
+.qrcode{text-align: center;margin-bottom:30rpx;}
+.qrcode image{width:100%;}
+.code{color:#4a98e7;font-size:40rpx;text-align: center;margin-bottom:30rpx;}
+.code label{border:3rpx solid #aaa;font-size:26rpx;padding:0rpx 16rpx;text-align: center;color:#aaa;border-radius: 10rpx;margin-left:20rpx;}
+.desc{color:#aaa;font-size:24rpx;text-align: center;}

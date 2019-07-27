@@ -4,9 +4,12 @@ E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Bus
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\LeoTools.dll
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\SignUpTools.Dal.dll
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\SignUpTools.Model.dll
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\zxing.dll
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\NPOI.dll
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\NPOI.OOXML.dll
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\CsharpHttpHelper.dll
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\Aliyun.OSS.dll
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\NLog.dll
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\Newtonsoft.Json.dll
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\ICSharpCode.SharpZipLib.dll
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\NPOI.OpenXml4Net.dll
@@ -15,6 +18,9 @@ E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Bus
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\SignUpTools.Dal.pdb
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\SignUpTools.Model.pdb
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\Dos.ORM.xml
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\zxing.pdb
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\zxing.xml
+E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\NLog.xml
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\Newtonsoft.Json.xml
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\bin\Debug\ICSharpCode.SharpZipLib.xml
 E:\李涛\工作\项目\微信小程序\报名工具\SignUpTools\SignUpTools.Business\obj\Debug\SignUpTools.Business.csprojAssemblyReference.cache

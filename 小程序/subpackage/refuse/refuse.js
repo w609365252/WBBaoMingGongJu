@@ -1,7 +1,7 @@
 function t(i) {
     var o = parseInt(i.data.type) || 2;
     a.showLoading("正在提交数据"), wx.request({
-        url: e.globalData.host + "/enroll/v1/verify",
+      url: e.globalData.host + "/SignUpForm/verify",
         method: "POST",
         data: {
             access_token: a.getToken(),

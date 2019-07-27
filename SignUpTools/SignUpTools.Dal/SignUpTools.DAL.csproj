@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditLogDAL.cs" />
+    <Compile Include="ActiveManagesDAL.cs" />
+    <Compile Include="ActivesManageApplyDAL.cs" />
     <Compile Include="CustomOptionsDAL.cs" />
     <Compile Include="UserFormIDDAL.cs" />
     <Compile Include="ActivesDAL.cs" />

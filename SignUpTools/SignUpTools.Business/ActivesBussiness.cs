@@ -42,9 +42,9 @@ namespace SignUpTools.Bussiness
             return ActivesDAL.dal.GetActivesModel(m => m.ID == id);
         }
 
-        public static List<ActivesModel> GetActivesModels(Expression<Func<ActivesModel, bool>> expression, int PageSize = 20, int pageIndex = 1)
+        public static List<ActivesModel> GetActivesModels(Expression<Func<ActivesModel, bool>> expression)
         {
-            return ActivesDAL.dal.GetActivesModels(expression, PageSize , pageIndex );
+            return ActivesDAL.dal.GetActivesModels(expression);
         }
 
         public static List<ActivesModel> GetList(int type, int userid, PageFliter pageFliter)

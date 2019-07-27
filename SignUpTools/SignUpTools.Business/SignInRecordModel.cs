@@ -82,9 +82,9 @@ namespace SignUpTools.Bussiness
             return SignInRecordDAL.dal.InserSignInRecordByTran(model, signInRecordModel, values);
         }
 
-        public static bool UpdateSignInRecordByTran(List<CustomFieldValueModel> values, int infoid)
+        public static bool UpdateSignInRecordByTran(List<CustomFieldValueModel> values, int infoid, SignInRecordModel signInRecordModel)
         {
-            return SignInRecordDAL.dal.UpdateSignInRecordByTran(values, infoid);
+            return SignInRecordDAL.dal.UpdateSignInRecordByTran(values, infoid, signInRecordModel);
         }
 
         public static bool ExitSignIn(int infoid)

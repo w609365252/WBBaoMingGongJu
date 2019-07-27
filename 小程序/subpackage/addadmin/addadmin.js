@@ -1,7 +1,7 @@
 function a(o) {
     t.showLoading("正在获二维码");
     wx.request({
-        url: e.globalData.host + "/enroll/v2/admin/qrcode",
+      url: e.globalData.host + "/SignUpForm/AdminQRCode",
         data: {
             eid: o.data.eid,
             access_token: wx.getStorageSync("accessToken")

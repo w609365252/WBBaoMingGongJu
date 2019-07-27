@@ -61,6 +61,7 @@ namespace SignUpToolsMVC
             var result = new ResultObject();
             result.code = string.IsNullOrEmpty(code) ? "-1" : code;
             result.msg = msg;
+            result.sta = -1;
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -71,7 +72,7 @@ namespace SignUpToolsMVC
             /// </summary>
             public string code = "";
             public string msg = "";
-            public int sta = 0;
+            public int sta =-1;
             public object data = new { };
         }
 

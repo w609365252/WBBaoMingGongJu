@@ -134,7 +134,7 @@ function n(e) {
     r.showLoading("正在提交数据");
     var a = e.data.remark;
     wx.request({
-        url: l.globalData.host + "/enroll/v1/comment",
+      url: l.globalData.host + "/SignUpForm/comment",
         method: "POST",
         data: {
             access_token: r.getToken(),

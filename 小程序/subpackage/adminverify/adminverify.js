@@ -1,7 +1,7 @@
 function t(e) {
     o.showLoading("正在提交数据");
     wx.request({
-        url: a.globalData.host + "/enroll/v2/admin/add",
+      url: a.globalData.host + "/SignUpForm/AdminAdd",
         data: {
             eid: e.data.eid,
             access_token: wx.getStorageSync("accessToken"),
